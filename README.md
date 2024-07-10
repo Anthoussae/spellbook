@@ -1,0 +1,2 @@
+# spellbook
+A JavaScript project
