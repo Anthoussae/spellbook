@@ -270,8 +270,6 @@ function rarifyArray(array){
   return rarifiedArray;
 }
 
-
-
 function makeReplacements(reward){
 
   if(reward.type == "cardReward"){
