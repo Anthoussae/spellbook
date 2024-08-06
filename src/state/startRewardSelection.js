@@ -1,16 +1,14 @@
 "use strict";
-import { rewardPool } from "../data/rewardPool";
-import { render } from "../render/render";
-import { filterArrayByLevel } from "../util/filterArrayByLevel";
-import { pickN } from "../util/pickN";
-import { rarifyArray } from "../util/rarifyArray";
 
-export function startRewardSelection() {
-  state = { ...state };
+import { render } from "../render/render";
+import { populateOptions } from "./populateOptions";
+
+export function startRewardSelection(oldState) {
+  let state = { ...oldState };
+  state.gold = state.gold + state.currentEnemy.goldReward;
+  state.defeatedEnemies.push(state.currentEnemy);
+  state.currentEnemy = null;
   state.currentScreen = "rewardSelection";
-  const possibleRewardOptions = rarifyArray(
-    filterArrayByLevel(rewardPool, state.rewardLuck, state.level)
-  );
-  state.presentedRewardOptions = pickN(possibleRewardOptions, 3);
+  state = populateOptions(state);
   render(state);
 }

@@ -11,6 +11,8 @@ export const enemyPool = [
     goldReward: 3,
     screen: "combat",
     rarity: "common",
+    type: "concrete",
+    superType: "enemy",
   },
   {
     name: "Four Carrots",
@@ -20,6 +22,8 @@ export const enemyPool = [
     goldReward: 4,
     screen: "combat",
     rarity: "common",
+    type: "concrete",
+    superType: "enemy",
   },
   {
     name: "Five Carrots",
@@ -29,6 +33,8 @@ export const enemyPool = [
     goldReward: 5,
     screen: "combat",
     rarity: "common",
+    type: "concrete",
+    superType: "enemy",
   },
   {
     name: "Six Carrots",
@@ -38,6 +44,8 @@ export const enemyPool = [
     goldReward: 6,
     screen: "combat",
     rarity: "uncommon",
+    type: "concrete",
+    superType: "enemy",
   },
   //level 1/16
   {
@@ -48,6 +56,8 @@ export const enemyPool = [
     goldReward: 6,
     screen: "combat",
     rarity: "common",
+    type: "concrete",
+    superType: "enemy",
   },
   {
     name: "Seven Carrots",
@@ -57,6 +67,8 @@ export const enemyPool = [
     goldReward: 7,
     screen: "combat",
     rarity: "common",
+    type: "concrete",
+    superType: "enemy",
   },
   {
     name: "Eight Carrots",
@@ -66,6 +78,8 @@ export const enemyPool = [
     goldReward: 8,
     screen: "combat",
     rarity: "common",
+    type: "concrete",
+    superType: "enemy",
   },
   {
     name: "Nine Carrots",
@@ -75,6 +89,8 @@ export const enemyPool = [
     goldReward: 9,
     screen: "combat",
     rarity: "uncommon",
+    type: "concrete",
+    superType: "enemy",
   },
   {
     name: "Ten Carrots",
@@ -84,5 +100,7 @@ export const enemyPool = [
     goldReward: 10,
     screen: "combat",
     rarity: "rare",
+    type: "concrete",
+    superType: "enemy",
   },
 ];

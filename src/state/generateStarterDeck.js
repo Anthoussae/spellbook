@@ -1,12 +1,33 @@
 "use strict";
-export function generateStarterDeck(state) {
-  state = { ...state };
-  if (state.difficultyLevel < 10) {
-    state.deck = [];
-  } else if (state.difficultyLevel < 15) {
-    state.deck = [];
-  } else {
-    state.deck = [];
-  }
+
+import { generateThreeRandomIntegersAddingUpToX } from "../util/generateThreeRandomIntegersAddingUpToX";
+
+export function generateStarterDeck(oldState) {
+  let state = { ...oldState };
+  let deck = [];
+  let weights = generateThreeRandomIntegersAddingUpToX(10);
+  const cardPool = state.cardPool.filter(
+    (card) => card.level === 0 && card.characterClass === "none"
+  );
+  cardPool.forEach((card, index) => {
+    for (let i = 0; i < weights[index]; i++) {
+      deck.push(card);
+    }
+  });
+  state.deck = deck;
+  state = insertClassCards(state);
+  state = socketRandomCard(state);
+  return state;
+}
+
+function insertClassCards(oldState) {
+  let state = { ...oldState };
+  // inserts two class cards into your deck.
+  return state;
+}
+
+function socketRandomCard(oldState) {
+  let state = { ...oldState };
+  // sockets a random card based on player color.
   return state;
 }

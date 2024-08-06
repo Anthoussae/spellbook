@@ -1,11 +1,18 @@
 "use strict";
 export const pathPool = [
   {
-    name: "combat",
+    name: "enemy",
     rarity: "common",
+    type: "abstract",
   },
   {
-    name: "rest",
+    name: "Rest",
     rarity: "mythic",
+    type: "concrete",
+  },
+  {
+    name: "Shop",
+    rarity: "mythic",
+    type: "concrete",
   },
 ];

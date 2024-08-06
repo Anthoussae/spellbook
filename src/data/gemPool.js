@@ -3,19 +3,39 @@
 export const gemPool = [
   {
     name: "Onyx",
-    level: 1,
     type: "gem",
     rarity: "common",
-    restrictions: "none",
-    effect: "destroy",
+    effect: "destroy the socketed card",
+    color: "black",
   },
   {
     name: "Lapis Lazuli",
-    level: 1,
     type: "gem",
     rarity: "common",
-    restrictions: "unsocketed",
     bunnies: 2,
     effect: "+bunnies",
+    color: "blue",
+  },
+  {
+    name: "Garnet",
+    rarity: "common",
+    type: "gem",
+    effect: "TBD",
+    color: "red",
+  },
+  {
+    color: "green",
+  },
+  {
+    color: "yellow",
+  },
+  {
+    color: "cyan",
+  },
+  {
+    color: "magenta",
+  },
+  {
+    color: "white",
   },
 ];
