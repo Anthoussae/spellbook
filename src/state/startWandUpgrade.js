@@ -13,7 +13,7 @@ export function startWandUpgrade(oldState) {
   }
   let newWand = {
     ...oldWand,
-    bunnies: state.wandUpgrade.wandUpgradeAmount + oldWand.bunnies,
+    bunnyAdd: state.wandUpgrade.wandUpgradeAmount + oldWand.bunnyAdd,
   };
   transformRelic(state, oldWand, newWand);
   render(state);

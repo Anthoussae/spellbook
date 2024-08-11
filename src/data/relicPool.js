@@ -2,87 +2,122 @@
 // an array with all the relics.
 export const relicPool = [
   {
+    //integrated
     name: "Magic Wand",
-    level: 0,
-    effect: "start each combat with +3 bunnies",
-    bunnies: 3,
+    effect: "bunniesOnStart",
+    bunnyAdd: 3,
     rarity: "basic",
     type: "relic",
     supertype: "wand",
     trigger: "combatStart",
   },
   {
+    //integrated
     name: "Broken Wand",
-    level: 0,
-    bunnies: 0,
-    effect: "start each combat with +0 bunnies",
+    bunnyAdd: 0,
+    effect: "bunniesOnStart",
     rarity: "basic",
     type: "relic",
     supertype: "wand",
     trigger: "combatStart",
   },
   {
+    //integrated
     name: "Inkpot",
-    level: 1,
-    effect: "+1 ink",
+    effect: "inkOnStart",
     rarity: "common",
+    inkAdd: 1,
     type: "relic",
     trigger: "combatStart",
   },
   {
+    //integrated
     name: "Quill",
-    level: 1,
-    effect: "+1 handsize",
+    bonusHandsize: 1,
+    effect: "+openingHandsize",
     rarity: "common",
     type: "relic",
     trigger: "combatStart",
   },
   {
-    name: "Page",
-    level: 2,
+    //integrated
+    name: "Extra Page",
+    bonusPages: 1,
     effect: "+1 page",
     rarity: "uncommon",
     type: "relic",
     trigger: "combatStart",
   },
   {
+    //integrated
     name: "Hydrangea",
-    level: 2,
-    effect: "+25 max HP",
+    effect: "+maxHp",
+    bonusMaxHp: 25,
     rarity: "uncommon",
     type: "relic",
     trigger: "pickup",
   },
   {
-    name: "Top Hat",
-    level: 3,
-    effect: "add +1 bunny to each played card",
-    rarity: "rare",
-    type: "relic",
-    trigger: "cardCount",
-  },
-  {
+    //integrated
     name: "Magic Staff",
-    level: 4,
-    effect: "add +10 bunnies upon cast",
+    effect: "bunnyAdd",
+    bunnyAdd: 10,
     rarity: "mythic",
     type: "relic",
     trigger: "cast",
   },
+
   {
+    //integrated
+    name: "Gold medal",
+    effect: "bonusGoldPercent",
+    bonusGoldpercent: 0.5,
+    rarity: "common",
+    type: "relic",
+    trigger: "combatWin",
+  },
+  {
+    //integrated
+    name: "Gold ingot",
+    effect: "interest",
+    interest: 0.05,
+    rarity: "uncommon",
+    type: "relic",
+    trigger: "combatWin",
+  },
+  {
+    //integrated
+    name: "Encyclopedia",
+    effect: "bunniesOnDraw",
+    rarity: "common",
+    type: "relic",
+    bunniesOnDraw: 1,
+    trigger: "draw",
+  },
+  {
+    //integrated
+    name: "Golf Club",
+    effect: "+mulligans",
+    rarity: "common",
+    type: "relic",
+    bonusMulligans: 1,
+    trigger: "combatStart",
+  },
+  //@@@ ~~ UNINTEGRATED ~~ @@@
+  {
+    //UNINTEGRATED: requires play card mechanic in combat.
+    name: "Top Hat",
+    effect: "add +1 bunny to each played card when you play it",
+    rarity: "rare",
+    type: "relic",
+    trigger: "playCard",
+  },
+  {
+    //UNINTEGRATED: currently no luck nor mf mechanic.
     name: "Shako",
-    level: 5,
     effect: "+3 luck for rewards",
     rarity: "uncommon",
     type: "relic",
     trigger: "rewardStart",
-  },
-  {
-    name: "Bank Card",
-    level: 6,
-    effect: "+50% gold from winning combat",
-    rarity: "common",
-    type: "relic",
-    trigger: "combatWin",
   },
 ];

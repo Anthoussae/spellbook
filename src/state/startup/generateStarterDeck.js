@@ -1,6 +1,6 @@
 "use strict";
 
-import { generateThreeRandomIntegersAddingUpToX } from "../util/generateThreeRandomIntegersAddingUpToX";
+import { generateThreeRandomIntegersAddingUpToX } from "../../util/generateThreeRandomIntegersAddingUpToX";
 
 export function generateStarterDeck(oldState) {
   let state = { ...oldState };
@@ -16,18 +16,11 @@ export function generateStarterDeck(oldState) {
   });
   state.deck = deck;
   state = insertClassCards(state);
-  state = socketRandomCard(state);
   return state;
 }
 
 function insertClassCards(oldState) {
   let state = { ...oldState };
   // inserts two class cards into your deck.
-  return state;
-}
-
-function socketRandomCard(oldState) {
-  let state = { ...oldState };
-  // sockets a random card based on player color.
   return state;
 }

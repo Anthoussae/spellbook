@@ -1,18 +1,29 @@
 "use strict";
+import { insertRelic } from "./insertRelic";
+import { drinkPotion } from "./drinkPotion";
+import { insertCard } from "./insertCard";
+import { renderSocketing } from "../render/renderSocketing";
+import { render } from "../render/render";
+import { startWandUpgrade } from "./startWandUpgrade";
 
-export function applyReward(option, state) {
+export function applyReward(state) {
   state = { ...state };
-  if (option.type == "potion") {
-    state.hp = Math.min(state.hp + (option.hpHeal || 0), state.maxHp);
-    state.gold = state.gold + (option.goldReward || 0);
+  const reward = state.selectedReward;
+  if (reward.type == "potion") {
+    state = drinkPotion(state);
     return state;
-  } else if (option.type == "relic") {
-    // move the selected option from the relic pool to the relic belt.
-  } else if (option.type == "card") {
-    // add a copy of the selected option to your deck
-  } else if (option.type == "gem") {
-    // launches the subscreen where you can peruse your deck and select 1 card for an effect (removal or upgrade)
+  } else if (reward.type == "relic") {
+    state = insertRelic(state, reward.name);
+  } else if (reward.type == "card") {
+    state = insertCard(state, reward);
+  } else if (reward.type == "gem") {
+    //initiate the socketing screen.
+    state = renderSocketing(state);
+  } else if (reward.type == "concrete" && reward.name == "Wand Upgrade") {
+    state = startWandUpgrade(state);
   } else {
-    throw "unknown startRewardSelection type" + option.type;
+    throw "unknown startRewardSelection type" + reward.type;
   }
+  //should it reset the reward?
+  return state;
 }

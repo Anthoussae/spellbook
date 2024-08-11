@@ -1,6 +1,338 @@
 /* Opinionated CSS defaults based on:
   ! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css 
 */
+
+/* Reward-specific button styling */
+.reward-button {
+  padding: 20px; /* Space inside the button */
+  font-size: 1.2em; /* Larger text */
+  border-radius: 10px; /* Rounded corners */
+  border: 1px solid #ccc; /* Light grey border */
+  cursor: pointer; /* Pointer cursor on hover */
+  text-align: center; /* Center text inside the button */
+  min-width: 150px; /* Minimum button width */
+  transition: background-color 0.3s ease; /* Smooth background color transition */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Optional: Add specific styles when the button is hovered or active */
+.reward-button:hover {
+  background-color: #f0f0f0; /* Light grey background on hover */
+}
+
+.reward-button:active {
+  background-color: #ddd; /* Slightly darker grey when clicked */
+}
+
+/* General styling for centering elements */
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* Specific styles for each element */
+.header,
+.deck-button,
+.hud {
+  margin: 20px 0; /* Add some vertical spacing */
+}
+
+.header {
+  /* Center the header */
+  width: 100%;
+}
+
+.deck-button {
+  /* Center the deck button */
+  width: 100px;
+  background-color: lightblue;
+}
+
+.hud {
+  /* Center the HUD */
+  width: 100%;
+}
+
+/* Optional: Additional styling for buttons and HUD */
+.deck-button button {
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.hud {
+  /* Example styling for HUD */
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
+.hand-container {
+  display: flex; /* Arrange items in a row */
+  gap: 20px; /* Increased space between the hand cards */
+  margin-top: 20px; /* Space after the "Hand" heading */
+}
+
+.handButton.card {
+  width: 105px; /* Increased size of the squares (50% bigger than 70px) */
+  height: 105px;
+  border: 2px solid darkgrey; /* Dark grey outline */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white; /* Ensure background color is white for visibility */
+  box-sizing: border-box; /* Ensure padding and border are included in width/height */
+  font-size: 14px; /* Adjust font size to fit within the square */
+  padding: 10px; /* Adjust padding to give some space inside the button */
+  text-align: center; /* Center text inside the button */
+  overflow: hidden; /* Hide any overflow text */
+}
+/* Container for path selection buttons */
+.spellbook-container {
+  display: flex; /* Arrange items in a row */
+  gap: 15px; /* Increased space between the squares */
+  margin-top: 20px; /* More space after the "Spellbook" heading */
+}
+/*empty page styling */
+
+.page {
+  width: 70px; /* Increase the size of the squares */
+  height: 70px;
+  border: 2px solid grey; /* Grey outline */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box; /* Ensure padding and border are included in width/height */
+}
+
+/*empty spell styling */
+
+.spell {
+  width: 70px; /* Increase the size of the squares */
+  height: 70px;
+  font-size: 50%;
+  color: white;
+  background-color: rgb(102, 2, 196);
+  border: 2px solid rgb(0, 0, 0); /* Grey outline */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-wrap: break-word; /* Alternative for word-wrap */
+  text-align: center; /* Center the text horizontally */
+  overflow: hidden; /* Hide any text that spills out */
+  word-wrap: break-word; /* Allow text to break onto the next line */
+  box-sizing: border-box; /* Ensure padding and border are included in width/height */
+}
+
+.combat.screen + button {
+  margin-top: 30px; /* More space before the "Cast Spellbook" button */
+}
+/* path selection styling */
+
+.path-selection {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 20px auto;
+  max-width: 1000px;
+}
+
+/* Common button styling */
+.path-selection button {
+  padding: 20px;
+  font-size: 1.2em;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  text-align: center;
+  min-width: 150px;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+/*reward selection styling*/
+.reward-selection {
+  display: flex;
+  justify-content: space-around; /* Distribute buttons evenly */
+  align-items: center; /* Center align items vertically */
+  margin: 20px auto; /* Vertical spacing and center alignment */
+  max-width: 1000px; /* Max width for the container */
+}
+
+/* Common button styling */
+.reward-selection button {
+  padding: 20px; /* Space inside the button */
+  font-size: 1.2em; /* Larger text */
+  border-radius: 10px; /* Rounded corners */
+  border: 1px solid #ccc; /* Light grey border */
+  cursor: pointer; /* Pointer cursor on hover */
+  text-align: center; /* Center text inside the button */
+  min-width: 150px; /* Minimum button width */
+  transition: background-color 0.3s ease; /* Smooth background color transition */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Specific button colors */
+.rest-button {
+  background-color: #d0f0d0; /* Pale green */
+}
+
+.shop-button {
+  background-color: #fffacd; /* Pale yellow */
+}
+
+.wand-upgrade-button {
+  background-color: #e6e6fa; /* Pale purple */
+}
+
+.other-button {
+  background-color: #f8d7da; /* Pale pink */
+}
+
+/* Hover effect for all buttons */
+.path-selection button:hover {
+  opacity: 0.9;
+}
+
+/* General container for the entire socketing section */
+.socketing {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header styling */
+.socketing__header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Button container styling for grid layout */
+.socketing__buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+/* Individual button styling */
+.socketing__button {
+  padding: 20px; /* Increase padding for more space */
+  font-size: 1.1em; /* Increase font size slightly */
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+  min-width: 150px; /* Ensures buttons are wide enough */
+}
+
+/* Hover effect for buttons */
+.socketing__button:hover {
+  background-color: #e0e0e0;
+}
+
+/* General container for the entire deck examination */
+.deck-examine {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header styling */
+.deck-examine__header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Card container styling for grid layout */
+.deck-examine__cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+/* Individual card styling */
+.deck-examine__card {
+  background-color: #f0f0f0;
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Card name styling */
+.deck-examine__card-name {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+/* Tooltip styling */
+.deck-examine__card-tooltip {
+  font-size: 0.9em;
+  color: #666;
+}
+
+/* Footer button styling */
+.deck-examine__footer {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.deck-examine__footer-button {
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.deck-examine__footer-button:hover {
+  background-color: #0056b3;
+}
+
+.deck-examine__card {
+  position: relative; /* Ensure tooltip is positioned relative to the card */
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.deck-examine__card-tooltip {
+  visibility: hidden; /* Hide the tooltip by default */
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%; /* Position the tooltip above the card */
+  left: 50%;
+  margin-left: -60px; /* Center the tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* the hovering isn't working */
+
+.deck-examine__card:hover .deck-examine__card-tooltip {
+  visibility: visible; /* Show tooltip on hover */
+  opacity: 1;
+}
+/* 
+make buttons with the class "handButton" be less tall (not square)
+*/
+
+.handButton {
+  height: 50px;
+}
+
 button {
   width: 100px;
   height: 100px;
