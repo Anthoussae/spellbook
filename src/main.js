@@ -1,14 +1,17 @@
 "use strict";
 //minor
 
-//bunnies not resetting after combat
-//show combat victory / loss screen
-//Extra Pages not working?
-// harvest not working?
+//create the luck mechanic.
+//tooltips should display full card effects.
+//tooltips should be helpful, and reflect gem effects.
+//malachite is bugged
 
 // fix color display in "render deck examine" so that card colors are displayed correctly.
 // make a favicon
-// make the shop.
+// make the shop render.
+// the shop should always include either a quill, an inkbottle, or a page. The first costs 10 gold, then incrementally 20, 30, etc.
+// you start the game with 50 gold in the shop.
+// the shop has a row of gems, a row of relics (one of which is one of the above 3), a row of cards, and a row of potions.
 //currently socketing a gem automatically takes you to path selection. It should be fixed so that if you're in a shop, it takes you back to shop selection.
 
 //major bug: Occasionally randomly skips through a screen. Reason unclear, no error message.
@@ -49,6 +52,8 @@ import { generateStarterDeck } from "./state/startup/generateStarterDeck";
 import { insertRelic } from "./state/insertRelic";
 import { colorize } from "./state/startup/colorize";
 import { populateEnemyPool } from "./state/startup/populateEnemyPool";
+import { insertCard } from "./state/insertCard";
+import { findObjectInArray } from "./util/findObjectInArray";
 
 // make sure tehre's combat values for everything.
 //new game creates a non-global state object and passes it to the path selection screen.
@@ -72,9 +77,9 @@ export function newGame() {
     potionPool: potionPool,
     maxHp: 100,
     hp: 100,
-    gold: 0,
+    gold: 50,
     level: 0,
-    startingHandSize: 4,
+    handSize: 4,
     combatHandSize: 0,
     mulligans: 1,
     combatMulligans: 0,
@@ -83,7 +88,12 @@ export function newGame() {
     presentedOptions: [],
     currentEnemy: null,
     enemyHp: 0,
+    lastEnemyHp: 0,
+    lastCombatResult: null,
+    bounty: 0,
     bunnies: 0,
+    casting: 0,
+    lastBunnies: 0,
     restHealAmount: 25,
     difficultyLevel: 1,
     luck: 1,
@@ -110,13 +120,14 @@ export function newGame() {
       B: generateColor(),
     },
     overallColor: "none",
-    discount: 1,
+    discount: 0,
     challengePool: challengePool,
     classPool: classPool,
     defeatedEnemies: [],
     bonusBunnies: 0,
     selectedReward: null,
     selectedCard: null,
+    shopWares: [],
   };
 
   //ultimately, difficulty level and class will be set by user selection.
@@ -124,6 +135,12 @@ export function newGame() {
   state = insertRelic(state, "Magic Wand");
   state = applyDifficultyLevel(state);
   state = colorize(state);
+
+  //debugger
+  // state = insertCard(state, findObjectInArray(cardPool, "name", "Harvest"));
+  // state = insertRelic(state, "Quill");
+
+  //begin game
   startPathSelection(state);
 }
 

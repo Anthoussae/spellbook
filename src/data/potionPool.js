@@ -23,7 +23,7 @@ export const potionPool = [
     type: "potion",
     goldReward: 20,
     hpHeal: -10,
-    rarity: "rare",
+    rarity: "common",
     effect: "bloodPact",
   },
   {

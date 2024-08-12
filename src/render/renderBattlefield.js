@@ -4,16 +4,19 @@ import { mulligan } from "../state/combat/mulligan";
 import { renderButtons } from "./renderButtons";
 import { renderHud } from "./renderHud";
 import { playCard } from "../state/combat/playCard";
+import { renderBattleHud } from "./renderBattleHud";
 
 export function renderBattlefield(oldState) {
   //displays a button that says "fight". When pressed, it triggers the callback function.
   let state = { ...oldState };
-  let html = "";
+
   //display state.currentEnemy.Hp and state.bunnies
-  html += "<div>";
-  html += `<h1 id='battleHud'>Enemy HP: ${state.currentEnemy.hp} Bunnies: ${state.bunnies} Ink: ${state.combatInk}</h1>`;
+  state.battleScene = "midCombat";
+  renderBattleHud(state);
 
   //display spellbook
+  let html = "";
+  html += "<div>";
   html += "<div class='combat screen'>";
   html += `<h1>Spellbook:</h1>`;
   html += "<div class='spellbook-container'>"; // Container for the pages
@@ -24,8 +27,8 @@ export function renderBattlefield(oldState) {
       html += "</div>";
     } else {
       console.log(page);
-      html += "<div class='spell'>";
-      html += `<h2 style='color: black font-size='3px''>${page.name}</h2>`;
+      html += `<div class='spell' data-effect="${page.effect}">`; // Add data-effect attribute
+      html += `<h2 style='color: white; font-size='3px'>${page.name}</h2>`;
       html += "</div>";
     }
   });
@@ -68,7 +71,10 @@ export function renderBattlefield(oldState) {
   //make the cast button clickable.
   //this may now require await or .then().
   document.querySelector("#cast-button").addEventListener("click", async () => {
-    state = await castSpellbook(state);
+    state.casting = state.casting + 1;
+    if (state.casting === 1) {
+      state = await castSpellbook(state);
+    }
     // Optionally, you can add any additional logic here that needs to happen after casting the spellbook
   });
   //make the mulligan button clickable

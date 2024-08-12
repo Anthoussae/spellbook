@@ -1,7 +1,7 @@
 "use strict";
 
 //charms are static effects that enemies have.
-//several cards etc. interact with charms.
+//several cards etc. interact with charms. There are ways of disenchanting charms.
 // none of these are implemented
 export const charmPool = [
   { name: "Nightshade Charm", effect: "whenever you play a card, lose 1 hp" },
@@ -19,5 +19,14 @@ export const charmPool = [
   {
     name: "Pepper Charm",
     effect: "Double damage",
+  },
+  {
+    name: "Carrot Charm",
+    effect: "reduce all played cards addbunnies by 1 and bunnymult by 0.25",
+  },
+  {
+    name: "Lead Charm",
+    effect:
+      "At the start of combat, shuffle 3 pet bricks into the opponent's deck. If disenchanted, remove them all and draw a card for each one removed from hand. ",
   },
 ];

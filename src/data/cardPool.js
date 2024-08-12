@@ -14,6 +14,14 @@ export const cardPool = [
     type: "card",
     characterClass: "none",
   },
+  {
+    name: "Pet Brick",
+    level: -1,
+    effect: "nothing, can't be cast",
+    type: "card",
+    rarity: "special",
+    characterClass: "none",
+  },
   // level 0 (starter deck)
   {
     name: "Bunnymancy",

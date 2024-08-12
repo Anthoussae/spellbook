@@ -8,7 +8,7 @@ export function populateEnemyPool() {
       level: Math.floor(i / 10),
       maxHp: i,
       hp: i,
-      goldReward: i,
+      goldReward: Math.floor(Math.random() * (30 - 15 + 1)) + 15,
       type: "concrete",
       screen: "combat",
       rarity: "common",

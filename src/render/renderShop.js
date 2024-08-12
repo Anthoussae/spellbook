@@ -4,7 +4,10 @@ import { renderHud } from "./renderHud";
 import { renderRelicBelt } from "./renderRelicBelt";
 
 // Placeholder functions to simulate shop
+//lets completely rewrite it.
 export function renderShop(state) {
+  console.log(state.shopWares);
+
   displayShop(() => {
     renderRelicBelt(state); // Render relic belt after animation
     renderHud(state); // Render HUD after relic belt

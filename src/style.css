@@ -108,7 +108,8 @@
 /*empty spell styling */
 
 .spell {
-  width: 70px; /* Increase the size of the squares */
+  position: relative; /* Required for positioning the tooltip */
+  width: 70px;
   height: 70px;
   font-size: 50%;
   color: white;
@@ -117,13 +118,35 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow-wrap: break-word; /* Alternative for word-wrap */
-  text-align: center; /* Center the text horizontally */
-  overflow: hidden; /* Hide any text that spills out */
+  text-align: center;
+  overflow: hidden;
   word-wrap: break-word; /* Allow text to break onto the next line */
   box-sizing: border-box; /* Ensure padding and border are included in width/height */
 }
 
+.spell::before {
+  content: attr(
+    data-effect
+  ); /* Use the data-effect attribute for the tooltip content */
+  position: absolute;
+  bottom: 100%; /* Position above the spell */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: black;
+  color: white;
+  padding: 5px;
+  border-radius: 3px;
+  white-space: nowrap; /* Prevent the tooltip from breaking lines */
+  font-size: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  z-index: 10;
+}
+
+.spell:hover::before {
+  opacity: 1; /* Show the tooltip when hovering over the spell */
+}
 .combat.screen + button {
   margin-top: 30px; /* More space before the "Cast Spellbook" button */
 }
@@ -149,6 +172,51 @@
   transition: background-color 0.3s ease;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+/*combat recap styling*/
+.Wcombat-recap {
+  display: flex;
+  background-color: powderblue;
+  justify-content: space-around; /* Distribute buttons evenly */
+  align-items: center; /* Center align items vertically */
+  margin: 20px auto; /* Vertical spacing and center alignment */
+  max-width: 1000px; /* Max width for the container */
+}
+
+.Lcombat-recap {
+  display: flex;
+  background-color: rgb(228, 145, 169);
+  justify-content: space-around; /* Distribute buttons evenly */
+  align-items: center; /* Center align items vertically */
+  margin: 20px auto; /* Vertical spacing and center alignment */
+  max-width: 1000px; /* Max width for the container */
+}
+
+.Wcombat-recap-button {
+  padding: 50px; /* Space inside the button */
+  background-color: rgb(2, 142, 189);
+  font-size: 1.2em; /* Larger text */
+  border-radius: 10px; /* Rounded corners */
+  border: 3px solid #ccc; /* Light grey border */
+  cursor: pointer; /* Pointer cursor on hover */
+  text-align: center; /* Center text inside the button */
+  min-width: 150px; /* Minimum button width */
+  transition: background-color 0.3s ease; /* Smooth background color transition */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.Lcombat-recap-button {
+  padding: 50px; /* Space inside the button */
+  background-color: rgb(241, 83, 83);
+  font-size: 1.2em; /* Larger text */
+  border-radius: 10px; /* Rounded corners */
+  border: 3px solid #ccc; /* Light grey border */
+  cursor: pointer; /* Pointer cursor on hover */
+  text-align: center; /* Center text inside the button */
+  min-width: 150px; /* Minimum button width */
+  transition: background-color 0.3s ease; /* Smooth background color transition */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
 /*reward selection styling*/
 .reward-selection {
   display: flex;

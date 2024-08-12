@@ -115,7 +115,8 @@ export const relicPool = [
   {
     //UNINTEGRATED: currently no luck nor mf mechanic.
     name: "Shako",
-    effect: "+3 luck for rewards",
+    bonusLuck: 50,
+    effect: "+luck",
     rarity: "uncommon",
     type: "relic",
     trigger: "rewardStart",

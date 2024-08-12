@@ -3,14 +3,14 @@ import { startRewardSelection } from "../startRewardSelection";
 import { renderHud } from "../../render/renderHud";
 import { renderRelicBelt } from "../../render/renderRelicBelt";
 import { checkEndCombatTriggers } from "./checkEndCombatTriggers";
+import { renderBattleHud } from "../../render/renderBattleHud";
 
-export function endCombat(oldState) {
+export async function endCombat(oldState) {
   let state = { ...oldState };
 
   let outcome = "";
   if (state.currentEnemy.hp < 1) {
     outcome = "win";
-    console.log("state.currentEnemy.hp", state.currentEnemy.hp);
   } else {
     outcome = "loss";
     if (state.hp <= 0) {
@@ -19,13 +19,13 @@ export function endCombat(oldState) {
       resetState(state);
     }
   }
-
+  state.lastCombatResult = outcome;
   state = checkEndCombatTriggers(state, outcome);
-
-  if (outcome === "win") {
-    state.gold = state.gold + state.currentEnemy.goldReward;
-    console.log("you win! gold reward: ", state.currentEnemy.goldReward);
+  if (state.lastCombatResult == "win") {
+    state.bounty = state.currentEnemy.goldReward;
   }
+  state.lastBunnies = state.bunnies;
+  state.lastEnemyHp = state.currentEnemy.hp;
 
   //clear enemy
   state.defeatedEnemies.push(state.currentEnemy);
@@ -37,6 +37,9 @@ export function endCombat(oldState) {
   state.combatMulligans = 0;
   state.combatInk = 0;
   state.combatPages = 0;
+  state.bunnies = 0;
+  state.combatHandSize = 0;
+  state.casting = 0;
 
   //rerender
   document.querySelector("#output").innerHTML = "";

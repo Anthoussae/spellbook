@@ -16,7 +16,16 @@ export async function castSpellbook(state) {
     await sleep(200);
   }
 
-  // Update state.hp and state.currentEnemy.hp
+  await sleep(200);
+  //apply damage.
+  state.bunnies = Math.floor(state.bunnies);
+  state.currentEnemy.hp = state.currentEnemy.hp - state.bunnies;
+  if (state.currentEnemy.hp > 0) {
+    state.hp = state.hp - state.currentEnemy.hp;
+  }
+  state.lastEnemyHp = state.currentEnemy.hp;
+
+  await sleep(200);
   endCombat(state);
   return state;
 }

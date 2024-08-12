@@ -1,5 +1,6 @@
 "use strict";
 import { animate } from "../../render/animate";
+import { drawXCards } from "./drawXCards";
 
 export function checkDrawTriggers(oldState, card) {
   let state = { ...oldState };
@@ -16,10 +17,12 @@ export function checkDrawTriggers(oldState, card) {
     }
   }
   // card triggers
-  if (drawnCard.trigger === "draw") {
-    if (drawnCard.bunniesOnDraw) {
-      state.bunnies = state.bunnies + drawnCard.bunniesOnDraw;
-    }
+
+  if (drawnCard.bunniesOnDraw) {
+    state.bunnies = state.bunnies + drawnCard.bunniesOnDraw;
+  }
+  if (drawnCard.drawOnDraw) {
+    state = drawXCards(state, drawnCard.drawOnDraw);
   }
   return state;
 }

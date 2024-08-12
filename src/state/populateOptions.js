@@ -61,9 +61,7 @@ export function populateOptions(oldState) {
     concreteOptions,
     replacementItem
   );
-  if (currentScreen == "shop") {
-    concreteOptions = assignPrices(concreteOptions, state.discount);
-  }
+
   state.presentedOptions = concreteOptions;
   return state;
 }
@@ -94,23 +92,4 @@ function weighPool(cardPool, rarities) {
 
 function filterPoolByLevel(pool, level) {
   return pool.filter((option) => option.level === level);
-}
-
-function assignPrices(oldArray, discount) {
-  let array = [...oldArray];
-  let pricedOptions = [];
-  let priceList = {
-    common: 1,
-    uncommon: 2,
-    rare: 3,
-    mythic: 4,
-  };
-  array.forEach((option) => {
-    let pricedOption = { ...option };
-    pricedOption.price =
-      10 +
-      Math.floor(Math.random() * 100 * discount * priceList[option.rarity]);
-    pricedOptions.push(pricedOption);
-  });
-  return pricedOptions;
 }

@@ -8,7 +8,7 @@ import { renderShop } from "./renderShop";
 import { renderSocketing } from "./renderSocketing";
 import { renderPathSelection } from "./renderPathSelection";
 import { renderDeckExamine } from "./renderDeckExamine";
-import { renderReward } from "./renderReward";
+import { renderCombatRecap } from "./renderCombatRecap";
 import { renderButtons } from "./renderButtons";
 import { colorWitch } from "./colorWitch";
 
@@ -31,7 +31,7 @@ export function render(oldState) {
   } else if (state.currentScreen === "shop") {
     renderShop(state);
   } else if (state.currentScreen === "rewardSelection") {
-    renderReward(state);
+    renderCombatRecap(state);
   } else {
     throw "unknown screen: " + state.currentScreen;
   }

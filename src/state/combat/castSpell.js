@@ -4,39 +4,42 @@ import { renderBattlefield } from "../../render/renderBattlefield";
 
 export function castSpell(oldState, card) {
   let state = { ...oldState };
-  if (card == "page" || typeof card != "object") {
+  if (card == "page") {
+    console.log("~ empty page ~");
+  } else if (typeof card != "object") {
     console.log("not a valid spell!");
     return state;
   }
-  if (card.effect == "draw") {
+  if (card.cardsDrawn) {
     state = drawXCards(state, card.cardsDrawn);
   }
-  if (card.effect == "addBunnies") {
+  if (card.bunnyAdd) {
     state.bunnies += card.bunnyAdd;
   }
-  if (card.effect == "addInk") {
+  if (card.inkAdd) {
     state.combatInk += card.inkAdd;
   }
-  if (card.effect == "reduceEnemyMaxHpPercent") {
-    state.currentEnemy.maxHp =
-      state.currentEnemy.maxHp * (1 - card.reduceEnemyMaxHpPercent);
+  if (card.reduceEnemyMaxHpPercent) {
+    state.currentEnemy.hp = Math.floor(
+      state.currentEnemy.hp * (1 - card.reduceEnemyMaxHpPercent)
+    );
   }
-  if (card.effect == "addPages") {
+  if (card.pageAdd) {
     for (let i = 0; i < card.pageAdd; i++) {
       state.spellbook.push("page");
     }
   }
-  if (card.effect == "multiplyBunnies") {
+  if (card.bunnyMult) {
     state.bunnies = state.bunnies * card.bunnyMult;
   }
   if (card.effect == "midasBunnies") {
     state.bunnies = state.bunnies + Math.floor(state.gold / 10);
   }
-  if (card.effect == "retrigger" && card.retriggers > 0) {
+  if (card.retriggers && card.retriggers > 0) {
     card.retriggers = card.retriggers - 1;
-    if (card.scope == "self") {
+    if (card.retriggerScope == "self") {
       state = castSpell(state, card);
-    } else if (card.scope == "sides") {
+    } else if (card.retriggerScope == "sides") {
       let cardIndex = state.spellbook.indexOf(card);
       if (cardIndex > 0) {
         let leftCard = state.spellbook[cardIndex - 1];
@@ -46,11 +49,11 @@ export function castSpell(oldState, card) {
         let rightCard = state.spellbook[cardIndex + 1];
         state = castSpell(state, rightCard);
       }
-    } else if (card.scope == "all") {
+    } else if (card.retriggerScope == "all") {
       for (let i = 0; i < state.spellbook.length; i++) {
         state = castSpell(state, state.spellbook[i]);
       }
-    } else if (card.scope == "reverse") {
+    } else if (card.retriggerScope == "reverse") {
       let cardIndex = state.spellbook.indexOf(card);
       // Ensure cardIndex is valid (not -1)
       if (cardIndex >= 0) {

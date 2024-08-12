@@ -1,6 +1,7 @@
 import { animate } from "../../render/animate";
+import { sleep } from "../../util/sleep";
 
-export function checkStartCombatTriggers(oldState) {
+export async function checkStartCombatTriggers(oldState) {
   let state = { ...oldState };
   let relics = state.relicBelt;
   //make sure that all of these only apply to combat, and that combat mods are reset at the end of combat.
@@ -18,7 +19,7 @@ export function checkStartCombatTriggers(oldState) {
         animate(relic);
       }
       //quill
-      if (relic.effect === "+openingHandsize") {
+      if (relic.bonusHandsize) {
         state.combatHandSize = state.combatHandSize + relic.bonusHandsize;
         animate(relic);
       }
@@ -32,6 +33,9 @@ export function checkStartCombatTriggers(oldState) {
         state.combatMulligans = state.combatMulligans + relic.bonusMulligans;
         animate(relic);
       }
+
+      // Wait for 200ms before processing the next relic
+      await sleep(200);
     }
   }
   return state;

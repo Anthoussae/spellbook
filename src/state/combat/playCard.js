@@ -16,6 +16,15 @@ export function playCard(oldState, playedCard) {
   } else if (card.ink <= state.combatInk) {
     state.combatInk = state.combatInk - card.ink;
   }
+  //if the spellbook doesn't have any "page", alert the player
+  if (
+    state.spellbook.every((page) => page != "page") &&
+    card.trigger == "cast"
+  ) {
+    alert("no space on the spellbook");
+    renderBattlefield(state);
+    return state;
+  }
 
   //card type check & page spce caheck
   if (card.trigger == "cast") {

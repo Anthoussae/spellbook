@@ -5,30 +5,32 @@ import { findObjectInArray } from "../../util/findObjectInArray.js";
 import { checkStartCombatTriggers } from "./checkStartCombatTriggers.js";
 
 // this function is a placeholder. Real combat mechanics need to be properly designed.
-export function startCombat(oldState) {
+export async function startCombat(oldState) {
   let state = { ...oldState };
   state.currentScreen = "combat";
-  state = checkStartCombatTriggers(state);
+  state = await checkStartCombatTriggers(state);
+
   state.spellbook = [];
   for (let i = 0; i < state.pages; i++) {
     state.spellbook.push("page");
   }
+  console.log("deck", state.deck);
   state.combatDeck = state.deck.map((card) => ({ ...card }));
   state.enemyHp = state.currentEnemy.maxHp;
-  //this function appears to be transforming state.deck. It should not.
-  state = drawXCards(state, state.startingHandSize);
 
   //assign combat values
   state.combatPages = state.combatPages + state.pages;
   state.combatInk = state.combatInk + state.ink;
   state.combatMulligans = state.combatMulligans + state.mulligans;
   state.combatPages = state.combatPages + state.pages;
+  state.bunnies = state.bunnies + state.bonusBunnies;
+  state.combatHandSize = state.handSize + state.combatHandSize;
 
-  state.bunnies =
-    state.bunnies +
-    state.bonusBunnies +
-    findObjectInArray(state.relicBelt, "supertype", "wand").bunnyAdd;
+  //draw hand
+  state = drawXCards(state, state.combatHandSize);
+
+  //clear bonus bunnies
   state.bonusBunnies = 0;
-  renderHud(state);
+
   render(state);
 }
