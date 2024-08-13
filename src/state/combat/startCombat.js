@@ -1,14 +1,14 @@
 import { render } from "../../render/render.js";
-import { renderHud } from "../../render/renderHud.js";
+
 import { drawXCards } from "./drawXCards.js";
-import { findObjectInArray } from "../../util/findObjectInArray.js";
 import { checkStartCombatTriggers } from "./checkStartCombatTriggers.js";
+import { updateCastBunnies } from "./updateCastBunnies.js";
 
 // this function is a placeholder. Real combat mechanics need to be properly designed.
-export async function startCombat(oldState) {
+export function startCombat(oldState) {
   let state = { ...oldState };
   state.currentScreen = "combat";
-  state = await checkStartCombatTriggers(state);
+  state = checkStartCombatTriggers(state);
 
   state.spellbook = [];
   for (let i = 0; i < state.pages; i++) {
@@ -31,6 +31,6 @@ export async function startCombat(oldState) {
 
   //clear bonus bunnies
   state.bonusBunnies = 0;
-
+  state = updateCastBunnies(state);
   render(state);
 }

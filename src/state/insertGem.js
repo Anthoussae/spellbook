@@ -6,12 +6,13 @@ export function insertGem(card, gem) {
   let newCard = { ...card };
   console.log(card, gem);
   newCard.name = gem.name + " " + newCard.name;
-  newCard.color = (newCard.color || 0) + gem.color;
+  newCard.color = gem.color;
+  newCard.effect = newCard.effect + ". " + gem.effect;
   if (gem.bunnyAdd) {
     newCard.bunnyAdd = (newCard.bunnyAdd || 0) + gem.bunnyAdd;
   }
   if (gem.drawOnDraw) {
-    newCard.drawOnDraw = (newCard.drawOnDraw || 0) + gem.cardsDrawn;
+    newCard.drawOnDraw = (newCard.drawOnDraw || 0) + gem.drawOnDraw;
   }
   if (gem.ink) {
     newCard.ink = Math.max(newCard.ink + gem.ink, 0);
@@ -39,6 +40,6 @@ export function insertGem(card, gem) {
   if (gem.pageAdd) {
     newCard.pageAdd = (newCard.pageAdd || 0) + gem.pageAdd;
   }
-
+  console.log(newCard);
   return newCard;
 }

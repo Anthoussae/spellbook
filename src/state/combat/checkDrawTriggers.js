@@ -10,7 +10,7 @@ export function checkDrawTriggers(oldState, card) {
   //relics triggers
   for (let i = 0; i < relics.length; i++) {
     if (relics[i].trigger === "draw") {
-      if (relics[i].effect === "bunniesOnDraw") {
+      if (relics[i].bunniesOnDraw) {
         state.bunnies = state.bunnies + relics[i].bunniesOnDraw;
         animate(relics[i]);
       }

@@ -7,8 +7,14 @@ import { insertRelic } from "./insertRelic";
 
 export function startShop(oldState) {
   let state = { ...oldState };
+  state.shopPityTimer = 5;
   checkStartShopTriggers(state);
   state.currentScreen = "shop";
+  state.shopwares = [];
+  let potionPool = [...state.potionPool];
+  let relicPool = [...state.relicPool];
+  let cardPool = [...state.cardPool];
+  let gemPool = [...state.gemPool];
 
   let offeredPotions = [];
   let offeredRelics = [];
@@ -20,17 +26,17 @@ export function startShop(oldState) {
     {
       //integrated
       name: "Inkpot",
-      effect: "inkOnStart",
+      effect: "Gain 1 bonus ink each combat",
       rarity: "common",
       inkAdd: 1,
       type: "relic",
       trigger: "combatStart",
     },
     {
-      //integrated - not working
+      //integrated
       name: "Quill",
       bonusHandsize: 1,
-      effect: "+openingHandsize",
+      effect: "Increase your opening hand size by 1",
       rarity: "common",
       type: "relic",
       trigger: "combatStart",
@@ -39,7 +45,7 @@ export function startShop(oldState) {
       //integrated
       name: "Extra Page",
       bonusPages: 1,
-      effect: "+1 page",
+      effect: "Increase your spellbook size by 1 page",
       rarity: "uncommon",
       type: "relic",
       trigger: "combatStart",
@@ -49,7 +55,7 @@ export function startShop(oldState) {
     basicRelics[Math.floor(Math.random() * basicRelics.length)];
   offeredRelics.push(offeredRelic1);
   let offeredRelic2 = getRandomNonMatchingObject(
-    state.relicPool,
+    relicPool,
     {
       rarity: "basic",
     },
@@ -57,23 +63,24 @@ export function startShop(oldState) {
   );
   offeredRelics.push(offeredRelic2);
   let offeredRelic3 = getRandomNonMatchingObject(
-    state.relicPool,
+    relicPool,
     {
       rarity: "basic",
     },
+    { name: offeredRelic1.name },
     { name: offeredRelic2.name }
   );
   offeredRelics.push(offeredRelic3);
 
   //potion array
-  let offeredPotion1 = getRandomMatchingObject(state.potionPool);
+  let offeredPotion1 = getRandomMatchingObject(potionPool);
   offeredPotions.push(offeredPotion1);
-  let offeredPotion2 = getRandomNonMatchingObject(state.potionPool, {
+  let offeredPotion2 = getRandomNonMatchingObject(potionPool, {
     name: offeredPotion1.name,
   });
   offeredPotions.push(offeredPotion2);
   let offeredPotion3 = getRandomNonMatchingObject(
-    state.potionPool,
+    potionPool,
     { name: offeredPotion1.name },
     { name: offeredPotion2.name }
   );
@@ -81,20 +88,20 @@ export function startShop(oldState) {
 
   //card array
   let offeredCard1 = getRandomNonMatchingObject(
-    state.cardPool,
+    cardPool,
     { level: 0 },
     { level: -1 }
   );
   offeredCards.push(offeredCard1);
   let offeredCard2 = getRandomNonMatchingObject(
-    state.cardPool,
+    cardPool,
     { level: 0 },
     { level: -1 },
     { name: offeredCard1.name }
   );
   offeredCards.push(offeredCard2);
   let offeredCard3 = getRandomNonMatchingObject(
-    state.cardPool,
+    cardPool,
     { level: 0 },
     { level: -1 },
     { name: offeredCard1.name },
@@ -103,14 +110,14 @@ export function startShop(oldState) {
   offeredCards.push(offeredCard3);
 
   //gem array
-  let offeredGem1 = getRandomMatchingObject(state.gemPool);
+  let offeredGem1 = getRandomMatchingObject(gemPool);
   offeredGems.push(offeredGem1);
-  let offeredGem2 = getRandomNonMatchingObject(state.gemPool, {
+  let offeredGem2 = getRandomNonMatchingObject(gemPool, {
     name: offeredGem1.name,
   });
   offeredGems.push(offeredGem2);
   let offeredGem3 = getRandomNonMatchingObject(
-    state.gemPool,
+    gemPool,
     { name: offeredGem1.name },
     { name: offeredGem2.name }
   );
@@ -148,10 +155,10 @@ function assignPrices(shopWares, oldState) {
       mythic: { min: 31, max: 50 },
     },
     gem: {
-      common: { min: 20, max: 30 },
-      uncommon: { min: 31, max: 50 },
-      rare: { min: 51, max: 70 },
-      mythic: { min: 71, max: 100 },
+      common: { min: 8, max: 15 },
+      uncommon: { min: 16, max: 30 },
+      rare: { min: 31, max: 45 },
+      mythic: { min: 46, max: 70 },
     },
   };
 

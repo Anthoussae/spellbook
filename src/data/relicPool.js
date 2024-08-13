@@ -4,7 +4,8 @@ export const relicPool = [
   {
     //integrated
     name: "Magic Wand",
-    effect: "bunniesOnStart",
+    effect:
+      "Gain bonus bunnies at the start of combat equal to your wand power",
     bunnyAdd: 3,
     rarity: "basic",
     type: "relic",
@@ -15,7 +16,8 @@ export const relicPool = [
     //integrated
     name: "Broken Wand",
     bunnyAdd: 0,
-    effect: "bunniesOnStart",
+    effect:
+      "Gain bonus bunnies at the start of combat equal to your wand power",
     rarity: "basic",
     type: "relic",
     supertype: "wand",
@@ -24,7 +26,7 @@ export const relicPool = [
   {
     //integrated
     name: "Inkpot",
-    effect: "inkOnStart",
+    effect: "Gain 1 bonus ink each combat",
     rarity: "common",
     inkAdd: 1,
     type: "relic",
@@ -34,7 +36,7 @@ export const relicPool = [
     //integrated
     name: "Quill",
     bonusHandsize: 1,
-    effect: "+openingHandsize",
+    effect: "Increase your opening hand size by 1",
     rarity: "common",
     type: "relic",
     trigger: "combatStart",
@@ -43,7 +45,7 @@ export const relicPool = [
     //integrated
     name: "Extra Page",
     bonusPages: 1,
-    effect: "+1 page",
+    effect: "Increase your spellbook size by 1 page",
     rarity: "uncommon",
     type: "relic",
     trigger: "combatStart",
@@ -51,7 +53,7 @@ export const relicPool = [
   {
     //integrated
     name: "Hydrangea",
-    effect: "+maxHp",
+    effect: "Gain 25 max HP",
     bonusMaxHp: 25,
     rarity: "uncommon",
     type: "relic",
@@ -60,7 +62,7 @@ export const relicPool = [
   {
     //integrated
     name: "Magic Staff",
-    effect: "bunnyAdd",
+    effect: "Gain 10 bunnies when you cast your spellbook",
     bunnyAdd: 10,
     rarity: "mythic",
     type: "relic",
@@ -70,7 +72,7 @@ export const relicPool = [
   {
     //integrated
     name: "Gold medal",
-    effect: "bonusGoldPercent",
+    effect: "Gain 50% more gold",
     bonusGoldpercent: 0.5,
     rarity: "common",
     type: "relic",
@@ -79,7 +81,7 @@ export const relicPool = [
   {
     //integrated
     name: "Gold ingot",
-    effect: "interest",
+    effect: "Gain 5% interest on your gold each time you win combat",
     interest: 0.05,
     rarity: "uncommon",
     type: "relic",
@@ -88,7 +90,7 @@ export const relicPool = [
   {
     //integrated
     name: "Encyclopedia",
-    effect: "bunniesOnDraw",
+    effect: "Gain 1 bunny each time you draw a card.",
     rarity: "common",
     type: "relic",
     bunniesOnDraw: 1,
@@ -97,28 +99,28 @@ export const relicPool = [
   {
     //integrated
     name: "Golf Club",
-    effect: "+mulligans",
+    effect: "Gain 1 bonus mulligan each combat",
     rarity: "common",
     type: "relic",
     bonusMulligans: 1,
     trigger: "combatStart",
   },
   //@@@ ~~ UNINTEGRATED ~~ @@@
-  {
-    //UNINTEGRATED: requires play card mechanic in combat.
-    name: "Top Hat",
-    effect: "add +1 bunny to each played card when you play it",
-    rarity: "rare",
-    type: "relic",
-    trigger: "playCard",
-  },
-  {
-    //UNINTEGRATED: currently no luck nor mf mechanic.
-    name: "Shako",
-    bonusLuck: 50,
-    effect: "+luck",
-    rarity: "uncommon",
-    type: "relic",
-    trigger: "rewardStart",
-  },
+  // {
+  //   //UNINTEGRATED: requires play card mechanic in combat.
+  //   name: "Top Hat",
+  //   effect: "add +1 bunny to each played card when you play it",
+  //   rarity: "rare",
+  //   type: "relic",
+  //   trigger: "playCard",
+  // },
+  // {
+  //   //UNINTEGRATED: currently no luck nor mf mechanic.
+  //   name: "Shako",
+  //   bonusLuck: 50,
+  //   effect: "+luck",
+  //   rarity: "uncommon",
+  //   type: "relic",
+  //   trigger: "rewardStart",
+  // },
 ];

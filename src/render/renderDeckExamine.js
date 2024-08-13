@@ -23,11 +23,11 @@ export function renderDeckExamine(state) {
             .map((card) => {
               // Check if card.color exists and set the style accordingly
               const textColorStyle = card.color
-                ? `style="color: ${card.color};"`
+                ? `style="background-color: ${card.color};"`
                 : "";
               return `
               <div class="deck-examine__card" data-effect="${card.effect}">
-                  <div class="deck-examine__card-name" ${textColorStyle}>${card.name}</div>
+                  <div class="deck-examine__card-name" ${textColorStyle}>${card.name} (${card.ink})</div>
                   <div class="deck-examine__card-tooltip">${card.effect}</div>
               </div>
               `;

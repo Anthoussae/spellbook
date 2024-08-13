@@ -7,6 +7,9 @@ import { renderRelicBelt } from "./renderRelicBelt";
 export function renderRewardSelection(oldState) {
   let state = { ...oldState };
   renderHud(state);
+  //reveal the deck button again
+  document.getElementById("deck").style.display = "block";
+
   let html = "";
   const options = state.presentedOptions;
   const outputDiv = document.querySelector("#output");

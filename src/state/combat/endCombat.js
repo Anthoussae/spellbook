@@ -3,7 +3,6 @@ import { startRewardSelection } from "../startRewardSelection";
 import { renderHud } from "../../render/renderHud";
 import { renderRelicBelt } from "../../render/renderRelicBelt";
 import { checkEndCombatTriggers } from "./checkEndCombatTriggers";
-import { renderBattleHud } from "../../render/renderBattleHud";
 
 export async function endCombat(oldState) {
   let state = { ...oldState };

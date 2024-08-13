@@ -1,10 +1,13 @@
 "use strict";
 import { renderBattleHud } from "./renderBattleHud";
+import { startRewardSelection } from "../state/startRewardSelection";
 import { renderRewardSelection } from "./renderRewardSelection";
 
 export function renderCombatRecap(oldState) {
   let state = { ...oldState };
   renderBattleHud(state);
+  //hide the deck button
+  document.getElementById("deck").style.display = "none";
   const outputDiv = document.querySelector("#output");
   let bounty = state.bounty;
   let lastEnemyHp = state.lastEnemyHp;
@@ -44,6 +47,8 @@ export function renderCombatRecap(oldState) {
     // Add a click event listener to the button
     const rewardButton = document.getElementById("survivors-reward-button");
     rewardButton.addEventListener("click", function () {
+      // startRewardSelection(state);
+      //this works, but arguably shouldn't. Ideally it shoul start reward selection.
       renderRewardSelection(state);
     });
   } else if (outcome == "loss" && state.hp <= 0) {

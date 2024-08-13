@@ -1,16 +1,31 @@
-"use strict";
+import { findObjectInArray } from "../util/findObjectInArray";
+import { transformRelic } from "./transformRelic";
+
+("use strict");
 export function drinkPotion(state) {
   state = { ...state };
   let potion = state.selectedReward;
-  if (potion.effect == "heal") {
+  if (potion.hpHeal) {
     state.hp = Math.min(state.hp + potion.hpHeal, state.maxHp);
-  } else if (potion.effect == "bonusBunnies") {
-    state.bonusBunnies = state.bonusBunnies + potion.bunnies;
-  } else if (potion.effect == "gainGold") {
-    state.gold = state.gold + potion.goldReward;
-  } else if (potion.effect == "bloodPact") {
-    state.gold = state.gold + potion.goldReward;
-    state.hp = state.hp - potion.hpHeal;
+  } else if (potion.bonusBunnies) {
+    state.bonusBunnies = state.bonusBunnies + potion.bonusBunnies;
+  } else if (potion.wandUpgrade) {
+    state = upgradeWand(state, potion.wandUpgrade);
   }
+  return state;
+}
+
+function upgradeWand(oldState, potionWandUpgrade) {
+  let state = { ...oldState };
+  let oldWand = findObjectInArray(state.relicBelt, "supertype", "wand");
+  if (typeof oldWand !== "object") {
+    console.log("No wand to upgrade");
+    return state;
+  }
+  let newWand = {
+    ...oldWand,
+    bunnyAdd: oldWand.bunnyAdd + potionWandUpgrade,
+  };
+  transformRelic(state, oldWand, newWand);
   return state;
 }

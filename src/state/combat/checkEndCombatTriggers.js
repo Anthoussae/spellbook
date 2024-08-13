@@ -10,7 +10,7 @@ export function checkEndCombatTriggers(oldState, combatOutcome) {
     if (relic.trigger == "combatWin" && outcome == "win") {
       //gold medal
       if (relic.effect == "bonusGoldPercent") {
-        bounty = bounty * (1 + relic.bonusGoldPercent);
+        bounty = Math.floor(bounty * (1 + relic.bonusGoldPercent));
         state.currentEnemy.goldReward = bounty;
       }
       //gold ingot

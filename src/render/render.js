@@ -10,12 +10,14 @@ import { renderPathSelection } from "./renderPathSelection";
 import { renderDeckExamine } from "./renderDeckExamine";
 import { renderCombatRecap } from "./renderCombatRecap";
 import { renderButtons } from "./renderButtons";
-import { colorWitch } from "./colorWitch";
+import { renderBattleHud } from "./renderBattleHud";
 
+//fix the 'render combat recap - it should be a separate screen to reward selection.""
 export function render(oldState) {
   let state = { ...oldState };
   // colorWitch(state);
   renderButtons(state);
+  renderBattleHud(state);
   if (state.currentScreen == "pathSelection") {
     renderPathSelection(state);
   } else if (state.currentScreen == "rest") {

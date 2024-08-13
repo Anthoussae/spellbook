@@ -58,36 +58,4 @@ export function renderPathSelection(oldState) {
       }
     });
   }
-
-  // let html = "";
-  // for (const optionIndex in options) {
-  //   const option = options[optionIndex];
-  //   // styling buttons based on content - this needs fixing, currently doesn't work.
-  //   html += '<button data-index="' + optionIndex + '">';
-  //   html += option.name;
-  //   html += "</button>";
-  // }
-  // const outputDiv = document.querySelector("#output");
-  // outputDiv.innerHTML = html;
-
-  // const btnElems = document.querySelectorAll("#output button");
-  // for (let btnElem of btnElems) {
-  //   btnElem.addEventListener("click", () => {
-  //     const name = btnElem.innerHTML;
-  //     const clickedOption = options[btnElem.dataset.index];
-  //     //check and see if it's a monster
-  //     if (name != "Rest" && name != "Shop" && name != "Wand Upgrade") {
-  //       state.currentEnemy = clickedOption;
-  //       startCombat(state);
-  //     } else if (name == "Rest") {
-  //       startRest(state);
-  //     } else if (name == "Shop") {
-  //       startShop(state);
-  //     } else if (name == "Wand Upgrade") {
-  //       startWandUpgrade(state);
-  //     } else {
-  //       throw "Unknown screen: " + state.currentScreen;
-  //     }
-  //   });
-  // }
 }

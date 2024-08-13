@@ -63,10 +63,12 @@ export function renderSocketing(oldState) {
       `;
     document.getElementById("output").innerHTML = html;
 
+    //may be bugged
     let socketingButton = document.querySelector(".socketing__button");
     socketingButton.addEventListener("click", () => {
       state.currentScreen = state.previousScreen;
       document.getElementById("deck").style.visibility = "visible";
+      render(state);
     });
   }
   document.getElementById("deck").style.visibility = "visible";

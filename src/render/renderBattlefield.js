@@ -11,7 +11,6 @@ export function renderBattlefield(oldState) {
   let state = { ...oldState };
 
   //display state.currentEnemy.Hp and state.bunnies
-  state.battleScene = "midCombat";
   renderBattleHud(state);
 
   //display spellbook
@@ -38,7 +37,7 @@ export function renderBattlefield(oldState) {
   //cast button
   html +=
     "<button id='cast-button' style='border: 3px solid green; color: darkgreen; background-color: lightgreen; font-size: 20px; text-align: center; padding: 20px;'>";
-  html += `Cast Spellbook`;
+  html += `Cast: ${state.castBunnies}`;
   html += "</button>";
 
   // Mulligan button
@@ -56,12 +55,16 @@ export function renderBattlefield(oldState) {
          </button>`;
 
   //hand
-
   html += "<div class='hand'>";
   html += `<h1>Hand:</h1>`;
   html += "<div class='hand-container'>"; // Container for hand cards
   state.hand.forEach((card) => {
-    html += `<button class='handButton card'>${card.name}<br>${card.ink}</br></button>`; // Apply 'card' class for formatting
+    html += `
+    <button class='handButton card'>
+      ${card.name}<br>${card.ink}</br>
+      <span class='tooltip'>${card.effect}</span>
+    </button>
+  `; // Apply 'card' class for formatting
   });
   html += "</div>"; // Close the hand-container div
   html += "</div>"; // Close the hand div

@@ -1,10 +1,20 @@
 "use strict";
 //minor
 
+//add italic effect text to cards in deck examine
+//add tooltips to hand cards
+//add tooltips to spellbook cards
+//rounded edges for cards
+//ink cost appears in socketing
+//wand upgrade can appear twice, fix that
+//shop pity timer (shop guaranteed every 5 fights)
+//console error when you cast (doesn't seem to affect logic).
+//show ink cost when socketing
+//add colors and reward type to reward selection, and make it look better.
+//make sure that battlehud doesn't display fractions - math.floor everything..
+//clear the renderBattlehud after combat (when entering pathselection)
+
 //create the luck mechanic.
-//tooltips should display full card effects.
-//tooltips should be helpful, and reflect gem effects.
-//malachite is bugged
 
 // fix color display in "render deck examine" so that card colors are displayed correctly.
 // make a favicon
@@ -47,6 +57,7 @@ import { startPathSelection } from "./state/startPathSelection";
 import { generateColor } from "./util/generateColor";
 
 //game state functions
+import { startShop } from "./state/startShop";
 import { applyDifficultyLevel } from "./state/startup/applyDifficultyLevel";
 import { generateStarterDeck } from "./state/startup/generateStarterDeck";
 import { insertRelic } from "./state/insertRelic";
@@ -94,11 +105,13 @@ export function newGame() {
     bunnies: 0,
     casting: 0,
     lastBunnies: 0,
+    castBunnies: 0,
     restHealAmount: 25,
     difficultyLevel: 1,
+    shopPityTimer: 5,
     luck: 1,
     characterClas: "base",
-    ink: 4,
+    ink: 5,
     combatInk: 0,
     tempInkBonus: 0,
     rewardProbabilities: {
@@ -141,7 +154,7 @@ export function newGame() {
   // state = insertRelic(state, "Quill");
 
   //begin game
-  startPathSelection(state);
+  startShop(state);
 }
 
 newGame();

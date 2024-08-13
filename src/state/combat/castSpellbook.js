@@ -3,8 +3,9 @@ import { checkCastTriggers } from "./checkCastTriggers";
 import { endCombat } from "./endCombat";
 import { castSpell } from "./castSpell";
 import { sleep } from "../../util/sleep";
+import { renderBattleHud } from "../../render/renderBattleHud";
 
-export async function castSpellbook(state) {
+export function castSpellbook(state) {
   state = checkCastTriggers(state);
   let spellbook = state.spellbook;
 
@@ -13,19 +14,17 @@ export async function castSpellbook(state) {
     state = castSpell(state, card);
 
     // Pause for 200ms between each spell cast
-    await sleep(200);
   }
 
-  await sleep(200);
   //apply damage.
   state.bunnies = Math.floor(state.bunnies);
   state.currentEnemy.hp = state.currentEnemy.hp - state.bunnies;
+  renderBattleHud(state);
   if (state.currentEnemy.hp > 0) {
     state.hp = state.hp - state.currentEnemy.hp;
   }
   state.lastEnemyHp = state.currentEnemy.hp;
 
-  await sleep(200);
   endCombat(state);
   return state;
 }

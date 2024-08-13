@@ -1,6 +1,7 @@
 "use strict";
 import { renderBattlefield } from "../../render/renderBattlefield";
 import { castSpell } from "./castSpell";
+import { updateCastBunnies } from "./updateCastBunnies";
 
 export function playCard(oldState, playedCard) {
   let state = { ...oldState };
@@ -50,6 +51,7 @@ export function playCard(oldState, playedCard) {
     //resolve effect
     state = castSpell(state, card);
   }
+  state = updateCastBunnies(state);
   renderBattlefield(state);
   return state;
 }

@@ -3,6 +3,7 @@ import { startPathSelection } from "./startPathSelection";
 import { insertCard } from "./insertCard";
 import { removeCard } from "./removeCard";
 import { insertGem } from "./insertGem";
+import { render } from "../render/render";
 
 export function socketCardWithGem(oldState) {
   let state = { ...oldState };
@@ -16,5 +17,10 @@ export function socketCardWithGem(oldState) {
   }
   state.selectedReward = null;
   document.getElementById("deck").style.visibility = "visible";
-  startPathSelection(state);
+  if (state.previousScreen != "shop") {
+    startPathSelection(state);
+  } else {
+    state.currentScreen = "shop";
+    render(state);
+  }
 }
