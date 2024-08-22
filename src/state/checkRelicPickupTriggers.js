@@ -7,6 +7,10 @@ export function checkRelicPickupTriggers(oldState, selectedRelic) {
     if (relic.bonusMaxHp) {
       state.maxHp = state.maxHp + relic.bonusMaxHp;
     }
+    // golden egg
+    else if (relic.gold) {
+      state.gold = state.gold + relic.gold;
+    }
   }
   return state;
 }

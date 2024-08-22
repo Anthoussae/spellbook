@@ -1,752 +1,221 @@
-/* Opinionated CSS defaults based on:
-  ! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css 
-*/
-/* 
-body {
+.level,
+.hud,
+.banner,
+.deck,
+.belt,
+.output {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0); /* Semi-transparent background */
+  box-sizing: border-box;
+  font-size: 2vw;
+  color: #333; /* Dark text color */
+}
+.level {
+  width: 7vw; /* Slightly smaller width */
+  height: 7vh; /* Slightly smaller height */
+  top: 5vh; /* Move closer to the center vertically */
+  left: 4vw; /* Move closer to the center horizontally */
+}
+
+.hud {
+  width: 14vw; /* Slightly smaller width */
+  height: 7vh; /* Slightly smaller height */
+  top: 4vh; /* Move closer to the center vertically */
+  right: 4vw; /* Move closer to the center horizontally */
+}
+
+.banner {
+  width: 30vw; /* Slightly smaller width */
+  height: 7vh; /* Slightly smaller height */
+  top: 4vh; /* Move closer to the center vertically */
+  left: calc(50vw - 16.5vw); /* Centered horizontally, adjusted for new width */
+  font-size: 2.7vw;
+}
+
+.output {
+  width: 70vw; /* Slightly smaller width */
+  height: calc(60vh - 8vh); /* Slightly smaller height */
+  top: calc(11vh + 8vh); /* Adjusted to align with the smaller top row */
+  left: 14vw; /* Centered horizontally */
+}
+
+.deck {
+  width: 7vw; /* Slightly smaller width */
+  height: 7vh; /* Slightly smaller height */
+  bottom: 4vh; /* Move closer to the center vertically */
+  left: 2vw; /* Move closer to the center horizontally */
+}
+.belt {
   display: flex;
-  justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  justify-content: flex-start; /* Adjust this based on your desired alignment */
+  overflow-x: auto; /* Allows scrolling if there are many relics */
+  padding: 0.5vh;
+  box-sizing: border-box;
+}
+
+.relicImage {
+  width: 7vh; /* Adjust size as needed */
+  height: 7vh; /* Ensure images are square */
+  margin-right: 1vh; /* Space between relics */
+}
+/* above this is experimental*/
+
+/* Global stylings for consistency */
+* {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f9;
-} */
-
-.handButton {
-  position: relative; /* Needed for positioning the tooltip */
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid #333;
-  background-color: #f8f9fa;
-  cursor: pointer;
-  margin: 5px;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.tooltip {
-  visibility: hidden;
-  width: 120px;
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-  border-radius: 5px;
-  padding: 5px;
-  position: absolute;
-  z-index: 1;
-  bottom: 125%; /* Position above the button */
-  left: 50%;
-  margin-left: -60px; /* Center the tooltip */
-  opacity: 0;
-  transition: opacity 0.3s;
-  font-size: 12px;
-  pointer-events: none; /* Prevent mouse interactions with the tooltip */
-}
-
-.tooltip::after {
-  content: "";
-  position: absolute;
-  top: 100%; /* Arrow at the bottom */
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #333 transparent transparent transparent; /* Arrow color */
-}
-
-.handButton:hover .tooltip {
-  visibility: visible;
-  opacity: 1;
-}
-
-/* relic belt*/
-#relicBelt {
-  display: flex; /* Align items in a horizontal row */
-  gap: 10px; /* Space between each relic */
-  padding: 10px;
-  justify-content: flex-start; /* Aligns items to the left */
-}
-.relic-item {
-  position: relative; /* Required for positioning the tooltip */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 60px;
-  height: 60px;
-  border-radius: 10px;
-  background-color: #f0e68c;
-  border: 2px solid #d4af37;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  font-weight: bold;
-  text-align: center;
-  color: #333;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-.relic-item:hover {
-  transform: scale(1.1);
-}
-
-.tooltip {
-  visibility: hidden;
-  width: 120px;
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-  border-radius: 5px;
-  padding: 5px;
-  position: absolute;
-  z-index: 1;
-  bottom: 125%; /* Position the tooltip above the relic */
-  left: 50%;
-  margin-left: -60px; /* Center the tooltip */
-  opacity: 0;
-  transition: opacity 0.3s;
-  font-size: 12px;
-}
-
-.tooltip::after {
-  content: "";
-  position: absolute;
-  top: 100%; /* Arrow at the bottom */
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #333 transparent transparent transparent; /* Arrow color */
-}
-
-.relic-item:hover .tooltip {
-  visibility: visible;
-  opacity: 1;
-}
-
-/* shop stylings */
-.shop-container {
-  background-color: #fff9c4;
-  width: 60%;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  text-align: center;
-}
-
-.shop-title {
-  font-size: 2em;
-  margin-bottom: 20px;
-}
-
-.shop-items {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  margin-bottom: 30px;
-}
-
-.shop-item {
-  position: relative;
-  background-color: #f1f1f1;
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  padding: 20px;
-  cursor: pointer;
-  font-size: 1em;
-  text-align: center;
-}
-
-.tooltip-text {
-  visibility: hidden;
-  width: 200px;
-  background-color: #555;
-  color: #fff;
-  text-align: center;
-  border-radius: 5px;
-  padding: 5px;
-  position: absolute;
-  z-index: 1;
-  bottom: 125%; /* Position the tooltip above the item */
-  left: 50%;
-  margin-left: -100px;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.shop-item:hover .tooltip-text {
-  visibility: visible;
-  opacity: 1;
-}
-
-.exit-button {
-  background-color: #e57373;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 10px;
-  font-size: 1.2em;
-  cursor: pointer;
-}
-
-.exit-button:hover {
-  background-color: #d32f2f;
-}
-
-/* Reward-specific button styling */
-.reward-button {
-  padding: 20px; /* Space inside the button */
-  font-size: 1.2em; /* Larger text */
-  border-radius: 10px; /* Rounded corners */
-  border: 1px solid #ccc; /* Light grey border */
-  cursor: pointer; /* Pointer cursor on hover */
-  text-align: center; /* Center text inside the button */
-  min-width: 150px; /* Minimum button width */
-  transition: background-color 0.3s ease; /* Smooth background color transition */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-}
-
-/* Optional: Add specific styles when the button is hovered or active */
-.reward-button:hover {
-  background-color: #f0f0f0; /* Light grey background on hover */
-}
-
-.reward-button:active {
-  background-color: #ddd; /* Slightly darker grey when clicked */
-}
-
-/* General styling for centering elements */
-.centered {
+body {
+  font-family: luminari, fantasy; /* Ensure global font application */
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
-}
-
-/* Specific styles for each element */
-.header,
-.deck-button,
-.hud {
-  margin: 20px 0; /* Add some vertical spacing */
-}
-
-.header {
-  /* Center the header */
-  width: 100%;
-}
-
-.deck-button {
-  /* Center the deck button */
-  width: 100px;
-  background-color: lightblue;
-}
-
-.hud {
-  /* Center the HUD */
-  width: 100%;
-}
-
-/* Optional: Additional styling for buttons and HUD */
-.deck-button button {
-  padding: 10px 20px;
-  font-size: 16px;
-}
-
-.hud {
-  /* Example styling for HUD */
-  padding: 20px;
-  border: 1px solid #ccc;
-}
-
-.hand-container {
-  display: flex; /* Arrange items in a row */
-  gap: 20px; /* Increased space between the hand cards */
-  margin-top: 20px; /* Space after the "Hand" heading */
-}
-
-.handButton.card {
-  width: 105px; /* Increased size of the squares (50% bigger than 70px) */
-  height: 105px;
-  border: 2px solid darkgrey; /* Dark grey outline */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: white; /* Ensure background color is white for visibility */
-  box-sizing: border-box; /* Ensure padding and border are included in width/height */
-  font-size: 14px; /* Adjust font size to fit within the square */
-  padding: 10px; /* Adjust padding to give some space inside the button */
-  text-align: center; /* Center text inside the button */
-  overflow: hidden; /* Hide any overflow text */
-}
-/* Container for path selection buttons */
-.spellbook-container {
-  display: flex; /* Arrange items in a row */
-  gap: 15px; /* Increased space between the squares */
-  margin-top: 20px; /* More space after the "Spellbook" heading */
-}
-/*empty page styling */
-
-.page {
-  width: 70px; /* Increase the size of the squares */
-  height: 70px;
-  border: 2px solid grey; /* Grey outline */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box; /* Ensure padding and border are included in width/height */
-}
-
-/*empty spell styling */
-
-.spell {
-  position: relative; /* Required for positioning the tooltip */
-  width: 70px;
-  height: 70px;
-  font-size: 50%;
-  color: white;
-  background-color: rgb(102, 2, 196);
-  border: 2px solid rgb(0, 0, 0); /* Grey outline */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  overflow: hidden;
-  word-wrap: break-word; /* Allow text to break onto the next line */
-  box-sizing: border-box; /* Ensure padding and border are included in width/height */
-}
-
-.spell::before {
-  content: attr(
-    data-effect
-  ); /* Use the data-effect attribute for the tooltip content */
-  position: absolute;
-  bottom: 100%; /* Position above the spell */
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: black;
-  color: white;
-  padding: 5px;
-  border-radius: 3px;
-  white-space: nowrap; /* Prevent the tooltip from breaking lines */
-  font-size: 12px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s;
-  z-index: 10;
-}
-
-.spell:hover::before {
-  opacity: 1; /* Show the tooltip when hovering over the spell */
-}
-.combat.screen + button {
-  margin-top: 30px; /* More space before the "Cast Spellbook" button */
-}
-/* path selection styling */
-
-.path-selection {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin: 20px auto;
-  max-width: 1000px;
-}
-
-/* Common button styling */
-.path-selection button {
-  padding: 20px;
-  font-size: 1.2em;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  cursor: pointer;
-  text-align: center;
-  min-width: 150px;
-  transition: background-color 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-/*combat recap styling*/
-.Wcombat-recap {
-  display: flex;
-  background-color: powderblue;
-  justify-content: space-around; /* Distribute buttons evenly */
-  align-items: center; /* Center align items vertically */
-  margin: 20px auto; /* Vertical spacing and center alignment */
-  max-width: 1000px; /* Max width for the container */
-}
-
-.Lcombat-recap {
-  display: flex;
-  background-color: rgb(228, 145, 169);
-  justify-content: space-around; /* Distribute buttons evenly */
-  align-items: center; /* Center align items vertically */
-  margin: 20px auto; /* Vertical spacing and center alignment */
-  max-width: 1000px; /* Max width for the container */
-}
-
-.Wcombat-recap-button {
-  padding: 50px; /* Space inside the button */
-  background-color: rgb(2, 142, 189);
-  font-size: 1.2em; /* Larger text */
-  border-radius: 10px; /* Rounded corners */
-  border: 3px solid #ccc; /* Light grey border */
-  cursor: pointer; /* Pointer cursor on hover */
-  text-align: center; /* Center text inside the button */
-  min-width: 150px; /* Minimum button width */
-  transition: background-color 0.3s ease; /* Smooth background color transition */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-}
-
-.Lcombat-recap-button {
-  padding: 50px; /* Space inside the button */
-  background-color: rgb(241, 83, 83);
-  font-size: 1.2em; /* Larger text */
-  border-radius: 10px; /* Rounded corners */
-  border: 3px solid #ccc; /* Light grey border */
-  cursor: pointer; /* Pointer cursor on hover */
-  text-align: center; /* Center text inside the button */
-  min-width: 150px; /* Minimum button width */
-  transition: background-color 0.3s ease; /* Smooth background color transition */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-}
-
-/*reward selection styling*/
-.reward-selection {
-  display: flex;
-  justify-content: space-around; /* Distribute buttons evenly */
-  align-items: center; /* Center align items vertically */
-  margin: 20px auto; /* Vertical spacing and center alignment */
-  max-width: 1000px; /* Max width for the container */
-}
-
-/* Common button styling */
-.reward-selection button {
-  padding: 20px; /* Space inside the button */
-  font-size: 1.2em; /* Larger text */
-  border-radius: 10px; /* Rounded corners */
-  border: 1px solid #ccc; /* Light grey border */
-  cursor: pointer; /* Pointer cursor on hover */
-  text-align: center; /* Center text inside the button */
-  min-width: 150px; /* Minimum button width */
-  transition: background-color 0.3s ease; /* Smooth background color transition */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-}
-
-/* Specific button colors */
-.rest-button {
-  background-color: #d0f0d0; /* Pale green */
-}
-
-.shop-button {
-  background-color: #fffacd; /* Pale yellow */
-}
-
-.wand-upgrade-button {
-  background-color: #e6e6fa; /* Pale purple */
-}
-
-.other-button {
-  background-color: #f8d7da; /* Pale pink */
-}
-
-/* Hover effect for all buttons */
-.path-selection button:hover {
-  opacity: 0.9;
-}
-
-/* General container for the entire socketing section */
-.socketing {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-/* Header styling */
-.socketing__header {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-/* Button container styling for grid layout */
-.socketing__buttons {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 20px;
-}
-
-/* Individual button styling */
-.socketing__button {
-  padding: 20px; /* Increase padding for more space */
-  font-size: 1.1em; /* Increase font size slightly */
-  background-color: #f0f0f0;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  cursor: pointer;
-  text-align: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease;
-  min-width: 150px; /* Ensures buttons are wide enough */
-}
-
-/* Hover effect for buttons */
-.socketing__button:hover {
-  background-color: #e0e0e0;
-}
-
-/* General container for the entire deck examination */
-.deck-examine {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-/* Header styling */
-.deck-examine__header {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-/* Card container styling for grid layout */
-.deck-examine__cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-}
-
-/* Individual card styling */
-.deck-examine__card {
-  background-color: #f0f0f0;
-  padding: 15px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  text-align: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-/* Card name styling */
-.deck-examine__card-name {
-  font-size: 1.2em;
-  margin-bottom: 10px;
-}
-
-/* Tooltip styling */
-.deck-examine__card-tooltip {
-  font-size: 0.9em;
-  color: #666;
-}
-
-/* Footer button styling */
-.deck-examine__footer {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.deck-examine__footer-button {
-  padding: 10px 20px;
-  font-size: 1em;
-  cursor: pointer;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-.deck-examine__footer-button:hover {
-  background-color: #0056b3;
-}
-
-.deck-examine__card {
-  position: relative; /* Ensure tooltip is positioned relative to the card */
-  padding: 10px;
-  border: 1px solid #ccc;
-  margin: 10px;
-  cursor: pointer;
-}
-
-.deck-examine__card-tooltip {
-  visibility: hidden; /* Hide the tooltip by default */
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-  border-radius: 5px;
-  padding: 5px;
-  position: absolute;
-  z-index: 1;
-  bottom: 100%; /* Position the tooltip above the card */
-  left: 50%;
-  margin-left: -60px; /* Center the tooltip */
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-/* the hovering isn't working */
-
-.deck-examine__card:hover .deck-examine__card-tooltip {
-  visibility: visible; /* Show tooltip on hover */
-  opacity: 1;
-}
-/* 
-make buttons with the class "handButton" be less tall (not square)
-*/
-
-.handButton {
-  height: 50px;
+  height: 100vh;
+  background-color: #f0f0f0; /* Light background for contrast */
 }
 
 button {
-  width: 100px;
-  height: 100px;
+  font-family: luminari, fantasy;
+}
+
+#gameContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* Stack items vertically */
+  text-align: center;
+  background-color: #f7ebe0;
+  position: relative; /* Add this to make the container a positioning context */
+  width: 100vw; /* 80% of the viewport width */
+  height: 100vh; /* 60% of the viewport height */
+  margin: 0 auto;
+  background-color: #f7ebe0;
+}
+
+/* fullscreen icon */
+#fullscreenBtn {
+  position: absolute; /* Position the button absolutely within the container */
+  bottom: 10px; /* 10px from the bottom */
+  right: 10px; /* 10px from the right */
+  padding: 0px;
+  background-color: #f7ebe0;
+  color: #000000;
+  border: none;
+  cursor: pointer;
+  font-size: 24px; /* Size of the icon */
+  border-radius: 50%; /* This makes the button fully rounded */
+  width: 32px; /* Set width to create a circular button */
+  height: 32px; /* Set height to match width for a perfect circle */
   display: flex;
   align-items: center;
   justify-content: center;
+}
+#fullscreenBtn:hover {
+  background-color: #ffd7a0;
+}
+
+/*small buttons*/
+
+.smallBtn {
+  background-color: #9859f1; /* Cute color for the button */
+  color: white;
   border: none;
-  font-size: 16px;
-  margin: 10px;
+  width: 10vw; /* Button width scales with the viewport width */
+  height: 9vh; /* Button height scales with the viewport height */
+  font-size: calc(0.3 * 10vh); /* Font size scales with the viewport width */
+  border-radius: 1vw; /* Rounded corners also scale */
+  border-radius: 15px; /* Slightly larger rounded corners */
+  padding: 0.5vh; /* Increase padding for larger button */
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions for hover effects */
+  /*add space between buttons*/
+  margin-bottom: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
-button.rest {
-  background-color: green;
+.smallBtn:hover {
+  background-color: #ff8a6c; /* Slightly lighter color on hover  */
 }
 
-button.rest:hover {
-  background-color: darkgreen;
+#smallBtn:active {
+  transform: scale(0.95); /* Button shrink effect on click */
 }
 
-button.rest:active {
-  background-color: darker green;
+/*menu buttons*/
+.menuBtn {
+  background-color: #9859f1; /* Cute color for the button */
+  color: white;
+  border: none;
+  width: 20vw; /* Button width scales with the viewport width */
+  height: 12vh; /* Button height scales with the viewport height */
+  font-size: calc(0.5 * 10vh); /* Font size scales with the viewport width */
+  border-radius: 1vw; /* Rounded corners also scale */
+  border-radius: 15px; /* Slightly larger rounded corners */
+  padding: 3vh; /* Increase padding for larger button */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions for hover effects */
+  /*add space between buttons*/
+  margin-bottom: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
-html {
-  line-height: 1.2;
-  -webkit-text-size-adjust: 100%;
+.menuBtn:hover {
+  background-color: #ff8a6c; /* Slightly lighter color on hover  */
 }
 
-html,
-* {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu,
-    "Helvetica Neue", Helvetica, sans-serif;
+#menuBtn:active {
+  transform: scale(0.95); /* Button shrink effect on click */
 }
 
-body {
-  margin: 0;
+/*start screen stylings*/
+.titleBanner {
+  font-size: 6vw; /* Increase font size for larger banner */
+  margin-bottom: 30px; /* Increase space between logo and button */
+  color: #120336; /* Dark text color for contrast */
 }
 
-h1 {
-  font-size: 2em;
-  margin: 0.67em 0;
+/*difficulty selection stylings*/
+#easy {
+  background-color: #a8e6cf; /* Light green */
+  color: #333; /* Dark text */
+  border: 2px solid #87d6b2; /* Slightly darker green for the border */
 }
 
-hr {
-  box-sizing: content-box;
-  height: 0;
-  overflow: visible;
+#normal {
+  background-color: #ffd3b6; /* Light orange */
+  color: #333; /* Dark text */
+  border: 2px solid #ffb085; /* Slightly darker orange for the border */
 }
 
-pre {
-  font-family: monospace, monospace;
-  font-size: 1em;
+#hard {
+  background-color: #ffaaa5; /* Light red */
+  color: #333; /* Dark text */
+  border: 2px solid #ff8474; /* Slightly darker red for the border */
 }
 
-b,
-strong {
-  font-weight: bolder;
+.menuBtn:hover {
+  transform: scale(1.1); /* Enlarge slightly on hover */
 }
 
-code,
-kbd,
-samp {
-  font-family: monospace, monospace;
-  font-size: 1em;
+#easy:hover {
+  background-color: #bdebd5; /* Slightly lighter green on hover */
 }
 
-small {
-  font-size: 80%;
+#normal:hover {
+  background-color: #ffe4cc; /* Slightly lighter orange on hover */
 }
 
-sub,
-sup {
-  font-size: 75%;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
+#hard:hover {
+  background-color: #ffc1be; /* Slightly lighter red on hover */
 }
 
-sub {
-  bottom: -0.25em;
-}
-
-sup {
-  top: -0.5em;
-}
-
-button,
-input,
-optgroup,
-select,
-textarea {
-  font-family: inherit;
-  font-size: 100%;
-  line-height: 1.15;
-  margin: 0;
-}
-
-button,
-select {
-  text-transform: none;
-}
-
-button,
-[type="button"],
-[type="reset"],
-[type="submit"] {
-  -webkit-appearance: button;
-}
-
-button::-moz-focus-inner,
-[type="button"]::-moz-focus-inner,
-[type="reset"]::-moz-focus-inner,
-[type="submit"]::-moz-focus-inner {
-  border-style: none;
-  padding: 0;
-}
-
-button:-moz-focusring,
-[type="button"]:-moz-focusring,
-[type="reset"]:-moz-focusring,
-[type="submit"]:-moz-focusring {
-  outline: 1px dotted ButtonText;
-}
-
-fieldset {
-  padding: 0.35em 0.75em 0.625em;
-}
-
-legend {
-  padding: 0;
-}
-
-progress {
-  vertical-align: baseline;
-}
-
-[type="number"]::-webkit-inner-spin-button,
-[type="number"]::-webkit-outer-spin-button {
-  height: auto;
-}
-
-[type="search"] {
-  -webkit-appearance: textfield;
-  outline-offset: -2px;
-}
-
-[type="search"]::-webkit-search-decoration {
-  -webkit-appearance: none;
-}
-
-::-webkit-file-upload-button {
-  -webkit-appearance: button;
-  font: inherit;
-}
-
-[hidden] {
-  display: none;
+#easy:active,
+#normal:active,
+#hard:active {
+  transform: scale(1.05); /* Reduce scale slightly when clicked */
 }

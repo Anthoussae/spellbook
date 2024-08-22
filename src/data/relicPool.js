@@ -68,16 +68,16 @@ export const relicPool = [
     type: "relic",
     trigger: "cast",
   },
-
-  {
-    //integrated
-    name: "Gold medal",
-    effect: "Gain 50% more gold",
-    bonusGoldpercent: 0.5,
-    rarity: "common",
-    type: "relic",
-    trigger: "combatWin",
-  },
+  //bugged
+  // {
+  //   //integrated
+  //   name: "Gold medal",
+  //   effect: "Gain 50% more gold",
+  //   bonusGoldPercent: 0.5,
+  //   rarity: "common",
+  //   type: "relic",
+  //   trigger: "combatWin",
+  // },
   {
     //integrated
     name: "Gold ingot",

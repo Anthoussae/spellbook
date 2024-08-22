@@ -10,22 +10,22 @@ export function startCombat(oldState) {
   state.currentScreen = "combat";
   state = checkStartCombatTriggers(state);
 
-  state.spellbook = [];
-  for (let i = 0; i < state.pages; i++) {
-    state.spellbook.push("page");
-  }
-  console.log("deck", state.deck);
   state.combatDeck = state.deck.map((card) => ({ ...card }));
   state.enemyHp = state.currentEnemy.maxHp;
 
   //assign combat values
-  state.combatPages = state.combatPages + state.pages;
   state.combatInk = state.combatInk + state.ink;
   state.combatMulligans = state.combatMulligans + state.mulligans;
   state.combatPages = state.combatPages + state.pages;
   state.bunnies = state.bunnies + state.bonusBunnies;
   state.combatHandSize = state.handSize + state.combatHandSize;
 
+  console.log(state.pages, state.combatPages);
+  //prepare pages
+  state.spellbook = [];
+  for (let i = 0; i < state.combatPages; i++) {
+    state.spellbook.push("page");
+  }
   //draw hand
   state = drawXCards(state, state.combatHandSize);
 

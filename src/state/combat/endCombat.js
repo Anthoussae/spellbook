@@ -4,7 +4,7 @@ import { renderHud } from "../../render/renderHud";
 import { renderRelicBelt } from "../../render/renderRelicBelt";
 import { checkEndCombatTriggers } from "./checkEndCombatTriggers";
 
-export async function endCombat(oldState) {
+export function endCombat(oldState) {
   let state = { ...oldState };
 
   let outcome = "";
@@ -19,10 +19,13 @@ export async function endCombat(oldState) {
     }
   }
   state.lastCombatResult = outcome;
-  state = checkEndCombatTriggers(state, outcome);
+
   if (state.lastCombatResult == "win") {
     state.bounty = state.currentEnemy.goldReward;
   }
+  state = checkEndCombatTriggers(state, outcome);
+  console.log(state.bounty);
+
   state.lastBunnies = state.bunnies;
   state.lastEnemyHp = state.currentEnemy.hp;
 
@@ -42,6 +45,7 @@ export async function endCombat(oldState) {
 
   //rerender
   document.querySelector("#output").innerHTML = "";
+  
   renderHud(state);
   renderRelicBelt(state);
   startRewardSelection(state);

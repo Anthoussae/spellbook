@@ -1,23 +1,51 @@
-<DOCTYPE html>
-  <html lang="en">
-    <head>
-      <title>Lapin Lazuli</title>
-      <link rel="stylesheet" href="style.css" />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-    </head>
-    <body>
-      <h1 id="titlecard">Lapin Lazuli</h1>
-      <p></p>
-      <div id="hud" class="centered hud"></div>
-      <p></p>
-      <div id="relicbelt"></div>
-      <p></p>
-      <div id="battleHud"></div>
-      <div id="output"></div>
-      <p></p>
-      <button class="centered deck-button" id="deck">Deck:</button>
-      <script src="main.js"></script>
-      <p></p>
-    </body>
-  </html>
-</DOCTYPE>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Lapin Lazuli</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-------------------------------Game Container---------------------------------->
+    <div id="gameContainer">
+      <!-------------------------------Start Screen---------------------------->
+      <div id="start" class="screen">
+        <div class="titleBanner" id="startBanner">Lapin Lazuli</div>
+        <button id="newGameBtn" class="menuBtn">New Game</button>
+      </div>
+      <button id="fullscreenBtn">&#x26F6;</button>
+
+      <!-------------------------------Difficulty Selection---------------------------->
+      <div id="difficultySelection" class="screen" style="display: none">
+        <div class="titleBanner" id="difficultyBanner">
+          Choose Difficulty Level:
+        </div>
+        <button id="easy" class="menuBtn" data-value="easy">Easy</button>
+        <button id="normal" class="menuBtn" data-value="normal">Normal</button>
+        <button id="hard" class="menuBtn" data-value="hard">Hard</button>
+      </div>
+
+      <!-------------------------------Mythic Selection---------------------------->
+
+      <div id="mythicSelection" class="screen" style="display: none">
+        <div class="level" id="levelElement">Level: 1</div>
+        <div class="hud" id="hudElement">
+          <div class="hp" id="hpElement"><span>HP: </span> 100/100</div>
+          <div class="gold" id="goldElement"><span>Gold: </span> 50</div>
+        </div>
+        <div class="banner" id="bannerElement">Choose a magical artefact:</div>
+        <div class="output" id="mythicSelectionOutput">Output content here</div>
+        <div class="deck" id="deckElement">
+          <button class="smallBtn" id="deckBtn">Deck</button>
+        </div>
+        <div class="belt" id="beltElement"></div>
+      </div>
+
+      <!-------------------------------Game Container ends----------------------------->
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>

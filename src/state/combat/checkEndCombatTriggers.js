@@ -8,8 +8,9 @@ export function checkEndCombatTriggers(oldState, combatOutcome) {
   for (let i = 0; i < relics.length; i++) {
     let relic = relics[i];
     if (relic.trigger == "combatWin" && outcome == "win") {
+      console.log(relic);
       //gold medal
-      if (relic.effect == "bonusGoldPercent") {
+      if (relic.bonusGoldPercent) {
         bounty = Math.floor(bounty * (1 + relic.bonusGoldPercent));
         state.currentEnemy.goldReward = bounty;
       }
