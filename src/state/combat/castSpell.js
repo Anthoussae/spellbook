@@ -32,7 +32,7 @@ export function castSpell(oldState, card) {
   if (card.bunnyMult) {
     state.bunnies = state.bunnies * card.bunnyMult;
   }
-  if (card.effect == "midasBunnies") {
+  if (card.specialEffect == "midasBunnies") {
     state.bunnies = state.bunnies + Math.floor(state.gold / 10);
   }
   if (card.retriggers && card.retriggers > 0) {

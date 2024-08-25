@@ -50,7 +50,7 @@ export const potionPool = [
     effect: "Gain 30 bonus bunnies next combat",
   },
   {
-    name: "Lesser Wisdom Potion",
+    name: "Lesser Wand Oil",
     level: 1,
     type: "potion",
     wandUpgrade: 1,
@@ -58,7 +58,7 @@ export const potionPool = [
     effect: "Permanently upgrade your wand by 1",
   },
   {
-    name: "Wisdom Potion",
+    name: "Wand Oil",
     level: 2,
     type: "potion",
     wandUpgrade: 2,
@@ -66,11 +66,13 @@ export const potionPool = [
     effect: "Permanently upgrade your wand by 2",
   },
   {
-    name: "Greater Wisdom Potion",
+    name: "Greater Wand Oil",
     level: 3,
     type: "potion",
     wandUpgrade: 3,
     rarity: "rare",
     effect: "Permanently upgrade your wand by 3",
   },
+  //potions that upgrade 1, 2, or 3 cards in your deck
+  //potions that give you 1, 2, or 3 bonus ink next fight
 ];

@@ -35,30 +35,93 @@
 .output {
   width: 70vw; /* Slightly smaller width */
   height: calc(60vh - 8vh); /* Slightly smaller height */
-  top: calc(11vh + 8vh); /* Adjusted to align with the smaller top row */
+  top: calc(21vh + 8vh); /* Adjusted to align with the smaller top row */
   left: 14vw; /* Centered horizontally */
 }
 
 .deck {
   width: 7vw; /* Slightly smaller width */
   height: 7vh; /* Slightly smaller height */
-  bottom: 4vh; /* Move closer to the center vertically */
+  bottom: 6vh; /* Move closer to the center vertically */
   left: 2vw; /* Move closer to the center horizontally */
 }
-.belt {
+
+/*experimental zone - needs fixing.*/
+
+#beltElement {
   display: flex;
-  align-items: center;
-  justify-content: flex-start; /* Adjust this based on your desired alignment */
+  flex-wrap: wrap; /* Allows the images to wrap to the next line if necessary */
+  justify-content: center; /* Centers the images in the belt */
+  align-items: center; /* Centers the images vertically within the belt */
+  padding: 10px; /* Adds some padding around the images */
+  width: 100%; /* Makes sure the beltDiv takes up the full width of its parent */
+  height: auto; /* Allows the height to adjust based on the content */
+  bottom: 4vh; /* Move closer to the center vertically */
+  left: 1vw; /* Move closer to the center horizontally */
   overflow-x: auto; /* Allows scrolling if there are many relics */
-  padding: 0.5vh;
-  box-sizing: border-box;
+  overflow: visible; /* Ensure overflow is not clipping the tooltip */
 }
 
-.relicImage {
-  width: 7vh; /* Adjust size as needed */
-  height: 7vh; /* Ensure images are square */
-  margin-right: 1vh; /* Space between relics */
+#beltElement img {
+  max-width: 100%; /* Ensures the image scales down to fit the container width */
+  height: auto; /* Maintains the aspect ratio of the image */
+  margin: 5px; /* Adds some space around each image */
+  object-fit: contain; /* Ensures the image is contained within its box */
+  flex: 1 1 auto; /* Allows images to grow and shrink as needed */
 }
+.tooltip {
+  position: relative;
+  display: inline-block;
+  margin: 0; /* Ensure no extra margin is applied */
+  padding: 0; /* Ensure no extra padding is applied */
+}
+
+/* Image styling */
+.tooltip img {
+  max-width: 100%; /* Ensures the image scales down to fit the container width */
+  height: auto; /* Maintains the aspect ratio of the image */
+  margin: 5px; /* Adds some space around each image */
+  object-fit: contain; /* Ensures the image is contained within its box */
+  flex: 1 1 auto; /* Allows images to grow and shrink as needed */
+  transition: transform 0.3s ease; /* Smooth transition for scaling effect */
+}
+
+/* Scale image on hover */
+.tooltip:hover img {
+  transform: scale(1.1); /* Scale image to 110% of its original size */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: auto; /* Automatically adjust width based on content */
+  min-width: 200px; /* Set a minimum width to prevent excessive shrinking */
+  max-width: 200px; /* Set a maximum width to prevent excessive expansion */
+  background-color: #333; /* Dark background for the tooltip */
+  color: #fff; /* White text color */
+  text-align: center;
+  border-radius: 5px; /* Rounded corners */
+  padding: 4px 10px; /* Padding around text */
+  position: absolute;
+  z-index: 9999; /* High z-index to ensure it appears above other elements */
+  bottom: 125%; /* Position tooltip above the image */
+  left: 50%; /* Center the tooltip horizontally */
+  transform: translateX(-50%); /* Center the tooltip horizontally */
+  opacity: 0; /* Hidden by default */
+  transition: opacity 0.3s; /* Smooth fade-in effect */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  line-height: 1.5; /* Adjust line height for better readability */
+  font-size: 18px;
+}
+
+/* Show the tooltip text when hovering over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+/*experimental zone - needs fixing.*/
+
 /* above this is experimental*/
 
 /* Global stylings for consistency */

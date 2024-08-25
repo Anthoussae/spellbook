@@ -152,6 +152,7 @@ export const cardPool = [
     name: "Golden Bunny",
     level: 1,
     ink: 3,
+    specialEffect: "midasBunnies",
     bunnyAdd: 0,
     effect: "Adds bunnies equal to 10% of your gold",
     trigger: "cast",
@@ -177,3 +178,4 @@ export const cardPool = [
 //red: Cards that heal and drain life
 //yellow: Cards that generate gold, upgrade relics, etc.
 //magenta: cards with a random element
+//cyan: cards that purge

@@ -23,11 +23,12 @@ export function render(oldState) {
     if (state.currentScreen === "difficultySelection") {
       showScreen("difficultySelection");
     } else if (state.currentScreen === "mythicSelection") {
+      console.log("mythic selection");
       showScreen("mythicSelection");
       renderHpAndGold(state);
       renderLevel(state);
       renderDeckButton(state);
-      renderBelt;
+      renderBelt(state);
       renderMythicSelection(state);
     } else if (state.currentScreen == "pathSelection") {
       renderPathSelection(state);
@@ -66,31 +67,27 @@ function showScreen(screenId) {
 }
 
 function renderMythicSelection(oldState) {
-  let state = { ...oldState };
-  let outputDiv = document.getElementById("mythicSelectionOutput");
-  let options = state.mythicRewards;
-
-  let html = "";
-  html += `<h1 class="reward-selection-title"></h1>`;
-  options.forEach((option, optionIndex) => {
-    html += `<button class="reward-button" data-index="${optionIndex}">${option.name}</button>`;
-  });
-
-  // Insert the buttons into the output container
-  outputDiv.innerHTML = html;
-
-  // Add event listeners to the buttons
-  const btnElems = document.querySelectorAll("#output .reward-button");
-  btnElems.forEach((btnElem) => {
-    btnElem.addEventListener("click", () => {
-      const option = state.presentedOptions[btnElem.dataset.index];
-      state.selectedReward = option;
-      state = applyReward(state);
-      renderHud(state);
-      renderRelicBelt(state);
-      startPathSelection(state);
-    });
-  });
+  // let state = { ...oldState };
+  // let outputDiv = document.getElementById("mythicSelectionOutput");
+  // let options = state.mythicRewards;
+  // let html = "";
+  // html += `<h1 class="reward-selection-title"></h1>`;
+  // options.forEach((option, optionIndex) => {
+  //   html += `<button class="reward-button" data-index="${optionIndex}">${option.name}</button>`;
+  // });
+  // // Insert the buttons into the output container
+  // outputDiv.innerHTML = html;
+  // // Add event listeners to the buttons
+  // const btnElems = document.querySelectorAll("#output .reward-button");
+  // btnElems.forEach((btnElem) => {
+  //   btnElem.addEventListener("click", () => {
+  //     const option = state.presentedOptions[btnElem.dataset.index];
+  //     state.selectedReward = option;
+  //     state = applyReward(state);
+  //     startPathSelection(state);
+  //   });
+  // });
+  console.log("Hello");
 }
 
 function renderLevel(state) {
@@ -174,15 +171,113 @@ function renderDeckButton(state) {
   }
 }
 
-function renderBelt(state) {
-  let beltDiv = document.getElementById("beltElement");
-  beltDiv.innerHTML = ""; // Clear previous content
+//works
+// function renderBelt(oldState) {
+//   let state = { ...oldState };
+//   console.log("rendering belt", state.relicBelt);
+//   let beltDiv = document.getElementById("beltElement");
+//   let imagePath = require("../data/imgs/mythicRelics/Orchid.png"); // Webpack resolves this
+//   let html = "";
+//   html += `<img src="${imagePath}" alt="Orchid">`;
+//   beltDiv.innerHTML = html;
+//   console.log(beltDiv.innerHTML);
+// }
 
+// Statically import images
+const relicImages = {
+  //mythics
+  orchid: require("../data/imgs/mythicRelics/orchid.png"),
+  grandmagusTome: require("../data/imgs/mythicRelics/grandmagusTome.png"),
+  goldenEgg: require("../data/imgs/mythicRelics/goldenEgg.png"),
+  //relics
+  magicWand: require("../data/imgs/relics/magicWand.png"),
+  brokenWand: require("../data/imgs/relics/brokenWand.png"),
+};
+
+function renderBelt(oldState) {
+  let state = { ...oldState };
+  let beltDiv = document.getElementById("beltElement");
+  let html = "";
   state.relicBelt.forEach((relic) => {
-    let relicImg = document.createElement("img");
-    relicImg.src = `data/imgs/relics/${relic}.png`; // Assuming .png extension
-    relicImg.alt = relic;
-    relicImg.className = "relicImage";
-    beltDiv.appendChild(relicImg);
+    let imagePath = relicImages[relic.imgName]; // Dynamically choose the image based on the relic's imgName
+
+    if (imagePath && relic.name != "Magic Wand") {
+      html += `
+      <div class="tooltip">
+        <img src="${imagePath}" alt="${relic.name}">
+        <span class="tooltiptext">
+          <strong style="font-size: 22px;">${relic.name}</strong><br>
+          <em>${relic.effect}</em>
+        </span>
+      </div>
+    `;
+    } else if (imagePath && relic.name == "Magic Wand") {
+      html += `
+      <div class="tooltip">
+        <img src="${imagePath}" alt="${relic.name}">
+        <span class="tooltiptext">
+          <strong style="font-size: 22px;">${relic.name}</strong><br>
+          <em>${relic.effect}</em>
+        </span>
+      </div>
+    `;
+    } else {
+      html += `
+      <div class="tooltip">
+        <p>Image not found for ${relic.name}</p>
+      </div>
+    `;
+    }
   });
+
+  beltDiv.innerHTML = html;
 }
+
+// //dynamically import images
+//ideal solution below - currently nonfunctional
+
+// function renderBelt(oldState) {
+//   let state = { ...oldState };
+//   let beltDiv = document.getElementById("beltElement");
+//   let relic = state.relicBelt[0];
+
+//   // Dynamically import the image
+//   import(`../data/imgs/mythicRelics/${relic.name}.png`)
+//     .then((imagePath) => {
+//       let html = `<img src="${imagePath.default}" alt="${relic.name}">`;
+//       beltDiv.innerHTML = html;
+//       console.log(beltDiv.innerHTML);
+//     })
+//     .catch((error) => {
+//       let html = `<p>Image not found for ${relic.name}</p>`;
+//       beltDiv.innerHTML = html;
+//       console.log(beltDiv.innerHTML);
+//     });
+// }
+
+// // function renderBelt(state) {
+//   console.log("rendering belt", state.relicBelt);
+//   let beltDiv = document.getElementById("beltElement");
+//   if (!beltDiv) {
+//     console.error("beltElement not found in the DOM.");
+//     return;
+//   }
+
+//   beltDiv.innerHTML = ""; // Clear previous content
+
+//   state.relicBelt.forEach((relic) => {
+//     let relicImg = document.createElement("img");
+//     const imgSrc = `data/imgs/mythicRelics/${relic.name}.png`;
+//     relicImg.src = "Orchid.png";
+//     relicImg.alt = relic.name;
+//     relicImg.className = "relicImage";
+
+//     relicImg.onerror = function () {
+//       console.error(`Failed to load image: ${imgSrc}`);
+//     };
+
+//     console.log(`Appending image: ${imgSrc}`);
+//     console.log(relicImg);
+//     beltDiv.appendChild(relicImg);
+//   });
+// }

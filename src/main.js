@@ -3,6 +3,11 @@
 //current
 // make it pretty
 
+//for relic belt
+//if the contents is over ~8, make it scrollable.
+// a good way to do that is to make the belt a flexbox, and then make the contents a flexbox as well.?
+//alternatively, draw arrow key icons, design a belt render that renders "displayed relics", and the arrow keys are buttons that shift the "dusplayed relics"  windw.
+
 //minor
 
 //add italic effect text to cards in deck examine
