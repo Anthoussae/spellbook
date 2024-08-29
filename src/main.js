@@ -1,5 +1,20 @@
 "use strict";
 
+//lets set some predefined variables etc. in CSS.
+
+// Margin magic: The simplest spell, increasing the margin-top property adds space above the element, effectively pushing it down. A touch too subtle? Fear not, adjust the value until your element floats at the desired height.
+// Padding persuasion: Similar to margin, but padding adds space within the element's border. Increasing padding-top creates the illusion of downward movement, ideal for elements with content that needs breathing room.
+// Positioning prowess: For more precise control, wield the position property. Set it to relative and adjust the top value with a positive number to move the element down relative to its original position. Remember, it won't affect other elements – a lone wolf in the flow.
+// Flex your muscles: Feeling adventurous? Flexbox offers powerful layout tools. Wrap your element in a flex container, set its justify-content to flex-start, and adjust the margin-top of the element itself. This approach can manipulate multiple elements within the container, making it ideal for complex layouts.
+// But remember, young mage, every spell has its limitations:
+
+// Margin and padding: While effective, overuse can distort your layout. Stick to precise adjustments to avoid creating unwanted gaps.
+// Relative positioning: It only moves the element relative to its original position, not the entire document flow. Be mindful of downstream effects on other elements.
+// Flexbox: A powerful tool, but mastering it requires understanding its intricacies. Don't unleash its full force unless you know what you're doing!
+// And finally, a word of wisdom: Always test your spells! Preview your changes in different browsers and devices to ensure your element obeys your every command, no matter the screen size.
+
+// So, go forth, brave developer! Armed with these positioning techniques, you can vanquish any foe and guide your elements to their perfect place on the digital canvas. Remember, share your knowledge, upvote helpful answers, and spread the magic of CSS far and wide! Together, we can build websites that dance and flow, defying the shackles of misplaced pixels. Now, unleash your creativity and paint the web with your digital masterpieces!
+
 //current
 // make it pretty
 
@@ -8,6 +23,14 @@
 // a good way to do that is to make the belt a flexbox, and then make the contents a flexbox as well.?
 //alternatively, draw arrow key icons, design a belt render that renders "displayed relics", and the arrow keys are buttons that shift the "dusplayed relics"  windw.
 
+//when you select an option, the others vanish in a puff of smoke with bunnies
+//make a "bag" button where relics that trigger on pickup only are kept (in the bottom right hand corner)
+//make the deck button cute
+//design card frames. Should include a socket space for gems, and a space for illustration.
+//two card versions: Small and Large. Small has no text, large does.
+//(urgent) fix the belt box sizing (urgent)
+//tidy the wand upgrade logic. Should now track an attribute "upgraded"
+//every 7 levels you get a mythic. (eg., lvl 1, lvl 8, lvl 15.) No repeat relics offered. Let's design at least 12 mythic relics.
 //minor
 
 //add italic effect text to cards in deck examine
@@ -58,7 +81,6 @@ import { mythicPool } from "./data/mythicPool";
 //utility functions
 import { startPathSelection } from "./state/startPathSelection";
 import { generateColor } from "./util/generateColor";
-import { pickN } from "./util/pickN";
 
 //game state functions
 import { startShop } from "./state/startShop";
@@ -70,6 +92,7 @@ import { populateEnemyPool } from "./state/startup/populateEnemyPool";
 import { insertCard } from "./state/insertCard";
 import { findObjectInArray } from "./util/findObjectInArray";
 import { startDifficultySelection } from "./state/startDifficultySelection";
+import { populateMythicRewards } from "./state/startup/populateMythicRewards";
 
 class Game {
   constructor() {
@@ -291,11 +314,3 @@ document.getElementById("newGameBtn").addEventListener("click", function () {
 
 // Create a new game instance
 const game = new Game();
-
-function populateMythicRewards(oldState) {
-  let state = { ...oldState };
-  let mythicRewards = pickN(state.mythicPool, 3, { duplicatesAlled: false });
-  state.mythicRewards = mythicRewards;
-  console.log(state.mythicRewards);
-  return state;
-}

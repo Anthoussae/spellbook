@@ -66,30 +66,6 @@ function showScreen(screenId) {
   document.getElementById(screenId).style.display = "block"; // Then show the desired screen
 }
 
-function renderMythicSelection(oldState) {
-  // let state = { ...oldState };
-  // let outputDiv = document.getElementById("mythicSelectionOutput");
-  // let options = state.mythicRewards;
-  // let html = "";
-  // html += `<h1 class="reward-selection-title"></h1>`;
-  // options.forEach((option, optionIndex) => {
-  //   html += `<button class="reward-button" data-index="${optionIndex}">${option.name}</button>`;
-  // });
-  // // Insert the buttons into the output container
-  // outputDiv.innerHTML = html;
-  // // Add event listeners to the buttons
-  // const btnElems = document.querySelectorAll("#output .reward-button");
-  // btnElems.forEach((btnElem) => {
-  //   btnElem.addEventListener("click", () => {
-  //     const option = state.presentedOptions[btnElem.dataset.index];
-  //     state.selectedReward = option;
-  //     state = applyReward(state);
-  //     startPathSelection(state);
-  //   });
-  // });
-  console.log("Hello");
-}
-
 function renderLevel(state) {
   let levelDiv = document.getElementById("levelElement");
   levelDiv.innerHTML = "Level: " + state.level;
@@ -171,37 +147,37 @@ function renderDeckButton(state) {
   }
 }
 
-//works
-// function renderBelt(oldState) {
-//   let state = { ...oldState };
-//   console.log("rendering belt", state.relicBelt);
-//   let beltDiv = document.getElementById("beltElement");
-//   let imagePath = require("../data/imgs/mythicRelics/Orchid.png"); // Webpack resolves this
-//   let html = "";
-//   html += `<img src="${imagePath}" alt="Orchid">`;
-//   beltDiv.innerHTML = html;
-//   console.log(beltDiv.innerHTML);
-// }
-
-// Statically import images
+// Statically import images for relics
+//Ideally upgrade this section, to permit dynamic image imports.
 const relicImages = {
   //mythics
   orchid: require("../data/imgs/mythicRelics/orchid.png"),
   grandmagusTome: require("../data/imgs/mythicRelics/grandmagusTome.png"),
   goldenEgg: require("../data/imgs/mythicRelics/goldenEgg.png"),
+  phoenixFeatherQuill: require("../data/imgs/mythicRelics/phoenixFeatherQuill.png"),
+  bottomlessInkpot: require("../data/imgs/mythicRelics/bottomlessInkpot.png"),
   //relics
   magicWand: require("../data/imgs/relics/magicWand.png"),
   brokenWand: require("../data/imgs/relics/brokenWand.png"),
 };
 
+//complete relic belt (and relic) render logic
 function renderBelt(oldState) {
   let state = { ...oldState };
   let beltDiv = document.getElementById("beltElement");
   let html = "";
-  state.relicBelt.forEach((relic) => {
+  let relicBelt;
+  if (state.relicBelt.length < 8) {
+    relicBelt = state.relicBelt;
+  } else if (false) {
+    //if the relic belt is full, designate a special array with "displayed relics."
+    //track a window of 7 "displayed relics"
+    //Add "arrow button" images to "scroll" through the display window.
+  }
+  relicBelt.forEach((relic) => {
     let imagePath = relicImages[relic.imgName]; // Dynamically choose the image based on the relic's imgName
 
-    if (imagePath && relic.name != "Magic Wand") {
+    if (imagePath && relic.supertype != "wand") {
       html += `
       <div class="tooltip">
         <img src="${imagePath}" alt="${relic.name}">
@@ -211,13 +187,25 @@ function renderBelt(oldState) {
         </span>
       </div>
     `;
-    } else if (imagePath && relic.name == "Magic Wand") {
+    } else if (imagePath && relic.supertype == "wand" && relic.upgrade > 0) {
       html += `
       <div class="tooltip">
         <img src="${imagePath}" alt="${relic.name}">
         <span class="tooltiptext">
           <strong style="font-size: 22px;">${relic.name}</strong><br>
-          <em>${relic.effect}</em>
+          <em>-------------------</em><br>
+          <em>When you cast, gain <span style="color: lightgreen;">${relic.bunnyAdd}</span> bonus bunnies</em>
+        </span>
+      </div>
+    `;
+    } else if (imagePath && relic.supertype == "wand") {
+      html += `
+      <div class="tooltip">
+        <img src="${imagePath}" alt="${relic.name}">
+        <span class="tooltiptext">
+          <strong style="font-size: 22px;">${relic.name}</strong><br>
+          <em>-------------------</em><br>
+          <em>When you cast, gain <span style="color: white;">${relic.bunnyAdd}</span> bonus bunnies</em>
         </span>
       </div>
     `;
@@ -229,55 +217,49 @@ function renderBelt(oldState) {
     `;
     }
   });
-
+  // arrow button images and logic if the relic belt is too crowded.
   beltDiv.innerHTML = html;
 }
 
-// //dynamically import images
-//ideal solution below - currently nonfunctional
+//complete mythic render logic
+function renderMythicSelection(state) {
+  let outputDiv = document.getElementById("mythicSelectionOutput");
+  let options = state.mythicRewards;
+  console.log("mythic rewards", state.mythicRewards);
+  let html = "";
 
-// function renderBelt(oldState) {
-//   let state = { ...oldState };
-//   let beltDiv = document.getElementById("beltElement");
-//   let relic = state.relicBelt[0];
+  options.forEach((relic, index) => {
+    let imagePath = relicImages[relic.imgName];
+    html += `
+      <div class="tooltip">
+        <img src="${imagePath}" alt="${relic.name}" class="relic-image" data-index="${index}">
+        <span class="tooltiptext">
+          <strong style="font-size: 22px;">${relic.name}</strong><br>
+          <em>-------------------</em><br>
+          <em>${relic.effect}</em>
+        </span>
+      </div>
+    `;
+  });
 
-//   // Dynamically import the image
-//   import(`../data/imgs/mythicRelics/${relic.name}.png`)
-//     .then((imagePath) => {
-//       let html = `<img src="${imagePath.default}" alt="${relic.name}">`;
-//       beltDiv.innerHTML = html;
-//       console.log(beltDiv.innerHTML);
-//     })
-//     .catch((error) => {
-//       let html = `<p>Image not found for ${relic.name}</p>`;
-//       beltDiv.innerHTML = html;
-//       console.log(beltDiv.innerHTML);
-//     });
-// }
+  // Insert the HTML content into the outputDiv
+  outputDiv.innerHTML = html;
 
-// // function renderBelt(state) {
-//   console.log("rendering belt", state.relicBelt);
-//   let beltDiv = document.getElementById("beltElement");
-//   if (!beltDiv) {
-//     console.error("beltElement not found in the DOM.");
-//     return;
-//   }
-
-//   beltDiv.innerHTML = ""; // Clear previous content
-
-//   state.relicBelt.forEach((relic) => {
-//     let relicImg = document.createElement("img");
-//     const imgSrc = `data/imgs/mythicRelics/${relic.name}.png`;
-//     relicImg.src = "Orchid.png";
-//     relicImg.alt = relic.name;
-//     relicImg.className = "relicImage";
-
-//     relicImg.onerror = function () {
-//       console.error(`Failed to load image: ${imgSrc}`);
-//     };
-
-//     console.log(`Appending image: ${imgSrc}`);
-//     console.log(relicImg);
-//     beltDiv.appendChild(relicImg);
-//   });
-// }
+  // Add event listeners to the images after they have been inserted into the DOM
+  const imgElems = document.querySelectorAll(
+    "#mythicSelectionOutput .relic-image"
+  );
+  imgElems.forEach((imgElem) => {
+    imgElem.addEventListener("click", () => {
+      const clickedIndex = imgElem.dataset.index;
+      const selectedRelic = state.mythicRewards[clickedIndex];
+      // Handle the click event, e.g., apply the selected relic, log it, etc.
+      console.log(`You clicked on ${selectedRelic.name}`, selectedRelic);
+      // Implement further actions here as needed
+      //pick the relic and add it to belt
+      //animate the movement of the relic
+      //the other relics vanish in a puff of smoke
+      //initate the next appropriate screen
+    });
+  });
+}

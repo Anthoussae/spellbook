@@ -5,6 +5,7 @@ export const cardPool = [
   //level -1 (special cards)
   {
     name: "Bunnyfluff",
+    imgName: "bunnyfluff",
     level: -1,
     bunnyAdd: 1,
     ink: 1,
@@ -16,6 +17,7 @@ export const cardPool = [
   },
   {
     name: "Pet Brick",
+    imgName: "petBrick",
     level: -1,
     effect: "nothing, can't be cast",
     type: "card",
@@ -25,6 +27,7 @@ export const cardPool = [
   // level 0 (starter deck)
   {
     name: "Bunnymancy",
+    imgName: "bunnymancy",
     level: 0,
     bunnyAdd: 3,
     ink: 1,
@@ -36,6 +39,7 @@ export const cardPool = [
   },
   {
     name: "Ponder",
+    imgName: "ponder",
     level: 0,
     ink: 1,
     cardsDrawn: 3,
@@ -47,6 +51,7 @@ export const cardPool = [
   },
   {
     name: "Bunnydouble",
+    imgName: "bunnydouble",
     level: 0,
     ink: 3,
     bunnyMult: 2,
@@ -58,6 +63,7 @@ export const cardPool = [
   },
   {
     name: "Inkswell",
+    imgName: "inkswell",
     level: 0,
     ink: 0,
     inkAdd: 1,
@@ -70,6 +76,7 @@ export const cardPool = [
   // level 1
   {
     name: "Free Bunnies",
+    imgName: "freeBunnies",
     level: 1,
     bunnyAdd: 2,
     ink: 0,
@@ -81,6 +88,7 @@ export const cardPool = [
   },
   {
     name: "Triple Bunnies",
+    imgName: "tripleBunnies",
     level: 1,
     ink: 4,
     bunnyMult: 3,
@@ -92,6 +100,7 @@ export const cardPool = [
   },
   {
     name: "Echoing Splash",
+    imgName: "echoingSplash",
     level: 1,
     ink: 2,
     retriggers: 1,
@@ -104,6 +113,7 @@ export const cardPool = [
   },
   {
     name: "Time Warp",
+    imgName: "timeWarp",
     level: 1,
     ink: 3,
     retriggers: 1,
@@ -116,6 +126,7 @@ export const cardPool = [
   },
   {
     name: "Time Flip",
+    imgName: "timeFlip",
     level: 1,
     ink: 3,
     retriggers: 1,
@@ -127,7 +138,8 @@ export const cardPool = [
     trigger: "cast",
   },
   {
-    name: "Reaper's Scythe",
+    name: "Scythe",
+    imgName: "scythe",
     level: 1,
     ink: 3,
     reduceEnemyMaxHpPercent: 0.5,
@@ -138,7 +150,8 @@ export const cardPool = [
     rarity: "rare",
   },
   {
-    name: "Harvest",
+    name: "Sickle",
+    imgName: "sickle",
     level: 1,
     ink: 1,
     reduceEnemyMaxHpPercent: 0.1,
@@ -150,6 +163,7 @@ export const cardPool = [
   },
   {
     name: "Golden Bunny",
+    imgName: "goldenBunny",
     level: 1,
     ink: 3,
     specialEffect: "midasBunnies",
@@ -163,6 +177,7 @@ export const cardPool = [
   },
   {
     name: "Conjure Pages",
+    imgName: "conjurePages",
     level: 1,
     ink: 1,
     pageAdd: 2,
@@ -172,6 +187,30 @@ export const cardPool = [
     type: "card",
     rarity: "uncommon",
   },
+  // {
+  //   name: "Dispel",
+  //   imgName: "dispel",
+  //   level: 1,
+  //   ink: 1,
+  //   purge: 1,
+  //   effect: "Purges one random buff from the enemy",
+  //   characterClass: "none",
+  //   type: "card",
+  //   rarity: "common",
+  //   trigger: "instant",
+  // },
+  // {
+  //   name: "Mass Dispel",
+  //   imgName: "massDispel",
+  //   level: 1,
+  //   ink: 1,
+  //   purge: 3,
+  //   effect: "Purges 3 random buffs from the enemy",
+  //   characterClass: "none",
+  //   type: "card",
+  //   rarity: "uncommon",
+  //   trigger: "cast",
+  // },
 ];
 
 //green: Cards that permanently upgrade on play / cast.

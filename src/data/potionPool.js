@@ -75,4 +75,5 @@ export const potionPool = [
   },
   //potions that upgrade 1, 2, or 3 cards in your deck
   //potions that give you 1, 2, or 3 bonus ink next fight
+  //perfumes that give +5 / +10/ +15 max hpx
 ];
