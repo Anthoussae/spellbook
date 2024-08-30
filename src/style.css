@@ -4,6 +4,14 @@
   --containerBackgroundColor: rgba(248, 215, 185, 0.4);
 }
 
+html,
+body {
+  overflow: hidden; /* Prevent scrollbars from appearing */
+  margin: 0; /* Ensure no unexpected margins */
+  padding: 0; /* Ensure no unexpected padding */
+  height: 100%; /* Ensure the body takes up the full height */
+}
+
 .screen {
   display: flex; /* Enable flexbox */
   flex-direction: column; /* Arrange children (buttons, etc.) in a column */
@@ -236,7 +244,7 @@
   display: flex;
   justify-content: center; /* Centers the images horizontally */
   align-items: center; /* Centers the images vertically */
-  transform: scale(1.1); /* Scales the images slightly */
+  transform: scale(1.2); /* Scales the images slightly */
   padding: 10px;
   margin-left: 20px;
   margin-top: -45px;
@@ -437,6 +445,7 @@ button {
   transform: none; /* Ensure no scale transform is applied */
 }
 
+/*animations*/
 /*bunny transition */
 .bunny-transition {
   position: fixed;
@@ -448,7 +457,7 @@ button {
   border-radius: 50%;
   z-index: 1000;
   transform: translate(-50%, -50%);
-  animation: expand 1s forwards ease-in-out;
+  animation: expand 0.5s forwards ease-in-out;
 }
 
 .bunny-transition::before,
@@ -488,4 +497,16 @@ button {
   to {
     transform: translate(-50%, -50%) scale(0);
   }
+}
+/* 
+/* Poof Effect */
+.relic-fade {
+  opacity: 0;
+  transform: scale(1.5);
+  filter: blur(5px);
+  transition: opacity 0.5s ease, transform 0.5s ease, filter 0.5s ease;
+}
+.relic-container {
+  position: relative;
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }

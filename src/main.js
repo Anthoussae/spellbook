@@ -2,6 +2,10 @@
 
 //lets set some predefined variables etc. in CSS.
 
+//seems to be triggering set difficulty for each button, rather than assigning it to onclick.
+
+//screen judder on relic selection.
+
 //add credits
 
 //add tutorial
@@ -9,6 +13,8 @@
 //add disclaimer @ breakpoint - "this game is in development, and is not optimized for small screens. Please re-open in a desktop browser."
 
 //add darkmnode
+
+//fix the picture for bottomless inkpot
 
 //current
 // make it pretty

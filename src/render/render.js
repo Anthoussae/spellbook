@@ -6,12 +6,13 @@ import { renderBattlefield } from "./renderBattlefield";
 import { renderWandUpgrade } from "./renderWandUpgrade";
 import { renderShop } from "./renderShop";
 import { renderSocketing } from "./renderSocketing";
-import { renderPathSelection } from "./renderPathSelection";
+// import { renderPathSelection } from "./renderPathSelection";
 // import { renderDeckExamine } from "./renderDeckExamine";
 import { renderCombatRecap } from "./renderCombatRecap";
 import { renderButtons } from "./renderButtons";
 import { renderBattleHud } from "./renderBattleHud";
-import { renderHud } from "./renderHud";
+// import { renderHud } from "./renderHud";
+import { startPathSelection } from "../state/startPathSelection";
 
 //fix the 'render combat recap - it should be a separate screen to reward selection.""
 export function render(oldState) {
@@ -23,13 +24,8 @@ export function render(oldState) {
     if (state.currentScreen === "difficultySelection") {
       showScreen("difficultySelection");
     } else if (state.currentScreen === "mythicSelection") {
-      console.log("mythic selection");
       showScreen("mythicSelection");
-      renderHpAndGold(state);
-      renderLevel(state);
-      renderDeckButton(state);
-      renderBagButton(state);
-      // renderBelt(state);
+      renderHud(state);
       renderMythicSelection(state);
     } else if (state.currentScreen == "pathSelection") {
       renderPathSelection(state);
@@ -60,6 +56,13 @@ function hideAllScreens() {
   screens.forEach((screen) => {
     screen.style.display = "none";
   });
+}
+
+function renderHud(state) {
+  renderHpAndGold(state);
+  renderLevel(state);
+  renderDeckButton(state);
+  renderBagButton(state);
 }
 
 function showScreen(screenId) {
@@ -149,6 +152,8 @@ const relicImages = {
   //relics
   magicWand: require("../data/imgs/relics/magicWand.png"),
   brokenWand: require("../data/imgs/relics/brokenWand.png"),
+  //others
+  poof: require("../data/imgs/displayElements/poof.png"),
 };
 
 //complete relic belt (and relic) render logic
@@ -210,19 +215,20 @@ function renderBelt(oldState) {
   // arrow button images and logic if the relic belt is too crowded.
   beltDiv.innerHTML = html;
 }
-
-//complete mythic render logic
 function renderMythicSelection(state) {
+  // Show the carpet background
   document.getElementById("carpetBackground").style.display = "block";
+
+  // Get the output div where relics will be displayed
   let outputDiv = document.getElementById("mythicSelectionOutput");
   let options = state.mythicRewards;
-  console.log("mythic rewards", state.mythicRewards);
   let html = "";
 
+  // Build HTML for each relic
   options.forEach((relic, index) => {
     let imagePath = relicImages[relic.imgName];
     html += `
-      <div class="tooltip">
+      <div class="tooltip relic-container" style="position: relative;">
         <img src="${imagePath}" alt="${relic.name}" class="relic-image" data-index="${index}">
         <span class="tooltiptext">
           <strong style="font-size: 22px;">${relic.name}</strong><br>
@@ -236,7 +242,7 @@ function renderMythicSelection(state) {
   // Insert the HTML content into the outputDiv
   outputDiv.innerHTML = html;
 
-  // Add event listeners to the images after they have been inserted into the DOM
+  // Add event listeners to the relic images
   const imgElems = document.querySelectorAll(
     "#mythicSelectionOutput .relic-image"
   );
@@ -244,14 +250,50 @@ function renderMythicSelection(state) {
     imgElem.addEventListener("click", () => {
       const clickedIndex = imgElem.dataset.index;
       const selectedRelic = state.mythicRewards[clickedIndex];
-      // Handle the click event, e.g., apply the selected relic, log it, etc.
+
+      // Handle the relic click event
       console.log(`You clicked on ${selectedRelic.name}`, selectedRelic);
-      // Implement further actions here as needed
-      //pick the relic and add it to belt
-      //animate the movement of the relic
-      //the other relics vanish in a puff of smoke
-      //initate the next appropriate screen
+
+      // Add a slight delay before starting the non-selected relic animations
+      setTimeout(() => {
+        imgElems.forEach((elem) => {
+          if (elem.dataset.index !== clickedIndex) {
+            elem.classList.add("relic-fade");
+          }
+        });
+      }, 10); // Small delay to ensure proper sequencing
+
+      // Animate the selected relic to the backpack
+      animateRelicToBag(imgElem, document.getElementById("bagBtn"), state);
     });
+  });
+}
+
+// Animate the selected relic image towards the bag
+function animateRelicToBag(relicElem, bagElem, state) {
+  const relicRect = relicElem.getBoundingClientRect();
+  const bagRect = bagElem.getBoundingClientRect();
+
+  const translateX =
+    bagRect.left + bagRect.width / 2 - (relicRect.left + relicRect.width / 2);
+  const translateY =
+    bagRect.top + bagRect.height / 2 - (relicRect.top + relicRect.height / 2);
+
+  // Force relayout
+  relicElem.getBoundingClientRect();
+
+  relicElem.style.transition = "transform 0.5s ease, opacity 0.5s ease";
+  relicElem.style.transform = `translate(${translateX}px, ${translateY}px) scale(0.1)`; // Move and scale down
+  relicElem.style.opacity = "0"; // Fade out during the animation
+
+  // Listen for the transitionend event
+  relicElem.addEventListener("transitionend", function onTransitionEnd() {
+    relicElem.style.display = "none";
+    // Remove the event listener to avoid potential memory leaks
+    relicElem.removeEventListener("transitionend", onTransitionEnd);
+
+    // Proceed to the next screen
+    renderPathSelection(state);
   });
 }
 
@@ -314,4 +356,7 @@ function resumeGame(oldState) {
   render(state);
 }
 
-function renderCard(card) {}
+function renderPathSelection(state) {
+  showScreen("deckExamine");
+  console.log("path selection", state);
+}

@@ -26,7 +26,7 @@ export const relicPool = [
   //need pics
   {
     //integrated
-    name: "Inkpot",
+    name: "Inkstone",
     effect: "Gain 1 bonus ink each combat",
     rarity: "common",
     inkAdd: 1,
@@ -35,7 +35,7 @@ export const relicPool = [
   },
   {
     //integrated
-    name: "Quill",
+    name: "Brush",
     bonusHandsize: 1,
     effect: "Increase your opening hand size by 1",
     rarity: "common",
@@ -44,7 +44,7 @@ export const relicPool = [
   },
   {
     //integrated
-    name: "Extra Page",
+    name: "Scroll",
     bonusPages: 1,
     effect: "Increase your spellbook size by 1 page",
     rarity: "uncommon",
@@ -63,8 +63,8 @@ export const relicPool = [
   {
     //integrated
     name: "Magic Staff",
-    effect: "Gain 10 bunnies when you cast your spellbook",
-    bunnyAdd: 10,
+    effect: "Gain 5 bunnies when you cast your spellbook",
+    bunnyAdd: 5,
     rarity: "mythic",
     type: "relic",
     trigger: "cast",
@@ -99,7 +99,7 @@ export const relicPool = [
   },
   {
     //integrated
-    name: "Golf Club",
+    name: "Golf Ball",
     effect: "Gain 1 bonus mulligan each combat",
     rarity: "common",
     type: "relic",
