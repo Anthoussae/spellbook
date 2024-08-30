@@ -1,12 +1,21 @@
+/*light theme*/
 :root {
   --baseBackgroundColor: #f7ebe0;
   --containerBackgroundColor: rgba(248, 215, 185, 0.4);
 }
 
+.screen {
+  display: flex; /* Enable flexbox */
+  flex-direction: column; /* Arrange children (buttons, etc.) in a column */
+  align-items: center; /* Center items horizontally */
+  justify-content: center; /* Center items vertically */
+  height: 100vh; /* Ensure the container takes up the full height of the viewport */
+  text-align: center; /* Center text inside the container */
+}
+
 .level,
 .hud,
 .banner,
-.deck,
 .belt,
 .output {
   position: absolute;
@@ -37,29 +46,105 @@
 }
 
 .banner {
+  background-color: var(--containerBackgroundColor);
   width: 30vw; /* Slightly smaller width */
-  height: 7vh; /* Slightly smaller height */
+  height: 14vh; /* Slightly smaller height */
   top: 4vh; /* Move closer to the center vertically */
   left: calc(50vw - 16.5vw); /* Centered horizontally, adjusted for new width */
   font-size: 2.7vw;
 }
 
 .output {
+  background-color: var(--containerBackgroundColor);
   width: 70vw; /* Slightly smaller width */
   height: calc(60vh - 8vh); /* Slightly smaller height */
   top: calc(21vh + 8vh); /* Adjusted to align with the smaller top row */
   left: 14vw; /* Centered horizontally */
 }
-
-.deck {
-  width: 7vw; /* Slightly smaller width */
-  height: 7vh; /* Slightly smaller height */
-  bottom: 6vh; /* Move closer to the center vertically */
-  left: 2vw; /* Move closer to the center horizontally */
+/* deck icon */
+.deckContainer {
+  position: fixed;
+  left: 0.25in;
+  bottom: 0.25in;
+  display: inline-block;
+  cursor: pointer;
+}
+.deckImage {
+  width: 100%; /* Adjust width as needed */
+  max-width: 400px;
+  height: auto;
+  transition: opacity 0.3s ease, filter 0.3s ease;
+}
+.deckText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 25px; /* Adjust font size as needed */
+  display: none;
+  text-align: center;
+}
+.deckContainer:hover .deckImage {
+  filter: brightness(50%); /* Darkens the image significantly */
+}
+.deckContainer:hover .deckText {
+  display: block; /* Shows the text on hover */
+}
+/*deckInspect*/
+#deckExamine {
+  display: none; /* Hide by default */
+  position: absolute; /* Remove from normal document flow */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0); /* Example styling for an overlay */
+  z-index: 10; /* Ensure it appears above other content when displayed */
+}
+/*bag inspect*/
+#bagExamine {
+  display: none; /* Hide by default */
+  position: absolute; /* Remove from normal document flow */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0); /* Example styling for an overlay */
+  z-index: 10; /* Ensure it appears above other content when displayed */
+}
+/* bag icon */
+.bagContainer {
+  position: fixed;
+  right: 0.2in;
+  bottom: 0.2in;
+  display: inline-block;
+  cursor: pointer;
+}
+.bagImage {
+  width: 80%; /* Adjust width as needed */
+  max-width: 400px;
+  height: auto;
+  transition: opacity 0.3s ease, filter 0.3s ease;
+}
+.bagText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 25px; /* Adjust font size as needed */
+  display: none;
+  text-align: center;
+}
+.bagContainer:hover .bagImage {
+  filter: brightness(50%); /* Darkens the image significantly */
+}
+.bagContainer:hover .bagText {
+  display: block; /* Shows the text on hover */
 }
 
-/*experimental zone - needs fixing.*/
-
+/*belt element*/
 #beltElement {
   display: flex;
   background-color: var(--containerBackgroundColor);
@@ -99,9 +184,10 @@
 
 /* Image styling */
 .tooltip img {
+  filter: brightness(1.3) contrast(0.7) saturate(0.5);
   max-width: 100%; /* Ensures the image scales down to fit the container width */
   height: auto; /* Maintains the aspect ratio of the image */
-  margin: 5px; /* Adds some space around each image */
+  margin: 4.2vw; /* Adds some space around each image */
   object-fit: contain; /* Ensures the image is contained within its box */
   flex: 1 1 auto; /* Allows images to grow and shrink as needed */
   transition: transform 0.3s ease; /* Smooth transition for scaling effect */
@@ -109,7 +195,7 @@
 
 /* Scale image on hover */
 .tooltip:hover img {
-  transform: scale(1.1); /* Scale image to 110% of its original size */
+  transform: scale(1.2); /* Scale image to 110% of its original size */
 }
 
 /* Tooltip text */
@@ -125,7 +211,7 @@
   padding: 4px 10px; /* Padding around text */
   position: absolute;
   z-index: 9999; /* High z-index to ensure it appears above other elements */
-  bottom: 125%; /* Position tooltip above the image */
+  bottom: 85%; /* Position tooltip above the image */
   left: 50%; /* Center the tooltip horizontally */
   transform: translateX(-50%); /* Center the tooltip horizontally */
   opacity: 0; /* Hidden by default */
@@ -143,15 +229,13 @@
 
 /*mythic selection zone*/
 #mythicSelectionOutput {
-  position: relative;
+  border-radius: 25px;
+  position: absolute;
   display: flex;
-  top: -15px;
-  margin-right: 300px;
-  margin-top: 50px;
-  background-color: white;
-  padding-top: 1vh; /* Add padding to center the text vertically */
-  align-content: center;
-  transform: scale(1.1); /* Scales the images to 40% of their original size */
+  justify-content: center; /* Centers the images horizontally */
+  align-items: center; /* Centers the images vertically */
+  background-color: var(--containerBackgroundColor);
+  transform: scale(1.1); /* Scales the images slightly */
   padding: 10px;
   object-fit: contain;
 }
@@ -208,6 +292,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 9999;
 }
 #fullscreenBtn:hover {
   background-color: #ffd7a0;
@@ -243,6 +328,7 @@ button {
 
 /*menu buttons*/
 .menuBtn {
+  display: block;
   background-color: #7238c3; /* Cute color for the button */
   color: white;
   border: none;
@@ -314,4 +400,73 @@ button {
 #normal:active,
 #hard:active {
   transform: scale(1.05); /* Reduce scale slightly when clicked */
+}
+
+.menuBtn:disabled {
+  background-color: #cccccc; /* Grey background for disabled button */
+  color: #666666; /* Grey text for disabled button */
+  border: 1px solid #cccccc;
+  cursor: not-allowed; /* Change cursor to indicate the button is not clickable */
+  transform: none; /* Ensure no scale transform is applied */
+}
+
+.smallBtn:disabled {
+  background-color: #cccccc; /* Grey background for disabled button */
+  color: #666666; /* Grey text for disabled button */
+  border: 1px solid #cccccc;
+  cursor: not-allowed; /* Change cursor to indicate the button is not clickable */
+  transform: none; /* Ensure no scale transform is applied */
+}
+
+/*bunny transition */
+.bunny-transition {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  background-color: black;
+  border-radius: 50%;
+  z-index: 1000;
+  transform: translate(-50%, -50%);
+  animation: expand 1s forwards ease-in-out;
+}
+
+.bunny-transition::before,
+.bunny-transition::after {
+  content: "";
+  position: absolute;
+  width: 60px;
+  height: 120px;
+  background-color: black;
+  border-radius: 50%;
+  top: -60px;
+}
+
+.bunny-transition::before {
+  left: -30px;
+  transform: rotate(-45deg);
+}
+
+.bunny-transition::after {
+  right: -30px;
+  transform: rotate(45deg);
+}
+
+@keyframes expand {
+  from {
+    transform: translate(-50%, -50%) scale(0);
+  }
+  to {
+    transform: translate(-50%, -50%) scale(25);
+  }
+}
+
+@keyframes contract {
+  from {
+    transform: translate(-50%, -50%) scale(25);
+  }
+  to {
+    transform: translate(-50%, -50%) scale(0);
+  }
 }

@@ -7,7 +7,7 @@ import { renderWandUpgrade } from "./renderWandUpgrade";
 import { renderShop } from "./renderShop";
 import { renderSocketing } from "./renderSocketing";
 import { renderPathSelection } from "./renderPathSelection";
-import { renderDeckExamine } from "./renderDeckExamine";
+// import { renderDeckExamine } from "./renderDeckExamine";
 import { renderCombatRecap } from "./renderCombatRecap";
 import { renderButtons } from "./renderButtons";
 import { renderBattleHud } from "./renderBattleHud";
@@ -28,7 +28,8 @@ export function render(oldState) {
       renderHpAndGold(state);
       renderLevel(state);
       renderDeckButton(state);
-      renderBelt(state);
+      renderBagButton(state);
+      // renderBelt(state);
       renderMythicSelection(state);
     } else if (state.currentScreen == "pathSelection") {
       renderPathSelection(state);
@@ -63,7 +64,7 @@ function hideAllScreens() {
 
 function showScreen(screenId) {
   hideAllScreens(); // First hide all screens
-  document.getElementById(screenId).style.display = "block"; // Then show the desired screen
+  document.getElementById(screenId).style.display = "flex"; // Then show the desired screen
 }
 
 function renderLevel(state) {
@@ -117,36 +118,25 @@ function tickUpAnimation(startValue, endValue, element) {
 
   requestAnimationFrame(updateValue);
 }
-
 function renderDeckButton(state) {
   const deckButton = document.getElementById("deckBtn");
-  if (state.currentScreen != "combat") {
-    deckButton.innerHTML = "Deck: (" + state.deck.length + ")";
-    if (deckButton) {
-      deckButton.addEventListener("click", () => {
-        if (state) {
-          renderDeckExamine(state);
-        } else {
-          console.error("State is not defined yet.");
-        }
-      });
-    } else {
-      console.error("Deck button not found.");
-    }
-  } else if (state.currentScreen == "combat") {
-    deckButton.innerHTML = "Remaining Deck: (" + state.combatDeck.length + ")";
-    if (deckButton) {
-      deckButton.addEventListener("click", () => {
-        if (state) {
-          renderDeckExamine(state);
-        } else {
-          console.error("State is not defined yet.");
-        }
-      });
-    }
-  }
-}
+  const deckText = deckButton.querySelector(".deckText");
 
+  if (state.currentScreen != "combat") {
+    deckText.innerHTML = "Deck: (" + state.deck.length + ")";
+  } else if (state.currentScreen == "combat") {
+    deckText.innerHTML = "Remaining Deck: (" + state.combatDeck.length + ")";
+  }
+
+  deckButton.addEventListener("click", () => {
+    if (state) {
+      console.log(state);
+      renderDeckExamine(state);
+    } else {
+      console.error("State is not defined yet.");
+    }
+  });
+}
 // Statically import images for relics
 //Ideally upgrade this section, to permit dynamic image imports.
 const relicImages = {
@@ -263,3 +253,64 @@ function renderMythicSelection(state) {
     });
   });
 }
+
+function renderBagButton(state) {
+  const bagButton = document.getElementById("bagBtn");
+  const bagText = bagButton.querySelector(".bagText");
+  bagText.innerHTML = "Relics: (" + state.relicBelt.length + ")";
+  bagButton.addEventListener("click", () => {
+    if (state) {
+      renderBagExamine(state);
+    } else {
+      console.error("State is not defined yet.");
+    }
+  });
+}
+
+function renderBagExamine(state) {
+  console.log("bag examine", state);
+  let bag = state.relicBelt;
+  state.previousScreen = state.currentScreen;
+  state.currentScreen = "bagExamine";
+  showScreen(state.currentScreen);
+  let resumeButton = document.getElementById("bag-resume-button");
+  resumeButton.addEventListener(
+    "click",
+    () => {
+      resumeGame(state);
+    },
+    { once: true }
+  );
+}
+
+function renderDeckExamine(state) {
+  console.log("deck Examine", state);
+  let deck;
+  if (state.currentScreen != "combat") {
+    deck = state.deck;
+  } else if (state.currentScreen == "combat") {
+    deck = state.combatDeck;
+  }
+  state.previousScreen = state.currentScreen;
+  state.currentScreen = "deckExamine";
+  showScreen(state.currentScreen);
+
+  let resumeButton = document.getElementById("deck-resume-button");
+
+  resumeButton.addEventListener(
+    "click",
+    () => {
+      resumeGame(state);
+    },
+    { once: true }
+  );
+}
+
+function resumeGame(oldState) {
+  let state = { ...oldState };
+  state.currentScreen = state.previousScreen;
+  state.previousScreen = null;
+  render(state);
+}
+
+function renderCard(card) {}

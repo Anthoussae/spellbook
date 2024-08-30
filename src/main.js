@@ -2,18 +2,9 @@
 
 //lets set some predefined variables etc. in CSS.
 
-// Margin magic: The simplest spell, increasing the margin-top property adds space above the element, effectively pushing it down. A touch too subtle? Fear not, adjust the value until your element floats at the desired height.
-// Padding persuasion: Similar to margin, but padding adds space within the element's border. Increasing padding-top creates the illusion of downward movement, ideal for elements with content that needs breathing room.
-// Positioning prowess: For more precise control, wield the position property. Set it to relative and adjust the top value with a positive number to move the element down relative to its original position. Remember, it won't affect other elements – a lone wolf in the flow.
-// Flex your muscles: Feeling adventurous? Flexbox offers powerful layout tools. Wrap your element in a flex container, set its justify-content to flex-start, and adjust the margin-top of the element itself. This approach can manipulate multiple elements within the container, making it ideal for complex layouts.
-// But remember, young mage, every spell has its limitations:
+//add darkmnode
 
-// Margin and padding: While effective, overuse can distort your layout. Stick to precise adjustments to avoid creating unwanted gaps.
-// Relative positioning: It only moves the element relative to its original position, not the entire document flow. Be mindful of downstream effects on other elements.
-// Flexbox: A powerful tool, but mastering it requires understanding its intricacies. Don't unleash its full force unless you know what you're doing!
-// And finally, a word of wisdom: Always test your spells! Preview your changes in different browsers and devices to ensure your element obeys your every command, no matter the screen size.
-
-// So, go forth, brave developer! Armed with these positioning techniques, you can vanquish any foe and guide your elements to their perfect place on the digital canvas. Remember, share your knowledge, upvote helpful answers, and spread the magic of CSS far and wide! Together, we can build websites that dance and flow, defying the shackles of misplaced pixels. Now, unleash your creativity and paint the web with your digital masterpieces!
+//bunny transition for new game
 
 //current
 // make it pretty

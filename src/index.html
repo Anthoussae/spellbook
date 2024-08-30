@@ -15,9 +15,10 @@
       <div id="start" class="screen">
         <div class="titleBanner" id="startBanner">Lapin Lazuli</div>
         <button id="newGameBtn" class="menuBtn">New Game</button>
+        <button id="tutorial" class="menuBtn" disabled>Tutorial</button>
+        <button id="Credits" class="menuBtn" disabled>Credits</button>
       </div>
       <button id="fullscreenBtn">&#x26F6;</button>
-
       <!-------------------------------Difficulty Selection---------------------------->
       <div id="difficultySelection" class="screen" style="display: none">
         <div class="titleBanner" id="difficultyBanner">
@@ -38,13 +39,39 @@
         </div>
         <div class="banner" id="bannerElement">Choose a magical artefact:</div>
         <div class="output" id="mythicSelectionOutput"></div>
-        <div class="deck" id="deckElement">
-          <button class="smallBtn" id="deckBtn">Deck</button>
+        <div id="deckElement">
+          <div class="deckContainer" id="deckBtn">
+            <img
+              src="data/imgs/displayElements/deck.png"
+              alt="Deck Image"
+              class="deckImage"
+            />
+            <span class="deckText"></span>
+          </div>
         </div>
-        <div class="belt" id="beltElement"></div>
+        <div id="bagElement">
+          <div class="bagContainer" id="bagBtn">
+            <img
+              src="data/imgs/displayElements/backpack.png"
+              alt="Bag Image"
+              class="bagImage"
+            />
+            <span class="bagText"></span>
+          </div>
+        </div>
+        <!-- <div class="belt" id="beltElement"></div> -->
+      </div>
+      <!---------------- Deck Examine ----------------->
+      <div id="deckExamine" class="screen" display="none">
+        <button class="smallBtn" id="deck-resume-button">Resume Game</button>
+      </div>
+      <!---------------- Bag Examine ----------------->
+      <div id="bagExamine" class="screen" display="none">
+        <button class="smallBtn" id="bag-resume-button">Resume Game</button>
       </div>
       <!-------------------------------Game Container ends----------------------------->
     </div>
+
     <script src="main.js"></script>
   </body>
 </html>
