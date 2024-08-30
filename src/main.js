@@ -2,9 +2,13 @@
 
 //lets set some predefined variables etc. in CSS.
 
-//add darkmnode
+//add credits
 
-//bunny transition for new game
+//add tutorial
+
+//add disclaimer @ breakpoint - "this game is in development, and is not optimized for small screens. Please re-open in a desktop browser."
+
+//add darkmnode
 
 //current
 // make it pretty

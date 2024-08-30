@@ -213,6 +213,7 @@ function renderBelt(oldState) {
 
 //complete mythic render logic
 function renderMythicSelection(state) {
+  document.getElementById("carpetBackground").style.display = "block";
   let outputDiv = document.getElementById("mythicSelectionOutput");
   let options = state.mythicRewards;
   console.log("mythic rewards", state.mythicRewards);
