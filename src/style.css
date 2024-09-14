@@ -77,6 +77,8 @@ body {
   bottom: 0.25in;
   display: inline-block;
   cursor: pointer;
+  /*rounded edges*/
+  border-radius: 25px;
 }
 .deckImage {
   width: 100%; /* Adjust width as needed */
@@ -236,8 +238,10 @@ body {
   opacity: 1;
 }
 
-/*mythic selection zone*/
-#mythicSelectionOutput {
+/*mythic, deck, and bag display zone*/
+#mythicSelectionOutput,
+#deckExamineOutput,
+#bagExamineOutput {
   border-radius: 25px;
   background-color: transparent;
   position: absolute;
@@ -250,6 +254,7 @@ body {
   margin-top: -45px;
   object-fit: contain;
 }
+
 /* Carpet Background Styling */
 .carpet-background {
   position: fixed;
@@ -351,6 +356,11 @@ button {
 
 #smallBtn:active {
   transform: scale(0.95); /* Button shrink effect on click */
+}
+
+#deck-resume-button,
+#bag-resume-button {
+  margin-top: 85vh;
 }
 
 /*menu buttons*/
@@ -500,13 +510,16 @@ button {
 }
 /* 
 /* Poof Effect */
-.relic-fade {
-  opacity: 0;
-  transform: scale(1.5);
-  filter: blur(5px);
-  transition: opacity 0.5s ease, transform 0.5s ease, filter 0.5s ease;
+/* Initial state for relics */
+.relic-image {
+  transform: scale(1);
+  opacity: 1;
+  transition: transform 3s ease, opacity 3s ease; /* Increase transition duration for debugging */
 }
-.relic-container {
-  position: relative;
-  transition: opacity 0.5s ease, transform 0.5s ease;
+
+/* Poof Effect when relic fades out */
+.relic-fade {
+  transform: scale(1.75); /* Increase size by 75% */
+  opacity: 0; /* Fade out */
+  transition: transform 3s ease, opacity 3s ease; /* Increase transition duration for debugging */
 }

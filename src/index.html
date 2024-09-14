@@ -32,17 +32,18 @@
       <!-------------------------------Mythic Selection container---------------------------->
 
       <div id="mythicSelection" class="screen" style="display: none">
-        <div class="level" id="levelElement">Level: 1</div>
-        <div class="hud" id="hudElement">
-          <div class="hp" id="hpElement"><span>HP: </span> 100/100</div>
-          <div class="gold" id="goldElement"><span>Gold: </span> 50</div>
+        <div class="level"></div>
+        <div class="hud">
+          <div class="hp"></div>
+          <div class="gold"></div>
         </div>
-        <div class="banner" id="bannerElement">Choose a magical artefact:</div>
-        <!-- Carpet Background -->
-        <div id="carpetBackground" class="carpet-background"></div>
+        <div class="banner" id="mythicBannerElement">
+          Choose a magical artefact:
+        </div>
+        <div id="redCarpetBackground" class="carpet-background"></div>
         <div class="output" id="mythicSelectionOutput"></div>
         <div id="deckElement">
-          <div class="deckContainer" id="deckBtn">
+          <div class="deckContainer">
             <img
               src="data/imgs/displayElements/deck.png"
               alt="Deck Image"
@@ -64,11 +65,67 @@
       </div>
       <!---------------- Deck Examine ----------------->
       <div id="deckExamine" class="screen" display="none">
-        <button class="smallBtn" id="deck-resume-button">Resume Game</button>
+        <div class="level"></div>
+        <div class="hud">
+          <div class="hp"></div>
+          <div class="gold"></div>
+        </div>
+        <div class="banner" id="deckBannerElement">Deck</div>
+        <div id="greenCarpetBackground" class="carpet-background"></div>
+        <div class="output" id="deckExamineOutput"></div>
+        <div id="deckElement">
+          <div class="deckContainer" id="deckExamineDeckContainer">
+            <img
+              src="data/imgs/displayElements/deck.png"
+              alt="Deck Image"
+              class="deckImage"
+            />
+            <span class="deckText"></span>
+          </div>
+        </div>
+        <div id="bagElement">
+          <div class="bagContainer" id="bagBtn">
+            <img
+              src="data/imgs/displayElements/backpack.png"
+              alt="Bag Image"
+              class="bagImage"
+            />
+            <span class="bagText"></span>
+          </div>
+          <button class="smallBtn" id="deck-resume-button">Resume Game</button>
+        </div>
       </div>
       <!---------------- Bag Examine ----------------->
       <div id="bagExamine" class="screen" display="none">
-        <button class="smallBtn" id="bag-resume-button">Resume Game</button>
+        <div class="level"></div>
+        <div class="hud">
+          <div class="hp"></div>
+          <div class="gold"></div>
+        </div>
+        <div class="banner" id="bagBannerElement">Relics</div>
+        <div id="blueCarpetBackground" class="carpet-background"></div>
+        <div class="output" id="bagExamineOutput"></div>
+        <div id="deckElement">
+          <div class="deckContainer">
+            <img
+              src="data/imgs/displayElements/deck.png"
+              alt="Deck Image"
+              class="deckImage"
+            />
+            <span class="deckText"></span>
+          </div>
+        </div>
+        <div id="bagElement">
+          <div class="bagContainer" id="bagBtn">
+            <img
+              src="data/imgs/displayElements/backpack.png"
+              alt="Bag Image"
+              class="bagImage"
+            />
+            <span class="bagText"></span>
+          </div>
+          <button class="smallBtn" id="bag-resume-button">Resume Game</button>
+        </div>
       </div>
       <!-------------------------------Game Container ends----------------------------->
     </div>

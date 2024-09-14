@@ -76,6 +76,7 @@ export const gemPool = [
   },
 ];
 
+//more gems?
 //  gem that adds a retrigger to the socketed card
 // gem that adds ink
 // gem that adds bunnies on draw

@@ -3,6 +3,11 @@ import { pickN } from "../../util/pickN";
 
 export function populateMythicRewards(oldState) {
   let state = { ...oldState };
+  //testing purposes
+  for (let i = 0; i < state.relicPool.length; i++) {
+    state.mythicPool.push(state.relicPool[i]);
+  }
+
   let mythicRewards = pickN(state.mythicPool, 3, { duplicatesAllowed: false });
   state.mythicRewards = mythicRewards;
   //state.mythicPool should have the selected 3 permanently removed.

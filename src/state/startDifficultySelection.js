@@ -1,6 +1,10 @@
 "use strict";
 import { render } from "../render/render";
-import { applyDifficultyLevel } from "./applyDifficultyLevel";
+import { startMythicSelection } from "./startMythicSelection";
+
+//this function is mixed, including some rendering features.
+//it is also bugged, as the difficulty buttons call the "render" function twice, with a delay. This is causing problems elsewhere and should be fixed as a priority.
+//the function that assigns logic to the difficulty buttons.
 
 export function startDifficultySelection(oldState) {
   let state = { ...oldState };
@@ -28,12 +32,32 @@ export function startDifficultySelection(oldState) {
         bunnyOverlay.addEventListener("animationend", function () {
           document.body.removeChild(bunnyOverlay); // Remove the overlay after the animation
         });
+        startMythicSelection(state); //when start mythic is here,
       });
+      state = applyDifficultyLevel(button.dataset.value, state);
     });
-    applyDifficultyLevel(button.dataset.value, state);
-    console.log(state);
   }
-  //render the difficulty screen.
   state.currentScreen = "difficultySelection";
   render(state);
+}
+
+function applyDifficultyLevel(difficulty, oldState) {
+  let state = { ...oldState };
+  console.log("difficulty set to: ", difficulty);
+  state.difficulty = difficulty;
+  //apply difficulty settings here.
+  //PLACEHOLDER- MERGE WIWTH STARTUP/APPLYDIFFICULTYLEVEL
+  if (difficulty === "easy") {
+    state.maxHp = state.maxHp + 50;
+    state.hp = state.hp + 50;
+    state.gold = state.gold + 50;
+    state.previousGold = state.gold;
+    state.previousMaxHp = state.maxHp;
+    state.previousHp = state.hp;
+    // state.previousGold = 150;
+    // state.previousMaxHp = 150;
+    // state.previousHp = 150;
+  }
+  console.log(state);
+  return state;
 }

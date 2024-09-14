@@ -1,22 +1,24 @@
 "use strict";
 
-//game state functions
+//to do:
+//add animations for non-selected relics.
+//render bag examine.
+//render deck examine.
+//implement relic check trigger function when a relic is selected.
+
+//render functions
 import { renderRest } from "./renderRest";
 import { renderBattlefield } from "./renderBattlefield";
 import { renderWandUpgrade } from "./renderWandUpgrade";
 import { renderShop } from "./renderShop";
 import { renderSocketing } from "./renderSocketing";
-// import { renderPathSelection } from "./renderPathSelection";
-// import { renderDeckExamine } from "./renderDeckExamine";
 import { renderCombatRecap } from "./renderCombatRecap";
-import { renderButtons } from "./renderButtons";
-import { renderBattleHud } from "./renderBattleHud";
-// import { renderHud } from "./renderHud";
-import { startPathSelection } from "../state/startPathSelection";
+//state functions
+import { pickupRelic } from "../state/pickupRelic";
 
-//fix the 'render combat recap - it should be a separate screen to reward selection.""
 export function render(oldState) {
   let state = { ...oldState };
+  console.log("arriving at render");
 
   if (state.currentScreen == "start") {
     showScreen("start");
@@ -51,95 +53,34 @@ export function render(oldState) {
   }
 }
 
+//screen display toggle functions
 function hideAllScreens() {
   const screens = document.querySelectorAll(".screen");
   screens.forEach((screen) => {
     screen.style.display = "none";
   });
 }
-
-function renderHud(state) {
-  renderHpAndGold(state);
-  renderLevel(state);
-  renderDeckButton(state);
-  renderBagButton(state);
-}
-
 function showScreen(screenId) {
   hideAllScreens(); // First hide all screens
   document.getElementById(screenId).style.display = "flex"; // Then show the desired screen
 }
 
+function renderHud(oldState) {
+  let state = { ...oldState };
+  renderGold(state);
+  renderHp(state);
+  renderLevel(state);
+  renderDeckButton(state);
+  renderBagButton(state);
+}
+
 function renderLevel(state) {
-  let levelDiv = document.getElementById("levelElement");
-  levelDiv.innerHTML = "Level: " + state.level;
-}
-
-function renderHpAndGold(state) {
-  let hpDiv = document.getElementById("hpValue");
-  let goldDiv = document.getElementById("goldValue");
-
-  let previousGold = state.previousGold;
-  let previousHp = state.previousHp;
-  let hp = state.hp;
-  let gold = state.gold;
-
-  tickUpAnimation(previousHp, hp, hpDiv);
-  tickUpAnimation(previousGold, gold, goldDiv);
-}
-
-function tickUpAnimation(startValue, endValue, element) {
-  if (startValue === endValue) return;
-
-  let duration = 1000; // Total duration of the animation in milliseconds
-  let frameRate = 60; // Frames per second
-  let totalFrames = (duration / 1000) * frameRate;
-  let increment = (endValue - startValue) / totalFrames;
-  let currentValue = startValue;
-
-  // Determine if the value is increasing or decreasing
-  if (increment > 0) {
-    element.style.color = "green"; // Green for increasing
-  } else {
-    element.style.color = "red"; // Red for decreasing
-  }
-
-  function updateValue() {
-    currentValue += increment;
-    element.textContent = Math.round(currentValue);
-
-    if (
-      (increment > 0 && currentValue < endValue) ||
-      (increment < 0 && currentValue > endValue)
-    ) {
-      requestAnimationFrame(updateValue);
-    } else {
-      element.textContent = endValue; // Ensure the final value is set
-      element.style.color = ""; // Reset color to default
-    }
-  }
-
-  requestAnimationFrame(updateValue);
-}
-function renderDeckButton(state) {
-  const deckButton = document.getElementById("deckBtn");
-  const deckText = deckButton.querySelector(".deckText");
-
-  if (state.currentScreen != "combat") {
-    deckText.innerHTML = "Deck: (" + state.deck.length + ")";
-  } else if (state.currentScreen == "combat") {
-    deckText.innerHTML = "Remaining Deck: (" + state.combatDeck.length + ")";
-  }
-
-  deckButton.addEventListener("click", () => {
-    if (state) {
-      console.log(state);
-      renderDeckExamine(state);
-    } else {
-      console.error("State is not defined yet.");
-    }
+  let levelDivs = document.querySelectorAll(".level");
+  levelDivs.forEach((levelDiv) => {
+    levelDiv.innerHTML = "Level: " + state.level;
   });
 }
+
 // Statically import images for relics
 //Ideally upgrade this section, to permit dynamic image imports.
 const relicImages = {
@@ -148,83 +89,47 @@ const relicImages = {
   grandmagusTome: require("../data/imgs/mythicRelics/grandmagusTome.png"),
   goldenEgg: require("../data/imgs/mythicRelics/goldenEgg.png"),
   phoenixFeatherQuill: require("../data/imgs/mythicRelics/phoenixFeatherQuill.png"),
-  bottomlessInkpot: require("../data/imgs/mythicRelics/bottomlessInkpot.png"),
+  eternalInkstone: require("../data/imgs/mythicRelics/eternalInkstone.png"),
   //relics
   magicWand: require("../data/imgs/relics/magicWand.png"),
   brokenWand: require("../data/imgs/relics/brokenWand.png"),
-  //others
-  poof: require("../data/imgs/displayElements/poof.png"),
+  inkpot: require("../data/imgs/relics/inkpot.png"),
+  brush: require("../data/imgs/relics/brush.png"),
+  scroll: require("../data/imgs/relics/scroll.png"),
+  hydrangea: require("../data/imgs/relics/hydrangea.png"),
+  magicStaff: require("../data/imgs/relics/magicStaff.png"),
+  goldIngot: require("../data/imgs/relics/goldIngot.png"),
+  encyclopaedia: require("../data/imgs/relics/encyclopaedia.png"),
+  golfBall: require("../data/imgs/relics/golfBall.png"),
 };
 
-//complete relic belt (and relic) render logic
-function renderBelt(oldState) {
-  let state = { ...oldState };
-  let beltDiv = document.getElementById("beltElement");
-  let html = "";
-  let relicBelt;
-  if (state.relicBelt.length < 8) {
-    relicBelt = state.relicBelt;
-  } else if (false) {
-    //if the relic belt is full, designate a special array with "displayed relics."
-    //track a window of 7 "displayed relics"
-    //Add "arrow button" images to "scroll" through the display window.
-  }
-  relicBelt.forEach((relic) => {
-    let imagePath = relicImages[relic.imgName]; // Dynamically choose the image based on the relic's imgName
+const animationImages = {
+  //poofs
+  poof: require("../data/imgs/displayElements/poof.png"),
+  bigPoof: require("../data/imgs/displayElements/bigPoof.png"),
+  tinyPoof: require("../data/imgs/displayElements/tinyPoof.png"),
+  tinyBunny: require("../data/imgs/displayElements/tinyBunny.png"),
+  leapingbunnyFront: require("../data/imgs/displayElements/leapingbunnyFront.png"),
+  leapingBunnyBack: require("../data/imgs/displayElements/leapingBunnyBack.png"),
+};
 
-    if (imagePath && relic.supertype != "wand") {
-      html += `
-      <div class="tooltip">
-        <img src="${imagePath}" alt="${relic.name}">
-        <span class="tooltiptext">
-          <strong style="font-size: 22px;">${relic.name}</strong><br>
-          <em>${relic.effect}</em>
-        </span>
-      </div>
-    `;
-    } else if (imagePath && relic.supertype == "wand" && relic.upgrade > 0) {
-      html += `
-      <div class="tooltip">
-        <img src="${imagePath}" alt="${relic.name}">
-        <span class="tooltiptext">
-          <strong style="font-size: 22px;">${relic.name}</strong><br>
-          <em>-------------------</em><br>
-          <em>When you cast, gain <span style="color: lightgreen;">${relic.bunnyAdd}</span> bonus bunnies</em>
-        </span>
-      </div>
-    `;
-    } else if (imagePath && relic.supertype == "wand") {
-      html += `
-      <div class="tooltip">
-        <img src="${imagePath}" alt="${relic.name}">
-        <span class="tooltiptext">
-          <strong style="font-size: 22px;">${relic.name}</strong><br>
-          <em>-------------------</em><br>
-          <em>When you cast, gain <span style="color: white;">${relic.bunnyAdd}</span> bonus bunnies</em>
-        </span>
-      </div>
-    `;
-    } else {
-      html += `
-      <div class="tooltip">
-        <p>Image not found for ${relic.name}</p>
-      </div>
-    `;
-    }
-  });
-  // arrow button images and logic if the relic belt is too crowded.
-  beltDiv.innerHTML = html;
-}
+const displayElementImages = {
+  backpackImage: require("../data/imgs/displayElements/backpack.png"),
+  mythicCarpet: require("../data/imgs/displayElements/mythicCarpet.png"),
+  deckImage: require("../data/imgs/displayElements/deck.png"),
+};
+
 function renderMythicSelection(state) {
   // Show the carpet background
-  document.getElementById("carpetBackground").style.display = "block";
+  document.getElementById("redCarpetBackground").style.display = "block";
 
   // Get the output div where relics will be displayed
   let outputDiv = document.getElementById("mythicSelectionOutput");
+  // get the mythic relics for display.
   let options = state.mythicRewards;
-  let html = "";
 
-  // Build HTML for each relic
+  // Build HTML for each relic, turning it into a button with a tooltip and the appropriate onclick effect.
+  let html = "";
   options.forEach((relic, index) => {
     let imagePath = relicImages[relic.imgName];
     html += `
@@ -246,31 +151,51 @@ function renderMythicSelection(state) {
   const imgElems = document.querySelectorAll(
     "#mythicSelectionOutput .relic-image"
   );
+
+  // Ensure relics are reset to their initial state before any animation
   imgElems.forEach((imgElem) => {
     imgElem.addEventListener("click", () => {
       const clickedIndex = imgElem.dataset.index;
       const selectedRelic = state.mythicRewards[clickedIndex];
 
-      // Handle the relic click event
+      // Log which relic was clicked
       console.log(`You clicked on ${selectedRelic.name}`, selectedRelic);
 
       // Add a slight delay before starting the non-selected relic animations
       setTimeout(() => {
         imgElems.forEach((elem) => {
           if (elem.dataset.index !== clickedIndex) {
-            elem.classList.add("relic-fade");
+            // Use requestAnimationFrame to ensure the class is applied correctly
+            requestAnimationFrame(() => {
+              // Now apply the fade-out class
+              elem.classList.add("relic-fade");
+            });
+          }
+        });
+
+        imgElems.forEach((elem) => {
+          if (elem.dataset.index !== clickedIndex) {
+            const computedStyle = window.getComputedStyle(elem);
+            console.log(
+              `Relic index ${elem.dataset.index}: transform: ${computedStyle.transform}, opacity: ${computedStyle.opacity}`
+            );
           }
         });
       }, 10); // Small delay to ensure proper sequencing
 
       // Animate the selected relic to the backpack
-      animateRelicToBag(imgElem, document.getElementById("bagBtn"), state);
+      animateRelicToBag(
+        imgElem,
+        document.getElementById("bagBtn"),
+        state,
+        selectedRelic
+      );
     });
   });
 }
 
 // Animate the selected relic image towards the bag
-function animateRelicToBag(relicElem, bagElem, state) {
+function animateRelicToBag(relicElem, bagElem, state, selectedRelic) {
   const relicRect = relicElem.getBoundingClientRect();
   const bagRect = bagElem.getBoundingClientRect();
 
@@ -292,30 +217,76 @@ function animateRelicToBag(relicElem, bagElem, state) {
     // Remove the event listener to avoid potential memory leaks
     relicElem.removeEventListener("transitionend", onTransitionEnd);
 
+    //pick up the relic
+    state = pickupRelic(state, selectedRelic);
+    console.log("relicBelt", state.relicBelt);
     // Proceed to the next screen
     renderPathSelection(state);
   });
 }
 
 function renderBagButton(state) {
-  const bagButton = document.getElementById("bagBtn");
-  const bagText = bagButton.querySelector(".bagText");
+  const oldBagButton = document.getElementById("bagBtn");
+  const newBagButton = oldBagButton.cloneNode(true); // Create a fresh copy of the button
+
+  oldBagButton.replaceWith(newBagButton); // Replace the old button with the new one
+
+  const bagText = newBagButton.querySelector(".bagText");
   bagText.innerHTML = "Relics: (" + state.relicBelt.length + ")";
-  bagButton.addEventListener("click", () => {
-    if (state) {
+
+  newBagButton.addEventListener(
+    "click",
+    () => {
       renderBagExamine(state);
-    } else {
-      console.error("State is not defined yet.");
-    }
-  });
+    },
+    { once: true } // Listener is removed after a single execution
+  );
 }
 
-function renderBagExamine(state) {
+function renderBagExamine(oldState) {
+  let state = { ...oldState };
+
+  // Render the HUD
+  renderHud(state);
+
   console.log("bag examine", state);
-  let bag = state.relicBelt;
-  state.previousScreen = state.currentScreen;
+  let bag = state.relicPool;
+  let outputDiv = document.getElementById("bagExamineOutput");
+
+  // Define the CSS grid for the relic container with reduced gap
+  outputDiv.style.display = "grid";
+  outputDiv.style.gridTemplateColumns = "repeat(7, 1fr)"; // 7 items per row
+  outputDiv.style.gap = "10px"; // Small gap between the relics
+
+  let html = "";
+  bag.forEach((relic, index) => {
+    let imagePath = relicImages[relic.imgName];
+    html += `
+      <div class="tooltip relic-container" style="position: relative;">
+        <img src="${imagePath}" alt="${relic.name}" class="relic-image" data-index="${index}" style="display: block;">
+        <span class="tooltiptext" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%);">
+          <strong style="font-size: 22px;">${relic.name}</strong><br>
+          <em>-------------------</em><br>
+          <em>${relic.effect}</em>
+        </span>
+      </div>
+    `;
+  });
+
+  // Insert the HTML content into the outputDiv
+  outputDiv.innerHTML = html;
+
+  if (
+    state.currentScreen !== "bagExamine" &&
+    state.currentScreen !== "deckExamine"
+  ) {
+    state.previousScreen = state.currentScreen;
+  }
+
   state.currentScreen = "bagExamine";
+
   showScreen(state.currentScreen);
+
   let resumeButton = document.getElementById("bag-resume-button");
   resumeButton.addEventListener(
     "click",
@@ -326,37 +297,160 @@ function renderBagExamine(state) {
   );
 }
 
-function renderDeckExamine(state) {
-  console.log("deck Examine", state);
-  let deck;
-  if (state.currentScreen != "combat") {
-    deck = state.deck;
-  } else if (state.currentScreen == "combat") {
-    deck = state.combatDeck;
+//the following 3 functions are bugged.
+//currently, clicking on the deck button triggers it 3 times.
+//while in the deck examine screen, the deck button doesn't work (it should "return to the previous screen")
+//deck button doesn't work while in bag view, nor viceversa.
+function resumeGame(state) {
+  if (state.previousScreen) {
+    state.currentScreen = state.previousScreen;
+    state.previousScreen = null;
+    render(state);
   }
-  state.previousScreen = state.currentScreen;
-  state.currentScreen = "deckExamine";
-  showScreen(state.currentScreen);
-
-  let resumeButton = document.getElementById("deck-resume-button");
-
-  resumeButton.addEventListener(
-    "click",
-    () => {
-      resumeGame(state);
-    },
-    { once: true }
-  );
-}
-
-function resumeGame(oldState) {
-  let state = { ...oldState };
-  state.currentScreen = state.previousScreen;
-  state.previousScreen = null;
-  render(state);
 }
 
 function renderPathSelection(state) {
   showScreen("deckExamine");
   console.log("path selection", state);
+}
+
+export function renderGold(state) {
+  const goldDivs = document.querySelectorAll(".gold"); // NodeList of all elements with the class 'gold'
+  const previousGold = state.previousGold;
+  const gold = state.gold;
+
+  goldDivs.forEach((goldDiv) => {
+    tickUpAnimation(previousGold, gold, function (value) {
+      goldDiv.textContent = `Gold: ${value}`;
+    });
+
+    if (previousGold == gold) {
+      goldDiv.textContent = `Gold: ${gold}`;
+    }
+  });
+}
+
+export function renderHp(state) {
+  const hpDivs = document.querySelectorAll(".hp"); // Select all elements with the class 'hp'
+  const previousHp = state.previousHp || 0;
+  const previousMaxHp = state.previousMaxHp || 0;
+  const hp = state.hp;
+  const maxHp = state.maxHp;
+
+  hpDivs.forEach((hpDiv) => {
+    // Run animation for hp
+    tickUpAnimation(previousHp, hp, function (value) {
+      updateHpDisplay(value, maxHp, hpDiv); // Use the current maxHp here
+    });
+
+    // Run animation for maxHp
+    tickUpAnimation(previousMaxHp, maxHp, function (value) {
+      updateHpDisplay(hp, value, hpDiv); // Use the current hp here
+    });
+
+    // If no change, directly update the display
+    if (previousHp == hp) {
+      updateHpDisplay(hp, maxHp, hpDiv);
+    }
+    if (previousMaxHp == maxHp) {
+      updateHpDisplay(hp, maxHp, hpDiv);
+    }
+  });
+}
+
+function tickUpAnimation(startValue, endValue, updateCallback) {
+  if (startValue === endValue) {
+    return;
+  }
+
+  let duration = 1000; // Total duration of the animation in milliseconds
+  let frameRate = 60; // Frames per second
+  let totalFrames = (duration / 1000) * frameRate;
+  let increment = (endValue - startValue) / totalFrames;
+  let currentValue = startValue;
+
+  function updateValue() {
+    currentValue += increment;
+    updateCallback(Math.round(currentValue));
+
+    if (
+      (increment > 0 && currentValue < endValue) ||
+      (increment < 0 && currentValue > endValue)
+    ) {
+      requestAnimationFrame(updateValue);
+    } else {
+      updateCallback(endValue); // Ensure the final value is set
+    }
+  }
+
+  requestAnimationFrame(updateValue);
+}
+
+function updateHpDisplay(hp, maxHp, element) {
+  element.textContent = `HP: ${hp}/${maxHp}`;
+}
+
+// semi working
+function renderDeckButton(state) {
+  const deckButtons = document.querySelectorAll(".deckContainer");
+  deckButtons.forEach((deckButton) => {
+    const deckText = deckButton.querySelector(".deckText");
+
+    // Determine button state based on currentScreen
+    const isDeckExamine = state.currentScreen === "deckExamine";
+    deckButton.style.backgroundColor = isDeckExamine ? "darkgreen" : "";
+    deckText.innerHTML = isDeckExamine
+      ? "Exit"
+      : state.currentScreen === "combat"
+      ? `Remaining Deck: (${state.combatDeck.length})`
+      : `Deck: (${state.deck.length})`;
+
+    // Remove any previous event listeners to avoid multiple bindings
+    deckButton.replaceWith(deckButton.cloneNode(true)); // Optional clone to reset events
+    const newDeckButton = document.querySelectorAll(".deckContainer")[0]; // Get the new element
+
+    // Remove any previous event listeners to avoid duplicates
+    const handleClick = (event) => {
+      event.stopPropagation(); // Prevent bubbling issues
+
+      if (isDeckExamine) {
+        resumeGame(state); // This should return to the previous screen
+      } else {
+        renderDeckExamine(state); // Go to deck examine
+      }
+    };
+
+    // Clear any existing listeners using named function references
+    newDeckButton.removeEventListener("click", handleClick);
+    newDeckButton.addEventListener("click", handleClick, { once: true });
+  });
+}
+function renderDeckExamine(state) {
+  const deck = state.currentScreen === "combat" ? state.combatDeck : state.deck;
+  console.log("deck Examine", deck);
+
+  // Only update previousScreen if not already in deckExamine or bagExamine
+  if (!["bagExamine", "deckExamine"].includes(state.currentScreen)) {
+    state.previousScreen = state.currentScreen;
+  }
+
+  // Toggle between deckExamine and bagExamine without overwriting previous screen
+  if (
+    state.currentScreen === "deckExamine" &&
+    state.previousScreen === "bagExamine"
+  ) {
+    state.previousScreen = "bagExamine";
+  }
+
+  state.currentScreen = "deckExamine";
+  renderHud(state);
+  showScreen(state.currentScreen); // Ensure this displays the correct UI
+
+  const resumeButton = document.getElementById("deck-resume-button");
+
+  // Clear any existing listener, referencing the named function directly
+  const resumeClick = () => resumeGame(state);
+
+  resumeButton.removeEventListener("click", resumeClick);
+  resumeButton.addEventListener("click", resumeClick, { once: true });
 }

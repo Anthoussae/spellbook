@@ -38,9 +38,6 @@ export function upgradeCard(oldState, card) {
   if (upgradedCard.pageAdd) {
     upgradedCard.pageAdd = upgradedCard.pageAdd + 1;
   }
-  if (upgradedCard.upgrade === 7) {
-    upgradedCard.ink = upgradedCard.ink - 1;
-  }
 
   // Update the card's name to reflect the upgrade level
   let newCardName =

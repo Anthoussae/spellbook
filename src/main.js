@@ -1,5 +1,20 @@
 "use strict";
 
+//add small icons for relic buffs.
+
+//make interesting relics that modify gameplay substantially.
+//relic: whenever you add a card to your deck, gain +5 max HP.
+//relic: whenever you play a socketed card, dispel an enemy buff.
+//relic: all lesser potions are upgraded to medium potions and discounted by 1 tier.
+//relic: All cards with 5 or more upgrades cost 1 less ink.
+//relic: you gain +2 ink, but can no longer rest.
+//relic: you gain +2 pages, but gain 50% less gold.
+//relic: you gain +3 hand size, but all healing is reduced by 50%.
+//relic: whenever you heal, upgrade a random card.
+//relic: All gems are onyx.
+
+//decide on reward mechanics, path tree, and shop design
+
 //lets set some predefined variables etc. in CSS.
 
 //seems to be triggering set difficulty for each button, rather than assigning it to onclick.
@@ -85,7 +100,6 @@ import { generateColor } from "./util/generateColor";
 
 //game state functions
 import { startShop } from "./state/startShop";
-import { applyDifficultyLevel } from "./state/startup/applyDifficultyLevel";
 import { generateStarterDeck } from "./state/startup/generateStarterDeck";
 import { insertRelic } from "./state/insertRelic";
 import { colorize } from "./state/startup/colorize";
@@ -115,6 +129,7 @@ class Game {
       potionPool: potionPool,
       mythicPool: mythicPool,
       maxHp: 100,
+      previousMaxHp: 100,
       hp: 100,
       gold: 50,
       previousHp: 100,
@@ -194,6 +209,7 @@ class Game {
       potionPool: potionPool,
       mythicPool: mythicPool,
       maxHp: 100,
+      previousMaxHp: 100,
       hp: 100,
       gold: 50,
       previousHp: 100,

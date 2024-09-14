@@ -26,9 +26,10 @@ export const relicPool = [
   //need pics
   {
     //integrated
-    name: "Inkstone",
+    name: "Inkpot",
     effect: "Gain 1 bonus ink each combat",
     rarity: "common",
+    imgName: "inkpot",
     inkAdd: 1,
     type: "relic",
     trigger: "combatStart",
@@ -37,6 +38,7 @@ export const relicPool = [
     //integrated
     name: "Brush",
     bonusHandsize: 1,
+    imgName: "brush",
     effect: "Increase your opening hand size by 1",
     rarity: "common",
     type: "relic",
@@ -45,6 +47,7 @@ export const relicPool = [
   {
     //integrated
     name: "Scroll",
+    imgName: "scroll",
     bonusPages: 1,
     effect: "Increase your spellbook size by 1 page",
     rarity: "uncommon",
@@ -54,7 +57,8 @@ export const relicPool = [
   {
     //integrated
     name: "Hydrangea",
-    effect: "Gain 25 max HP",
+    imgName: "hydrangea",
+    effect: "Gain 25 max HP upon pickup",
     bonusMaxHp: 25,
     rarity: "uncommon",
     type: "relic",
@@ -63,6 +67,7 @@ export const relicPool = [
   {
     //integrated
     name: "Magic Staff",
+    imgName: "magicStaff",
     effect: "Gain 5 bunnies when you cast your spellbook",
     bunnyAdd: 5,
     rarity: "mythic",
@@ -82,6 +87,7 @@ export const relicPool = [
   {
     //integrated
     name: "Gold ingot",
+    imgName: "goldIngot",
     effect: "Gain 5% interest on your gold each time you win combat",
     interest: 0.05,
     rarity: "uncommon",
@@ -90,7 +96,8 @@ export const relicPool = [
   },
   {
     //integrated
-    name: "Encyclopedia",
+    name: "Encyclopaedia",
+    imgName: "encyclopaedia",
     effect: "Gain 1 bunny each time you draw a card.",
     rarity: "common",
     type: "relic",
@@ -100,6 +107,7 @@ export const relicPool = [
   {
     //integrated
     name: "Golf Ball",
+    imgName: "golfBall",
     effect: "Gain 1 bonus mulligan each combat",
     rarity: "common",
     type: "relic",

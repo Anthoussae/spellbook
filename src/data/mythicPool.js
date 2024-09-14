@@ -20,8 +20,8 @@ export const mythicPool = [
     trigger: "combatStart",
   },
   {
-    name: "Bottomless Inkpot",
-    imgName: "bottomlessInkpot",
+    name: "Eternal Inkstone",
+    imgName: "eternalInkstone",
     effect: "Gain 2 bonus ink each combat",
     rarity: "mythic",
     inkAdd: 2,
