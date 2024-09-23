@@ -1,7 +1,7 @@
 "use strict";
 import { renderHp, renderGold } from "../render/render";
 
-function modifyStat(oldState, stat, amount) {
+export function modifyStat(oldState, stat, amount) {
   let state = { ...oldState };
   let hp = state.hp;
   let gold = state.gold;

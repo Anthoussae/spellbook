@@ -3,10 +3,6 @@ import { pickN } from "../../util/pickN";
 
 export function populateMythicRewards(oldState) {
   let state = { ...oldState };
-  //testing purposes
-  for (let i = 0; i < state.relicPool.length; i++) {
-    state.mythicPool.push(state.relicPool[i]);
-  }
 
   let mythicRewards = pickN(state.mythicPool, 3, { duplicatesAllowed: false });
   state.mythicRewards = mythicRewards;
@@ -14,6 +10,5 @@ export function populateMythicRewards(oldState) {
   state.mythicPool = state.mythicPool.filter(
     (relic) => !mythicRewards.includes(relic)
   );
-  console.log(state.mythicRewards);
   return state;
 }

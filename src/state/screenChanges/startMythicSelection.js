@@ -1,5 +1,5 @@
 "use strict";
-import { render } from "../render/render";
+import { render } from "../../render/render";
 
 //this function will set the game to its first state.
 //ideally, choosing a mythic reward.

@@ -1,5 +1,5 @@
 "use strict";
-import { startPathSelection } from "./startPathSelection";
+import { startPathSelection } from "./screenChanges/startPathSelection";
 import { insertCard } from "./insertCard";
 import { removeCard } from "./removeCard";
 import { insertGem } from "./insertGem";

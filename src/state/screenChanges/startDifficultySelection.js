@@ -1,5 +1,5 @@
 "use strict";
-import { render } from "../render/render";
+import { render } from "../../render/render";
 import { startMythicSelection } from "./startMythicSelection";
 
 //this function is mixed, including some rendering features.

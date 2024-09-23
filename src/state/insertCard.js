@@ -1,6 +1,6 @@
 "use strict";
 
-import { checkCardPickupTriggers } from "./checkCardPickupTriggers";
+import { checkCardPickupTriggers } from "./nonCombatTriggers/checkCardPickupTriggers";
 
 export function insertCard(oldState, card) {
   let state = { ...oldState };

@@ -95,18 +95,18 @@ import { challengePool } from "./data/challengePool";
 import { mythicPool } from "./data/mythicPool";
 
 //utility functions
-import { startPathSelection } from "./state/startPathSelection";
+import { startPathSelection } from "./state/screenChanges/startPathSelection";
 import { generateColor } from "./util/generateColor";
 
 //game state functions
-import { startShop } from "./state/startShop";
+import { startShop } from "./state/screenChanges/startShop";
 import { generateStarterDeck } from "./state/startup/generateStarterDeck";
 import { insertRelic } from "./state/insertRelic";
 import { colorize } from "./state/startup/colorize";
 import { populateEnemyPool } from "./state/startup/populateEnemyPool";
 import { insertCard } from "./state/insertCard";
 import { findObjectInArray } from "./util/findObjectInArray";
-import { startDifficultySelection } from "./state/startDifficultySelection";
+import { startDifficultySelection } from "./state/screenChanges/startDifficultySelection";
 import { populateMythicRewards } from "./state/startup/populateMythicRewards";
 
 class Game {
@@ -276,8 +276,6 @@ class Game {
     this.state = generateStarterDeck(this.state);
     this.state = insertRelic(this.state, "Magic Wand");
     this.state = populateMythicRewards(this.state);
-    // this.state = applyDifficultyLevel(this.state);
-    // this.state = colorize(this.state);
 
     // Debugging
     // this.state = insertCard(this.state, findObjectInArray(this.state.cardPool, "name", "Harvest"));
@@ -285,7 +283,6 @@ class Game {
 
     // Begin game
     startDifficultySelection(this.state);
-    // startShop(this.state);
   }
 }
 

@@ -1,6 +1,6 @@
 "use strict";
-import { render } from "../render/render";
-import { insertRelic } from "./insertRelic";
+import { render } from "../../render/render";
+import { insertRelic } from "../insertRelic";
 
 //start shop ends with a render call.
 //make sure that's acceptable! It may need to return state instead.

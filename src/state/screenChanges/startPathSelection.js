@@ -1,6 +1,6 @@
 "use strict";
-import { render } from "../render/render";
-import { populateOptions } from "./populateOptions";
+import { render } from "../../render/render";
+import { populateOptions } from "../populateOptions.js";
 
 export function startPathSelection(oldState) {
   let state = { ...oldState };

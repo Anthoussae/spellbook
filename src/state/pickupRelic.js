@@ -1,5 +1,5 @@
 "use strict";
-import { checkRelicPickupTriggers } from "./checkRelicPickupTriggers";
+import { checkRelicPickupTriggers } from "./nonCombatTriggers/checkRelicPickupTriggers";
 
 export function pickupRelic(oldstate, relic) {
   let state = { ...oldstate };

@@ -29,7 +29,7 @@ export const mythicPool = [
     trigger: "combatStart",
   },
   {
-    name: "Orchid",
+    name: "Blessed Orchid",
     imgName: "orchid",
     effect: "Gain 50 max HP on pickup",
     bonusMaxHp: 50,
