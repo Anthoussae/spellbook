@@ -8,6 +8,7 @@ import { startMythicSelection } from "./startMythicSelection";
 
 export function startDifficultySelection(oldState) {
   let state = { ...oldState };
+  console.log("calling startDifficultySelection");
   //assign logic to the difficulty buttons.
   let difficulties = ["easy", "normal", "hard"];
   for (let i = 0; i < difficulties.length; i++) {
@@ -19,21 +20,24 @@ export function startDifficultySelection(oldState) {
       bunnyOverlay.className = "bunny-transition";
       document.body.appendChild(bunnyOverlay);
 
-      bunnyOverlay.addEventListener("animationend", function () {
+      const onAnimationEnd = function () {
         // Hide all other divs and reveal the new game div
         document
           .querySelectorAll(".screen")
           .forEach((div) => (div.style.display = "none"));
         document.getElementById("mythicSelection").style.display = "flex";
-
         // Contract the bunny face
         bunnyOverlay.style.animation = "contract 1s forwards ease-in-out";
-
         bunnyOverlay.addEventListener("animationend", function () {
           document.body.removeChild(bunnyOverlay); // Remove the overlay after the animation
         });
+        console.log(
+          "about to call startMythicSelection() from startDifficultySelection()"
+        );
         startMythicSelection(state); //when start mythic is here,
-      });
+        bunnyOverlay.removeEventListener("animationend", onAnimationEnd);
+      };
+      bunnyOverlay.addEventListener("animationend", onAnimationEnd);
       state = applyDifficultyLevel(button.dataset.value, state);
     });
   }

@@ -1,6 +1,7 @@
 "use strict";
 import { relicImages, showScreen } from "./render";
 import { resumeGame } from "./render";
+import { renderHud } from "./renderHud";
 
 export function renderBagExamine(state) {
   let bag = state.relicPool;
@@ -34,14 +35,14 @@ export function renderBagExamine(state) {
 
   state.currentScreen = "bagExamine";
   console.log("bag examine", state.currentScreen);
+  renderHud(state);
   showScreen(state.currentScreen); // Display the correct screen
-
   const resumeButton = document.getElementById("bag-resume-button");
-
   // Clear any existing listener, referencing the named function directly
-  const resumeClick = () => resumeGame(state);
-
-  resumeButton.removeEventListener("click", resumeClick);
+  const resumeClick = () => {
+    resumeGame(state);
+    resumeButton.removeEventListener("click", resumeClick);
+  };
   resumeButton.addEventListener("click", resumeClick, { once: true });
 }
 

@@ -33,9 +33,10 @@ export function renderDeckExamine(state) {
   const resumeButton = document.getElementById("deck-resume-button");
 
   // Clear any existing listener, referencing the named function directly
-  const resumeClick = () => resumeGame(state);
-
-  resumeButton.removeEventListener("click", resumeClick);
+  const resumeClick = () => {
+    resumeGame(state);
+    resumeButton.removeEventListener("click", resumeClick);
+  };
   resumeButton.addEventListener("click", resumeClick, { once: true });
 }
 function renderCard(card, index) {

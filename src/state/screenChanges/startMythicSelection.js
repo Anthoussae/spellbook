@@ -6,6 +6,8 @@ import { render } from "../../render/render";
 
 export function startMythicSelection(oldState) {
   let state = { ...oldState };
-  state.currentScreen = "mythicSelection";
-  render(state);
+  if (state.currentScreen != "mythicSelection") {
+    state.currentScreen = "mythicSelection";
+    render(state);
+  }
 }

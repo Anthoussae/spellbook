@@ -4,9 +4,13 @@ import { resumeGame } from "./render";
 import { renderBagExamine } from "./renderBagExamine";
 import { renderDeckExamine } from "./renderDeckExamine";
 
+const hudEventRemovers = [];
+
 //seems to be assigning click handlers to the bag and deck buttons multiple times.
 export function renderHud(oldState) {
   let state = { ...oldState };
+  console.log(new Error().stack);
+  removeAllHudEventHandlers();
   renderGold(state);
   renderHp(state);
   renderLevel(state);
@@ -121,39 +125,67 @@ function handleDeckButtonClick(state, isDeckExamine) {
 }
 
 function renderBagButton(state) {
-  const bagButtons = document.querySelectorAll(".bagContainer");
-  bagButtons.forEach((bagButton) => {
-    const bagText = bagButton.querySelector(".bagText");
-    const isBagExamine = state.currentScreen === "bagExamine";
+  const bagButton = document.querySelector(
+    `#${state.currentScreen} .bagContainer`
+  );
 
-    // Set background color based on screen
-    bagButton.style.backgroundColor = isBagExamine ? "darkgreen" : "";
-    bagText.innerHTML = isBagExamine
-      ? "Exit"
-      : `Relics: (${state.relicBelt.length})`;
+  const bagText = bagButton.querySelector(".bagText");
+  const isBagExamine = state.currentScreen === "bagExamine";
 
-    // Ensure event handler is managed properly
-    const existingHandler = handleBagButtonClick(state, isBagExamine);
-    bagButton.removeEventListener("click", existingHandler);
-    bagButton.addEventListener("click", existingHandler, { once: true });
-  });
+  // Set background color based on screen
+  bagButton.style.backgroundColor = isBagExamine ? "darkgreen" : "";
+  bagText.innerHTML = isBagExamine
+    ? "Exit"
+    : `Relics: (${state.relicBelt.length})`;
+
+  // Ensure event handler is managed properly
+  const bagClickHandler = handleBagButtonClick(state, isBagExamine);
+  addHudEventListener(bagButton, "click", bagClickHandler);
+  // bagButton.addEventListener(
+  //   "click",
+  //   (event) => {
+  //     bagClickHandler(event);
+  //     bagButton.removeEventListener("click", bagClickHandler);
+  //   },
+  //   { once: true }
+  // );
 }
 
 function renderDeckButton(state) {
-  const deckButtons = document.querySelectorAll(".deckContainer");
-  deckButtons.forEach((deckButton) => {
-    const deckText = deckButton.querySelector(".deckText");
-    const isDeckExamine = state.currentScreen === "deckExamine";
+  const deckButton = document.querySelector(
+    `#${state.currentScreen} .deckContainer`
+  );
 
-    deckButton.style.backgroundColor = isDeckExamine ? "darkgreen" : "";
-    deckText.innerHTML = isDeckExamine
-      ? "Exit"
-      : state.currentScreen === "combat"
-      ? `Remaining Deck: (${state.combatDeck.length})`
-      : `Deck: (${state.deck.length})`;
+  const deckText = deckButton.querySelector(".deckText");
+  const isDeckExamine = state.currentScreen === "deckExamine";
+  deckButton.style.backgroundColor = isDeckExamine ? "darkgreen" : "";
+  deckText.innerHTML = isDeckExamine
+    ? "Exit"
+    : state.currentScreen === "combat"
+    ? `Remaining Deck: (${state.combatDeck.length})`
+    : `Deck: (${state.deck.length})`;
+  const deckClickHandler = handleDeckButtonClick(state, isDeckExamine);
+  addHudEventListener(deckButton, "click", deckClickHandler);
+  // deckButton.addEventListener(
+  //   "click",
+  //   (event) => {
+  //     deckClickHandler(event);
+  //     deckButton.removeEventListener("click", deckClickHandler);
+  //   },
+  //   { once: true }
+  // );
+}
 
-    const existingHandler = handleDeckButtonClick(state, isDeckExamine);
-    deckButton.removeEventListener("click", existingHandler);
-    deckButton.addEventListener("click", existingHandler, { once: true });
+function addHudEventListener(elem, type, handler) {
+  elem.addEventListener(type, handler);
+
+  hudEventRemovers.push(() => {
+    elem.removeEventListener(type, handler);
   });
+}
+function removeAllHudEventHandlers() {
+  for (const hudEventRemover of hudEventRemovers) {
+    hudEventRemover();
+  }
+  hudEventRemovers.length = 0;
 }
