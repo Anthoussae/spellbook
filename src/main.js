@@ -2,6 +2,9 @@
 
 //add small icons for relic buffs.
 
+//make a concede button that transitions to an end-game 'you lose' screen with stats. When you close that screen, bunny screen transition plays and takes you back to the main menu.
+//the above you lose screen is also displayed when you lose.
+
 //make interesting relics that modify gameplay substantially.
 //relic: whenever you add a card to your deck, gain +5 max HP.
 //relic: whenever you play a socketed card, dispel an enemy buff.
@@ -108,10 +111,12 @@ import { insertCard } from "./state/insertCard";
 import { findObjectInArray } from "./util/findObjectInArray";
 import { startDifficultySelection } from "./state/screenChanges/startDifficultySelection";
 import { populateMythicRewards } from "./state/startup/populateMythicRewards";
+import { advanceScreen } from "./state/screenChanges/advanceScreen";
 
 class Game {
   constructor() {
     this.state = {
+      keys: 1,
       deck: [],
       combatDeck: [],
       hand: [],
@@ -139,7 +144,7 @@ class Game {
       combatHandSize: 0,
       mulligans: 1,
       combatMulligans: 0,
-      currentScreen: "pathSelection",
+      currentScreen: "startScreen",
       previousScreen: null,
       presentedOptions: [],
       currentEnemy: null,
@@ -192,6 +197,7 @@ class Game {
 
   resetState() {
     this.state = {
+      keys: 1,
       deck: [],
       combatDeck: [],
       hand: [],
@@ -219,7 +225,7 @@ class Game {
       combatHandSize: 0,
       mulligans: 1,
       combatMulligans: 0,
-      currentScreen: "pathSelection",
+      currentScreen: "startScreen",
       previousScreen: null,
       presentedOptions: [],
       currentEnemy: null,
@@ -282,7 +288,7 @@ class Game {
     // this.state = insertRelic(this.state, "Quill");
 
     // Begin game
-    startDifficultySelection(this.state);
+    advanceScreen(this.state);
   }
 }
 

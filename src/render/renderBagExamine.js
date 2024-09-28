@@ -4,14 +4,16 @@ import { resumeGame } from "./render";
 import { renderHud } from "./renderHud";
 
 export function renderBagExamine(state) {
-  let bag = state.relicPool;
+  let bag = state.relicBelt;
   let outputDiv = document.getElementById("bagExamineOutput");
   // document.getElementById("blueCarpetBackground").style.display = "block";
 
   // Display bag items
-  outputDiv.style.display = "grid";
-  outputDiv.style.gridTemplateColumns = "repeat(7, 1fr)";
-  outputDiv.style.gap = "10px";
+  if (bag.length > 6) {
+    outputDiv.style.display = "grid";
+    outputDiv.style.gridTemplateColumns = "repeat(7, 1fr)";
+    outputDiv.style.gap = "10px";
+  }
 
   let html = "";
   bag.forEach((relic, index) => {
@@ -60,7 +62,7 @@ function renderRelic(
 
   // Handle tooltip text for wands
   if (supertype === "wand" && bunnyAdd !== null) {
-    let bunnyAddColor = bunnyAdd > 0 ? "green" : "red";
+    let bunnyAddColor = bunnyAdd > 0 ? "lightgreen" : "red";
     tooltipText = `When you cast, gain <span style="color: ${bunnyAddColor};">${bunnyAdd}</span> bonus bunnies.`;
   }
 

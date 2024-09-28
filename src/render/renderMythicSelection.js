@@ -1,7 +1,7 @@
 "use strict";
 import { relicImages } from "./render";
 import { pickupRelic } from "../state/pickupRelic";
-import { advanceScreen } from "../state/advanceScreen";
+import { advanceScreen } from "../state/screenChanges/advanceScreen";
 
 export function renderMythicSelection(state) {
   // Show the carpet background

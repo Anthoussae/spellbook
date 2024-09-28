@@ -14,6 +14,7 @@ export const cardPool = [
     rarity: "special",
     type: "card",
     characterClass: "none",
+    color: "basic",
   },
   {
     name: "Pet Brick",
@@ -23,6 +24,7 @@ export const cardPool = [
     type: "card",
     rarity: "special",
     characterClass: "none",
+    color: "basic",
   },
   // level 0 (starter deck)
   {
@@ -36,6 +38,7 @@ export const cardPool = [
     rarity: "common",
     type: "card",
     characterClass: "none",
+    color: "basic",
   },
   {
     name: "Ponder",
@@ -48,9 +51,10 @@ export const cardPool = [
     rarity: "common",
     type: "card",
     characterClass: "none",
+    color: "basic",
   },
   {
-    name: "Bunnydouble",
+    name: "Double Bunnies",
     imgName: "bunnydouble",
     level: 0,
     ink: 3,
@@ -60,6 +64,7 @@ export const cardPool = [
     type: "card",
     trigger: "cast",
     characterClass: "none",
+    color: "basic",
   },
   {
     name: "Inkswell",
@@ -72,6 +77,7 @@ export const cardPool = [
     trigger: "instant",
     type: "card",
     characterClass: "base",
+    color: "basic",
   },
   // level 1
   {
@@ -85,6 +91,7 @@ export const cardPool = [
     type: "card",
     trigger: "cast",
     characterClass: "none",
+    color: "basic",
   },
   {
     name: "Triple Bunnies",
@@ -97,6 +104,7 @@ export const cardPool = [
     type: "card",
     trigger: "cast",
     characterClass: "none",
+    color: "basic",
   },
   {
     name: "Echoing Splash",
@@ -110,6 +118,7 @@ export const cardPool = [
     type: "card",
     trigger: "cast",
     characterClass: "none",
+    color: "basic",
   },
   {
     name: "Time Warp",
@@ -123,6 +132,7 @@ export const cardPool = [
     type: "card",
     trigger: "cast",
     characterClass: "none",
+    color: "basic",
   },
   {
     name: "Time Flip",
@@ -136,6 +146,7 @@ export const cardPool = [
     type: "card",
     characterClass: "none",
     trigger: "cast",
+    color: "basic",
   },
   {
     name: "Scythe",
@@ -148,6 +159,7 @@ export const cardPool = [
     characterClass: "none",
     type: "card",
     rarity: "rare",
+    color: "basic",
   },
   {
     name: "Sickle",
@@ -160,6 +172,7 @@ export const cardPool = [
     characterClass: "none",
     type: "card",
     rarity: "common",
+    color: "basic",
   },
   {
     name: "Golden Bunny",
@@ -174,6 +187,7 @@ export const cardPool = [
     type: "card",
     rarity: "mythic",
     flavor: "Adds bunnies equal to 10% of your gold",
+    color: "basic",
   },
   {
     name: "Conjure Pages",
@@ -186,6 +200,7 @@ export const cardPool = [
     characterClass: "none",
     type: "card",
     rarity: "uncommon",
+    color: "basic",
   },
   // {
   //   name: "Dispel",
@@ -198,6 +213,7 @@ export const cardPool = [
   //   type: "card",
   //   rarity: "common",
   //   trigger: "instant",
+  // color: "basic",
   // },
   // {
   //   name: "Mass Dispel",
@@ -210,6 +226,7 @@ export const cardPool = [
   //   type: "card",
   //   rarity: "uncommon",
   //   trigger: "cast",
+  //color: "basic",
   // },
 ];
 

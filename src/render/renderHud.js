@@ -9,9 +9,10 @@ const hudEventRemovers = [];
 //seems to be assigning click handlers to the bag and deck buttons multiple times.
 export function renderHud(oldState) {
   let state = { ...oldState };
-  console.log(new Error().stack);
+  // console.log(new Error().stack);
   removeAllHudEventHandlers();
   renderGold(state);
+  renderKeys(state);
   renderHp(state);
   renderLevel(state);
   renderDeckButton(state);
@@ -22,6 +23,13 @@ function renderLevel(state) {
   let levelDivs = document.querySelectorAll(".level");
   levelDivs.forEach((levelDiv) => {
     levelDiv.innerHTML = "Level: " + state.level;
+  });
+}
+
+function renderKeys(state) {
+  let keysDivs = document.querySelectorAll(".keys");
+  keysDivs.forEach((keysDiv) => {
+    keysDiv.innerHTML = "Keys: " + state.keys;
   });
 }
 
@@ -133,7 +141,7 @@ function renderBagButton(state) {
   const isBagExamine = state.currentScreen === "bagExamine";
 
   // Set background color based on screen
-  bagButton.style.backgroundColor = isBagExamine ? "darkgreen" : "";
+  bagButton.style.backgroundColor = isBagExamine ? "darkblue" : "";
   bagText.innerHTML = isBagExamine
     ? "Exit"
     : `Relics: (${state.relicBelt.length})`;

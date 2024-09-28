@@ -34,8 +34,9 @@
       <div id="mythicSelection" class="screen" style="display: none">
         <div class="level"></div>
         <div class="hud">
-          <div class="hp"></div>
           <div class="gold"></div>
+          <div class="keys"></div>
+          <div class="hp"></div>
         </div>
         <div class="banner" id="mythicBannerElement">
           Choose a mythic artefact:
@@ -65,10 +66,11 @@
       </div>
       <!---------------- Deck Examine ----------------->
       <div id="deckExamine" class="screen" display="none">
-        <div class="level"></div>
+        <div id="deckExamineLevel" class="level"></div>
         <div class="hud">
-          <div class="hp"></div>
-          <div class="gold"></div>
+          <div id="deckExamineGold" class="gold"></div>
+          <div class="keys"></div>
+          <div id="deckExamineHp" class="hp"></div>
         </div>
         <div class="banner" id="deckBannerElement">Deck</div>
         <div id="greenCarpetBackground" class="green-carpet-background"></div>
@@ -99,8 +101,9 @@
       <div id="bagExamine" class="screen" display="none">
         <div class="level"></div>
         <div class="hud">
-          <div class="hp"></div>
           <div class="gold"></div>
+          <div class="keys"></div>
+          <div class="hp"></div>
         </div>
         <div class="banner" id="bagBannerElement">Relics</div>
         <div id="blueCarpetBackground" class="blue-carpet-background"></div>
@@ -127,7 +130,38 @@
           <button class="smallBtn" id="bag-resume-button">Resume Game</button>
         </div>
       </div>
+      <!-------------------------------Path Selection container---------------------------->
 
+      <div id="pathSelection" class="screen" style="display: none">
+        <div class="level"></div>
+        <div class="hud">
+          <div class="gold"></div>
+          <div class="keys"></div>
+          <div class="hp"></div>
+        </div>
+        <div class="banner" id="pathBannerElement">Choose a Path:</div>
+        <!-- <div class="output" id="pathSelectionOutput"></div> -->
+        <div id="deckElement">
+          <div class="deckContainer">
+            <img
+              src="data/imgs/displayElements/deck.png"
+              alt="Deck Image"
+              class="deckImage"
+            />
+            <span class="deckText"></span>
+          </div>
+        </div>
+        <div id="bagElement">
+          <div class="bagContainer" id="bagBtn">
+            <img
+              src="data/imgs/displayElements/backpack.png"
+              alt="Bag Image"
+              class="bagImage"
+            />
+            <span class="bagText"></span>
+          </div>
+        </div>
+      </div>
       <!-------------------------- Test Zone ---------------------------------------->
 
       <div id="testScreen" class="screen" style="display: none">

@@ -30,7 +30,7 @@ export const relicImages = {
   encyclopaedia: require("../data/imgs/relics/encyclopaedia.png"),
   golfBall: require("../data/imgs/relics/golfBall.png"),
 };
-const animationImages = {
+export const animationImages = {
   poof: require("../data/imgs/displayElements/poof.png"),
   bigPoof: require("../data/imgs/displayElements/bigPoof.png"),
   tinyPoof: require("../data/imgs/displayElements/tinyPoof.png"),
@@ -38,7 +38,7 @@ const animationImages = {
   leapingbunnyFront: require("../data/imgs/displayElements/leapingbunnyFront.png"),
   leapingBunnyBack: require("../data/imgs/displayElements/leapingBunnyBack.png"),
 };
-const displayElementImages = {
+export const displayElementImages = {
   backpackImage: require("../data/imgs/displayElements/backpack.png"),
   mythicCarpet: require("../data/imgs/displayElements/mythicCarpet.png"),
   greenCarpet: require("../data/imgs/displayElements/greenCarpet.png"),
@@ -47,7 +47,7 @@ const displayElementImages = {
   page: require("../data/imgs/displayElements/page.png"),
   senjafudaFrame: require("../data/imgs/displayElements/senjafudaFrame.png"),
 };
-const gemImages = {
+export const gemImages = {
   amber: require("../data/imgs/gems/amber.png"),
   aquamarine: require("../data/imgs/gems/aquamarine.png"),
   garnet: require("../data/imgs/gems/garnet.png"),
@@ -56,7 +56,7 @@ const gemImages = {
   tourmaline: require("../data/imgs/gems/tourmaline.png"),
   zircon: require("../data/imgs/gems/zircon.png"),
 };
-const cardBacks = {
+export const cardBacks = {
   basic: require("../data/imgs/cardBacks/basic.png"),
   blue: require("../data/imgs/cardBacks/blue.png"),
   cyan: require("../data/imgs/cardBacks/cyan.png"),
@@ -67,7 +67,7 @@ const cardBacks = {
   white: require("../data/imgs/cardBacks/white.png"),
   yellow: require("../data/imgs/cardBacks/yellow.png"),
 };
-const potions = {
+export const potions = {
   bunnyJar: require("../data/imgs/potions/bunnyJar.png"),
   characterPotion: require("../data/imgs/potions/characterPotion.png"),
   greaterGreenPotion: require("../data/imgs/potions/greaterGreenPotion.png"),
@@ -78,7 +78,7 @@ const potions = {
   mediumPurplePotion: require("../data/imgs/potions/mediumPurplePotion.png"),
   squidInk: require("../data/imgs/potions/squidInk.png"),
 };
-const spellIcons = {
+export const spellIcons = {
   bunnydouble: require("../data/imgs/spellIcons/bunnydouble.png"),
   bunnyfluff: require("../data/imgs/spellIcons/bunnyfluff.png"),
   bunnymancy: require("../data/imgs/spellIcons/bunnymancy.png"),
@@ -102,6 +102,7 @@ import { renderDeckExamine } from "./renderDeckExamine";
 //renders
 import { renderHud } from "./renderHud";
 import { renderMythicSelection } from "./renderMythicSelection";
+import { renderPathSelection } from "./renderPathSelection";
 
 export function render(oldState) {
   let state = { ...oldState };
@@ -119,6 +120,10 @@ export function render(oldState) {
     renderDeckExamine(state);
   } else if (state.currentScreen === "bagExamine") {
     renderBagExamine(state);
+  } else if (state.currentScreen === "pathSelection") {
+    showScreen("pathSelection");
+    renderHud(state);
+    renderPathSelection(state);
   } else {
     throw "unknown screen: " + state.currentScreen;
   }
@@ -135,12 +140,6 @@ function hideAllScreens() {
 export function showScreen(screenId) {
   hideAllScreens(); // First hide all screens
   document.getElementById(screenId).style.display = "flex"; // Then show the desired screen
-}
-
-export function renderPathSelection(state) {
-  //currently a placeholder.
-  showScreen("deckExamine");
-  console.log("path selection", state);
 }
 
 export function resumeGame(state) {

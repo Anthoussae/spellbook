@@ -4,6 +4,8 @@ import { checkDuplicates } from "../util/checkDuplicates";
 import { repeatAction } from "../util/repeatAction";
 import { pickN } from "../util/pickN";
 
+//this function should be overhauled. For now it is functional, but it is not balanced.
+
 export function populateOptions(oldState) {
   let state = { ...oldState };
   const rarities = state.rewardProbabilities;

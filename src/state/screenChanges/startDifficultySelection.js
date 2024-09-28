@@ -1,6 +1,7 @@
 "use strict";
 import { render } from "../../render/render";
 import { startMythicSelection } from "./startMythicSelection";
+import { advanceScreen } from "./advanceScreen";
 
 //this function is mixed, including some rendering features.
 //it is also bugged, as the difficulty buttons call the "render" function twice, with a delay. This is causing problems elsewhere and should be fixed as a priority.
@@ -34,7 +35,7 @@ export function startDifficultySelection(oldState) {
         console.log(
           "about to call startMythicSelection() from startDifficultySelection()"
         );
-        startMythicSelection(state); //when start mythic is here,
+        advanceScreen(state); //when start mythic is here,
         bunnyOverlay.removeEventListener("animationend", onAnimationEnd);
       };
       bunnyOverlay.addEventListener("animationend", onAnimationEnd);
@@ -58,9 +59,16 @@ function applyDifficultyLevel(difficulty, oldState) {
     state.previousGold = state.gold;
     state.previousMaxHp = state.maxHp;
     state.previousHp = state.hp;
-    // state.previousGold = 150;
-    // state.previousMaxHp = 150;
-    // state.previousHp = 150;
+    state.keys = state.keys + 1;
+  }
+  if (difficulty === "hard") {
+    state.maxHp = state.maxHp - 50;
+    state.hp = state.hp - 50;
+    state.gold = state.gold - 50;
+    state.previousGold = state.gold;
+    state.previousMaxHp = state.maxHp;
+    state.previousHp = state.hp;
+    state.keys = state.keys - 1;
   }
   console.log(state);
   return state;

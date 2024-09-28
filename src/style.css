@@ -30,26 +30,26 @@ body {
   position: absolute;
   background-color: rgba(255, 255, 255, 0); /* Semi-transparent background */
   box-sizing: border-box;
-  font-size: 2vw;
+  font-size: 1.2vw;
   color: #333; /* Dark text color */
 }
-.level {
+.hud {
   border-radius: 25px;
   padding: 4px; /* Adds some padding around the images */
   background-color: var(--containerBackgroundColor);
-  width: 10vw; /* Slightly smaller width */
-  height: 6vh; /* Slightly smaller height */
-  top: 5vh; /* Move closer to the center vertically */
+  width: 9vw; /* Slightly smaller width */
+  height: 9.5vh; /* Slightly smaller height */
+  top: 4vh; /* Move closer to the center vertically */
   left: 4vw; /* Move closer to the center horizontally */
 }
 
-.hud {
+.level {
   /*should always be slightly larger than contents*/
   border-radius: 25px;
   padding: 4px; /* Adds some padding around the images */
   background-color: var(--containerBackgroundColor);
-  width: 14vw; /* Slightly smaller width */
-  height: 11vh; /* Slightly smaller height */
+  width: 8vw; /* Slightly smaller width */
+  height: 4vh; /* Slightly smaller height */
   top: 4vh; /* Move closer to the center vertically */
   right: 4vw; /* Move closer to the center horizontally */
 }
@@ -57,20 +57,25 @@ body {
 .banner {
   background-color: var(--containerBackgroundColor);
   width: 40vw; /* Slightly smaller width */
-  height: 8vh; /* Slightly smaller height */
+  height: 7.3vh; /* Slightly smaller height */
   top: 4vh; /* Move closer to the center vertically */
   left: calc(47vw - 16.5vw); /* Centered horizontally, adjusted for new width */
   font-size: 3vw;
   border-radius: 25px;
 }
 
-.output {
-  background-color: var(--containerBackgroundColor);
-  width: 70vw; /* Slightly smaller width */
-  height: calc(60vh - 8vh); /* Slightly smaller height */
-  top: calc(21vh + 8vh); /* Adjusted to align with the smaller top row */
-  left: 14vw; /* Centered horizontally */
+#deckBannerElement {
+  /* text should be dark green, banner should be slightly greener*/
+  color: #333; /* Dark text color */
+  background-color: rgba(0, 128, 0, 0.4); /* Slightly transparent green */
 }
+
+#bagBannerElement {
+  /* text should be dark blue, banner should be slightly bluer*/
+  color: #160042; /* Dark text color */
+  background-color: rgba(0, 0, 128, 0.4); /* Slightly transparent blue */
+}
+
 /* deck icon */
 .deckContainer {
   position: fixed;
@@ -106,14 +111,8 @@ body {
 /*deckInspect*/
 #deckExamine {
   display: none; /* Hide by default */
-  position: absolute; /* Remove from normal document flow */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0); /* Example styling for an overlay */
-  z-index: 10; /* Ensure it appears above other content when displayed */
 }
+
 /*bag inspect*/
 #bagExamine {
   display: none; /* Hide by default */
@@ -132,6 +131,8 @@ body {
   bottom: 0.2in;
   display: inline-block;
   cursor: pointer;
+  /*rounded edges*/
+  border-radius: 25px;
 }
 .bagImage {
   width: 80%; /* Adjust width as needed */
@@ -247,7 +248,6 @@ body {
   background-color: transparent;
   position: absolute;
   display: flex;
-  justify-content: center; /* Centers the images horizontally */
   align-items: center; /* Centers the images vertically */
   transform: scale(1.2); /* Scales the images slightly */
   padding: 10px;
@@ -558,14 +558,23 @@ button {
 }
 
 /* cards */
-
+/*currently causing the deck icon to jump. */
 #deckExamineOutput {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 1%; /* Space between cards */
+  display: flex; /*not culprit of deck jump */
+  flex-wrap: wrap; /*not culprit of deck jump */
+  align-items: flex-start; /*not culprit of deck jump */
+  justify-content: space-between; /*not culprit of deck jump */
+  gap: 3%; /* Space between cards */ /*not culprit of deck jump */
+  font-size: 1.5vw; /*not culprit of deck jump */
 }
 
 .card:hover .tooltip {
   visibility: visible;
+}
+
+/* relic examine */
+
+#bagExamineOutput {
+  /*if less than 7 items, center them*/
+  justify-content: center;
 }
