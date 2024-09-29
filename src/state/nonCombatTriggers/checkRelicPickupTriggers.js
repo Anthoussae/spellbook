@@ -1,4 +1,5 @@
 "use strict";
+
 export function checkRelicPickupTriggers(oldState, selectedRelic) {
   let state = { ...oldState };
   let relic = selectedRelic;
@@ -6,6 +7,7 @@ export function checkRelicPickupTriggers(oldState, selectedRelic) {
     //hydrangea
     if (relic.bonusMaxHp) {
       state.maxHp = state.maxHp + relic.bonusMaxHp;
+      state.hp = state.hp + relic.bonusMaxHp;
     }
     // golden egg
     else if (relic.gold) {

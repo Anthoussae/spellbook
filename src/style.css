@@ -127,7 +127,7 @@ body {
 /* bag icon */
 .bagContainer {
   position: fixed;
-  right: 0.2in;
+  right: 0.6in;
   bottom: 0.2in;
   display: inline-block;
   cursor: pointer;
@@ -554,7 +554,7 @@ button {
 .relic-fade {
   transform: scale(1.75); /* Increase size by 75% */
   opacity: 0; /* Fade out */
-  transition: transform 3s ease, opacity 3s ease; /* Increase transition duration for debugging */
+  transition: transform 1.5s ease, opacity 1.5s ease; /* Increase transition duration for debugging */
 }
 
 /* cards */

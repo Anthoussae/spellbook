@@ -96,6 +96,7 @@ import { rewardPool } from "./data/rewardPool";
 import { classPool } from "./data/classPool";
 import { challengePool } from "./data/challengePool";
 import { mythicPool } from "./data/mythicPool";
+import { bossPool } from "./data/bossPool";
 
 //utility functions
 import { startPathSelection } from "./state/screenChanges/startPathSelection";
@@ -123,6 +124,7 @@ class Game {
       graveyard: [],
       relicBelt: [],
       spellBook: [],
+      bossPool: bossPool,
       pages: 3,
       combatPages: 0,
       relicPool: relicPool,
@@ -204,6 +206,7 @@ class Game {
       graveyard: [],
       relicBelt: [],
       spellBook: [],
+      bossPool: bossPool,
       pages: 3,
       combatPages: 0,
       relicPool: relicPool,

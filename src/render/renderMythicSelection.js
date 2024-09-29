@@ -2,6 +2,7 @@
 import { relicImages } from "./render";
 import { pickupRelic } from "../state/pickupRelic";
 import { advanceScreen } from "../state/screenChanges/advanceScreen";
+import { renderRelic } from "./renderRelic";
 
 export function renderMythicSelection(state) {
   // Show the carpet background
@@ -16,16 +17,15 @@ export function renderMythicSelection(state) {
   let html = "";
   options.forEach((relic, index) => {
     let imagePath = relicImages[relic.imgName];
-    html += `
-      <div class="tooltip relic-container" style="position: relative;">
-        <img src="${imagePath}" alt="${relic.name}" class="relic-image" data-index="${index}">
-        <span class="tooltiptext">
-          <strong style="font-size: 22px;">${relic.name}</strong><br>
-          <em>-------------------</em><br>
-          <em>${relic.effect}</em>
-        </span>
-      </div>
-    `;
+    html += renderRelic(
+      imagePath,
+      relic.name,
+      index,
+      relic.effect,
+      relic.supertype,
+      relic.bunnyAdd,
+      relic.rarity
+    );
   });
 
   // Insert the HTML content into the outputDiv
@@ -42,8 +42,9 @@ export function renderMythicSelection(state) {
       const clickedIndex = imgElem.dataset.index;
       const selectedRelic = state.mythicRewards[clickedIndex];
 
-      // Log which relic was clicked
-      console.log(`You clicked on ${selectedRelic.name}`, selectedRelic);
+      // Hide the tooltip of the clicked relic immediately
+      const tooltip = imgElem.parentElement.querySelector(".tooltiptext");
+      tooltip.style.opacity = "0"; // Optional: Use display: none if you want it to disappear immediately without fading
 
       // Add a slight delay before starting the non-selected relic animations
       setTimeout(() => {
@@ -79,7 +80,6 @@ export function renderMythicSelection(state) {
 }
 
 // Animate the selected relic image towards the bag
-
 export function animateRelicToBag(relicElem, bagElem, state, selectedRelic) {
   const relicRect = relicElem.getBoundingClientRect();
   const bagRect = bagElem.getBoundingClientRect();

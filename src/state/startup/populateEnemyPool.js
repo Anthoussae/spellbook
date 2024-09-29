@@ -2,7 +2,7 @@
 
 export function populateEnemyPool() {
   const enemyPool = [];
-  for (let i = 0; i < 200; i++) {
+  for (let i = 0; i < 300; i++) {
     const enemy = {
       hp: Math.max(i - 5, 5),
       name: "",
@@ -12,6 +12,10 @@ export function populateEnemyPool() {
       screen: "combat",
       rarity: "common",
       supertype: "enemy",
+      //monsterClass should randomly be one of "elite", "enchanted", or "basic"
+      monsterClass: ["elite", "enchanted", "basic"][
+        Math.floor(Math.random() * 3)
+      ],
     };
     enemy.name = generateRandomName() + " (" + enemy.hp + ")";
     enemyPool.push(enemy);
