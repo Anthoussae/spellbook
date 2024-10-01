@@ -57,6 +57,7 @@ export const gemImages = {
   zircon: require("../data/imgs/gems/zircon.png"),
 };
 export const cardBacks = {
+  reverse: require("../data/imgs/cardBacks/reverse.png"),
   basic: require("../data/imgs/cardBacks/basic.png"),
   blue: require("../data/imgs/cardBacks/blue.png"),
   cyan: require("../data/imgs/cardBacks/cyan.png"),
@@ -93,6 +94,14 @@ export const spellIcons = {
   timeFlip: require("../data/imgs/spellIcons/timeFlip.png"),
   timeWarp: require("../data/imgs/spellIcons/timeWarp.png"),
   tripleBunnies: require("../data/imgs/spellIcons/tripleBunnies.png"),
+};
+export const paths = {
+  rest: require("../data/imgs/pathOfuda/rest.png"),
+  shop: require("../data/imgs/pathOfuda/shop.png"),
+  combat: require("../data/imgs/pathOfuda/combat.png"),
+  highlightedRest: require("../data/imgs/pathOfuda/highlightedRest.png"),
+  highlightedCombat: require("../data/imgs/pathOfuda/highlightedCombat.png"),
+  highlightedShop: require("../data/imgs/pathOfuda/highlightedShop.png"),
 };
 
 import { renderBagExamine } from "./renderBagExamine";

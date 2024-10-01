@@ -117,6 +117,7 @@ import { advanceScreen } from "./state/screenChanges/advanceScreen";
 class Game {
   constructor() {
     this.state = {
+      lockChance: 0.3,
       keys: 1,
       deck: [],
       combatDeck: [],
@@ -199,6 +200,7 @@ class Game {
 
   resetState() {
     this.state = {
+      lockChance: 0.5,
       keys: 1,
       deck: [],
       combatDeck: [],

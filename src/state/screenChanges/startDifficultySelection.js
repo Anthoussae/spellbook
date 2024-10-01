@@ -60,6 +60,7 @@ function applyDifficultyLevel(difficulty, oldState) {
     state.previousMaxHp = state.maxHp;
     state.previousHp = state.hp;
     state.keys = state.keys + 1;
+    state.lockChance = 0.1;
   }
   if (difficulty === "hard") {
     state.maxHp = state.maxHp - 50;
@@ -69,6 +70,7 @@ function applyDifficultyLevel(difficulty, oldState) {
     state.previousMaxHp = state.maxHp;
     state.previousHp = state.hp;
     state.keys = state.keys - 1;
+    state.lockChance = 0.7;
   }
   console.log(state);
   return state;

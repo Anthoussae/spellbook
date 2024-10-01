@@ -16,6 +16,7 @@ export function populatePathOptions(oldState) {
     enemyPool,
     shopPityTimer,
     rewardProbabilities,
+    lockChance,
   } = state;
   const bossLevels = [10, 20, 30];
   const restBanLevels = [0, 1, 2, 3, 10, 11, 12, 13, 20, 21, 22, 23];
@@ -155,4 +156,52 @@ function weightedRandomSelection(options, probabilities) {
 // Helper function to filter pool by level
 function filterPoolByLevel(pool, level) {
   return pool.filter((option) => option.level === level);
+}
+
+export function applyLocks(options, oldState) {
+  // Copy the options array and state object
+  let availableOptions = [...options];
+  let state = { ...oldState };
+  let lockedOptions = [];
+  let lockChance = state.lockChance;
+
+  // Helper function to apply a lock based on a chance
+  function shouldLock(chance) {
+    return Math.random() < chance;
+  }
+
+  // One random option is always unlocked
+  let unlockedIndex = Math.floor(Math.random() * availableOptions.length);
+
+  // Initialize all options with a "locked" property set to false initially
+  availableOptions.forEach((option, index) => {
+    option.locked = false;
+    if (index !== unlockedIndex) {
+      lockedOptions.push(option);
+    }
+  });
+
+  // Sort options by priority: Rest > Shop > Others
+  let sortedOptions = availableOptions.sort((a, b) => {
+    if (a.name === "Rest") return -1;
+    if (b.name === "Rest") return 1;
+    if (a.name === "Shop") return -1;
+    if (b.name === "Shop") return 1;
+    return 0;
+  });
+
+  // Apply lock to the second option based on lockChance
+  if (shouldLock(lockChance)) {
+    sortedOptions[1].locked = true;
+  }
+
+  // Apply lock to the third option based on adjusted lockChance
+  let thirdLockChance = sortedOptions[1].locked
+    ? lockChance / 4
+    : lockChance / 2;
+  if (shouldLock(thirdLockChance)) {
+    sortedOptions[2].locked = true;
+  }
+
+  return availableOptions;
 }

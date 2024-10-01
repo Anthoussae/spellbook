@@ -2,7 +2,7 @@
 :root {
   --baseBackgroundColor: #f7ebe0;
   --containerBackgroundColor: rgba(248, 215, 185, 0.4);
-  --relicStyling: brightness(1.3) contrast(0.7) saturate(0.5);
+  --relicStyling: brightness(1.4) contrast(0.7) saturate(0.7);
 }
 
 html,
@@ -577,4 +577,32 @@ button {
 #bagExamineOutput {
   /*if less than 7 items, center them*/
   justify-content: center;
+}
+
+/*path displays */
+
+#pathSelectionOutput {
+  display: flex;
+  justify-content: space-around; /* or 'space-between', 'flex-start', etc. */
+  overflow: hidden; /* Ensure that if the image grows, it doesn't affect the layout */
+}
+.path-option {
+  margin: 0 10px;
+  text-align: center;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  overflow: hidden; /* Ensure that if the image grows, it doesn't affect the layout */
+}
+
+.path-option:hover {
+  transform: scale(1.1); /* Increase size by 10% */
+}
+
+.path-image {
+  width: 100%; /* Ensure image scales to fill its container */
+  height: auto; /* Maintain aspect ratio */
+  transition: opacity 0.3s ease;
+}
+
+.path-image.fade {
+  opacity: 0;
 }

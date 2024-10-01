@@ -12,6 +12,7 @@ export function populateEnemyPool() {
       screen: "combat",
       rarity: "common",
       supertype: "enemy",
+      pathImgName: "combat",
       //monsterClass should randomly be one of "elite", "enchanted", or "basic"
       monsterClass: ["elite", "enchanted", "basic"][
         Math.floor(Math.random() * 3)
