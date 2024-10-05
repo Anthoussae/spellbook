@@ -2,7 +2,6 @@
 import { showScreen, resumeGame } from "./render";
 import { renderHud } from "./renderHud";
 import { renderCard } from "./renderCard";
-
 export function renderDeckExamine(state) {
   const deck = state.currentScreen === "combat" ? state.combatDeck : state.deck;
   const output = document.getElementById("deckExamineOutput");
@@ -20,12 +19,23 @@ export function renderDeckExamine(state) {
     state.previousScreen = "bagExamine";
   }
 
+  // Change background color during deck examine
+  document.documentElement.style.setProperty(
+    "--baseBackgroundColor",
+    "rgba(200, 255, 200, 0.2)" // Slightly greenish color
+  );
+
   // Display deck
   let html = "";
   deck.forEach((card, index) => {
     html += renderCard(card, index);
   });
   output.innerHTML = html;
+
+  //RESIZING CARDS BASED ON NUMBER
+  // if (deck.length < 6) {
+  //   output.style.transform = "scale(2.5)";
+  // }
 
   state.currentScreen = "deckExamine";
   renderHud(state);
@@ -36,6 +46,13 @@ export function renderDeckExamine(state) {
   // Clear any existing listener, referencing the named function directly
   const resumeClick = () => {
     resumeGame(state);
+
+    // Restore the background color when resuming the game
+    document.documentElement.style.setProperty(
+      "--baseBackgroundColor",
+      "#f7ebe0" // Reset to the original color
+    );
+
     resumeButton.removeEventListener("click", resumeClick);
   };
   resumeButton.addEventListener("click", resumeClick, { once: true });

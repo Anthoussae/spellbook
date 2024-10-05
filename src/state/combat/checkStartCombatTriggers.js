@@ -1,4 +1,3 @@
-import { animate } from "../../render/animate";
 import { sleep } from "../../util/sleep";
 
 export function checkStartCombatTriggers(oldState) {
@@ -11,27 +10,22 @@ export function checkStartCombatTriggers(oldState) {
       //wands
       if (relic.bunnyAdd) {
         state.bunnies = state.bunnies + relic.bunnyAdd;
-        animate(relic);
       }
       //inkpot
       if (relic.inkAdd) {
         state.combatInk = state.combatInk + relic.inkAdd;
-        animate(relic);
       }
       //quill
       if (relic.bonusHandsize) {
         state.combatHandSize = state.combatHandSize + relic.bonusHandsize;
-        animate(relic);
       }
       //page
       if (relic.bonusPages) {
         state.combatPages = state.combatPages + relic.bonusPages;
-        animate(relic);
       }
       //golf club
       if (relic.bonusMulligans) {
         state.combatMulligans = state.combatMulligans + relic.bonusMulligans;
-        animate(relic);
       }
 
       // Wait for 200ms before processing the next relic

@@ -193,6 +193,7 @@ class Game {
       bonusBunnies: 0,
       selectedReward: null,
       selectedCard: null,
+      selectedPath: null,
       shopWares: [],
       mythicRewards: [],
     };
@@ -276,6 +277,7 @@ class Game {
       bonusBunnies: 0,
       selectedReward: null,
       selectedCard: null,
+      selectedPath: null,
       shopWares: [],
       mythicRewards: [],
     };

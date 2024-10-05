@@ -99,13 +99,15 @@ export const paths = {
   rest: require("../data/imgs/pathOfuda/rest.png"),
   shop: require("../data/imgs/pathOfuda/shop.png"),
   combat: require("../data/imgs/pathOfuda/combat.png"),
-  highlightedRest: require("../data/imgs/pathOfuda/highlightedRest.png"),
-  highlightedCombat: require("../data/imgs/pathOfuda/highlightedCombat.png"),
-  highlightedShop: require("../data/imgs/pathOfuda/highlightedShop.png"),
+  highlightedrest: require("../data/imgs/pathOfuda/highlightedRest.png"),
+  highlightedcombat: require("../data/imgs/pathOfuda/highlightedCombat.png"),
+  highlightedshop: require("../data/imgs/pathOfuda/highlightedShop.png"),
+  locked: require("../data/imgs/pathOfuda/lockedOverlay.png"),
 };
 
 import { renderBagExamine } from "./renderBagExamine";
 import { renderDeckExamine } from "./renderDeckExamine";
+import { renderCombat } from "./renderCombat";
 //state functions
 
 //renders
@@ -133,6 +135,10 @@ export function render(oldState) {
     showScreen("pathSelection");
     renderHud(state);
     renderPathSelection(state);
+  } else if (state.currentScreen === "combat") {
+    showScreen("combat");
+    renderHud(state);
+    renderCombat(state);
   } else {
     throw "unknown screen: " + state.currentScreen;
   }

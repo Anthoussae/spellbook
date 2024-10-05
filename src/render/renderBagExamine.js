@@ -6,15 +6,9 @@ import { renderRelic } from "./renderRelic";
 
 export function renderBagExamine(state) {
   let bag = state.relicBelt;
+
   let outputDiv = document.getElementById("bagExamineOutput");
   // document.getElementById("blueCarpetBackground").style.display = "block";
-
-  // Display bag items
-  if (bag.length > 6) {
-    outputDiv.style.display = "grid";
-    outputDiv.style.gridTemplateColumns = "repeat(7, 1fr)";
-    outputDiv.style.gap = "10px";
-  }
 
   let html = "";
   bag.forEach((relic, index) => {
@@ -26,7 +20,8 @@ export function renderBagExamine(state) {
       relic.effect,
       relic.supertype,
       relic.bunnyAdd,
-      relic.rarity
+      relic.rarity,
+      "bag"
     );
   });
 

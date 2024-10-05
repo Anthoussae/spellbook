@@ -2,8 +2,8 @@ import { findObjectInArray } from "../util/findObjectInArray";
 import { transformRelic } from "./transformRelic";
 
 ("use strict");
-export function drinkPotion(state) {
-  state = { ...state };
+export function drinkPotion(oldState) {
+  let state = { ...oldState };
   let potion = state.selectedReward;
   if (potion.hpHeal) {
     state.hp = Math.min(state.hp + potion.hpHeal, state.maxHp);

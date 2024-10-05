@@ -4,18 +4,18 @@ export const pathPool = [
     name: "enemy",
     rarity: "common",
     type: "abstract",
-    pathImgName: "combat",
+    pathType: "combat",
   },
   {
     name: "Rest",
     rarity: "mythic",
     type: "concrete",
-    pathImgName: "rest",
+    pathType: "rest",
   },
   {
     name: "Shop",
     rarity: "mythic",
     type: "concrete",
-    pathImgName: "shop",
+    pathType: "shop",
   },
 ];

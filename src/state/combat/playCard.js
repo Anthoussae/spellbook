@@ -1,5 +1,5 @@
 "use strict";
-import { renderBattlefield } from "../../render/renderBattlefield";
+// import { renderBattlefield } from "../../render/renderBattlefield";
 import { castSpell } from "./castSpell";
 import { updateCastBunnies } from "./updateCastBunnies";
 
@@ -12,7 +12,7 @@ export function playCard(oldState, playedCard) {
   //ink cost check
   if (card.ink > state.combatInk) {
     alert("not enough ink!");
-    renderBattlefield(state);
+    // renderBattlefield(state);
     return state;
   } else if (card.ink <= state.combatInk) {
     state.combatInk = state.combatInk - card.ink;
@@ -23,7 +23,7 @@ export function playCard(oldState, playedCard) {
     card.trigger == "cast"
   ) {
     alert("no space on the spellbook");
-    renderBattlefield(state);
+    // renderBattlefield(state);
     return state;
   }
 
@@ -52,6 +52,6 @@ export function playCard(oldState, playedCard) {
     state = castSpell(state, card);
   }
   state = updateCastBunnies(state);
-  renderBattlefield(state);
+  // renderBattlefield(state);
   return state;
 }

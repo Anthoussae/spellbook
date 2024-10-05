@@ -11,14 +11,14 @@ export function populateEnemyPool() {
       type: "concrete",
       screen: "combat",
       rarity: "common",
-      supertype: "enemy",
-      pathImgName: "combat",
+      supertype: "enemy", //is this needed? Purge if posible, it's unclear.
+      pathType: "combat",
       //monsterClass should randomly be one of "elite", "enchanted", or "basic"
       monsterClass: ["elite", "enchanted", "basic"][
         Math.floor(Math.random() * 3)
       ],
     };
-    enemy.name = generateRandomName() + " (" + enemy.hp + ")";
+    enemy.name = generateRandomName();
     enemyPool.push(enemy);
   }
   return enemyPool;

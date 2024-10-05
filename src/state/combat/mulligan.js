@@ -1,7 +1,7 @@
 "use strict";
 import { drawXCards } from "./drawXCards";
 import { render } from "../../render/render";
-import { renderBattlefield } from "../../render/renderBattlefield";
+// import { renderBattlefield } from "../../render/renderBattlefield";
 import { renderButtons } from "../../render/renderButtons";
 
 export function mulligan(oldState) {
@@ -21,6 +21,6 @@ export function mulligan(oldState) {
 
   // Update the state object
   console.log(state.hand);
-  renderBattlefield(state);
+  // renderBattlefield(state);
   return state;
 }

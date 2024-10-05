@@ -1,96 +1,139 @@
 "use strict";
 import { paths } from "./render";
-
-// //
-// Currently, it's working OK (albeit a bit messy) but has four bugs.
-// Firstly, the screen "judders" when you hover over a path option. This is likely because it's adjusting size, or the highlightedOption image is a different size, or similar. I want to absolutely stop the "juddering". Any suggestions would be very helpful.
-// Secondly, when you hover over the image, it fades to invisible then reappears. I don't want that behavior.
-// THirdly, when you stop hovering over an image, it should retiurn to its default, non-highlighted image. Instead, it's staying as its highlighted version.
-// FOurtly, the top is slightly cropped when highlighted.
-// also for some reason rest is smaller than shop and fight
-// also, it's not forwards-compatible : if we add more paths, we need to add more logic to the renderPathSelection function.
-// consider rewriting!
-
-// the lock logic needs to be implemented - the image overlay, checking to see if an option is locked etc.
-// the onclick logic also needs to be imported and implemented.
+import { advanceScreen } from "../state/screenChanges/advanceScreen";
+import { renderHud } from "./renderHud";
 
 export function renderPathSelection(state) {
   let outputDiv = document.getElementById("pathSelectionOutput");
-  let options = state.pathPool;
-
+  let options = state.presentedOptions;
+  console.log("options", options);
   let html = "";
   options.forEach((path, index) => {
-    let imagePath = paths[path.pathImgName];
-    html += renderPath(imagePath, path.name, index);
+    const imagePath = paths[path.pathType];
+    const highlightedImagePath = paths["highlighted" + path.pathType];
+    const lockedOverlay = paths["locked"];
+    const hp = path.hp ? ` (${path.hp} HP)` : "";
+    html += renderPath(
+      imagePath,
+      highlightedImagePath,
+      path.name,
+      index,
+      path.pathType,
+      path.locked,
+      lockedOverlay,
+      hp
+    );
   });
   outputDiv.innerHTML = html;
 
-  // Add hover effects for each path
-  let pathOptions = document.querySelectorAll(".path-option");
-  pathOptions.forEach((option) => {
-    option.addEventListener("mouseenter", handleMouseEnter);
-    option.addEventListener("mouseleave", handleMouseLeave);
+  //add a click listener to each path option. the listener will set the current path to the selected path and advance the screen to the next screen.
+  const pathOptions = document.querySelectorAll(".path-option");
+  pathOptions.forEach((pathOption) => {
+    const referencedOption = state.presentedOptions[pathOption.dataset.index];
+    pathOption.addEventListener("click", () => {
+      state.selectedPath = structuredClone(referencedOption);
+      advanceScreen(state);
+    });
+  });
+
+  // Add event listeners to the locks
+  const lockedOverlays = document.querySelectorAll(".locked-overlay");
+  lockedOverlays.forEach((lockedOverlay) => {
+    const overlayIndex = parseInt(lockedOverlay.classList[1]);
+    console.log("overlayIndex", overlayIndex);
+    lockedOverlay.addEventListener("click", (event) => {
+      // Stop event propagation so clicking on the lock doesn't trigger the path selection click
+      event.stopPropagation();
+
+      if (state.keys > 0) {
+        // Remove the lock by hiding the overlay
+        lockedOverlay.style.display = "none";
+        document
+          .querySelector(`.path-optionlocked[data-index="${overlayIndex}"]`)
+          .classList.replace("path-optionlocked", "path-option");
+        //add the click function. This is a bit of a hack - testing.
+        document
+          .querySelector(`.path-option[data-index="${overlayIndex}"]`)
+          .addEventListener("click", () => {
+            state.selectedPath = structuredClone(
+              state.presentedOptions[overlayIndex]
+            );
+            advanceScreen(state);
+          });
+
+        // Decrease the number of keys
+        state.keys -= 1;
+
+        // Optionally, update the display of remaining keys (if needed in your UI)
+        renderHud(state);
+      } else {
+        //flash the hud red briefly if no keys are left
+        document.querySelector(".keys").style.transition =
+          "background-color 0.3s ease";
+        document.querySelector(".keys").style.backgroundColor =
+          "rgba(255, 0, 0, 0.5)"; // Flash red
+        setTimeout(() => {
+          document.querySelector(".keys").style.backgroundColor =
+            "rgba(1, 0, 0, -0.5)"; // Reset to original color
+        }, 500);
+        // Flash the lock red briefly if no keys are left
+        lockedOverlay.style.transition = "background-color 0.3s ease";
+        lockedOverlay.style.backgroundColor = "rgba(255, 0, 0, 0.5)"; // Flash red
+        setTimeout(() => {
+          lockedOverlay.style.backgroundColor = "rgba(1, 0, 0, -0.5)"; // Reset to original color
+        }, 500);
+      }
+    });
   });
 }
 
-function handleMouseEnter(event) {
-  let option = event.currentTarget;
-  let imgElement = option.querySelector("img");
-  let originalPath = imgElement.src;
-  let pathName = imgElement.alt; // Use the alt attribute to get the name
-
-  // Change image source to highlighted version
-  let highlightedPath = "";
-  if (pathName === "Rest") {
-    highlightedPath = paths.highlightedRest;
-  } else if (pathName === "Shop") {
-    highlightedPath = paths.highlightedShop;
-  } else {
-    highlightedPath = paths.highlightedCombat;
+function renderPath(
+  imagePath,
+  highlightedImagePath,
+  name,
+  index,
+  pathType,
+  locked,
+  lockedOverlay,
+  hp
+) {
+  let html = "";
+  if (!locked) {
+    html += `
+    <div class="path-option" data-index="${index}"> 
+      <div class="image-wrapper">`;
+  } else if (locked) {
+    html += `
+    <div class="path-optionlocked" data-index="${index}"> 
+      <div class="image-wrapper">`;
   }
-
-  console.log(highlightedPath);
-  imgElement.classList.add("fade");
-
-  setTimeout(() => {
-    imgElement.src = highlightedPath;
-    imgElement.classList.remove("fade");
-  }, 300);
-}
-
-function handleMouseLeave(event) {
-  let option = event.currentTarget;
-  let imgElement = option.querySelector("img");
-  let pathName = "";
-
-  if (option.name === "Rest") {
-    pathname = "rest";
-  } else if (option.name === "Shop") {
-    pathname = "shop";
-  } else {
-    pathname = "combat";
+  html += `<img class="path-image  ${pathType}" src="${imagePath}" alt="${name}" pathtype="${pathType}" />`;
+  if (locked) {
+    html += `<img class="locked-overlay ${index}" src="${lockedOverlay}"></div>`;
   }
-
-  // Revert back to the original image
-  let originalPath = paths[pathName];
-  imgElement.classList.add("fade");
-
-  setTimeout(() => {
-    imgElement.src = originalPath;
-    imgElement.classList.remove("fade");
-  }, 300); // Match the CSS transition duration (0.3s)
-}
-
-// Utility function to capitalize the first letter of the name for camelCase.
-function capitalizeFirstLetter(name) {
-  return name.charAt(0).toUpperCase() + name.slice(1);
-}
-
-function renderPath(imagePath, name, index) {
-  return `
-    <div class="path-image path-option" data-index="${index}"> 
-      <img class="path-image" src="${imagePath}" alt="${name}" />
-      <div class="path-name">${name}</div>
+  html += `<img class="path-image highlighted-image" src="${highlightedImagePath}" alt="${name}" style="display: none"/>`;
+  if (!pathType === "combat") html += `<div class="path-name">${name}</div>`;
+  else html += `<div class="path-name">${name}${hp}</div>`;
+  html += `</div>
     </div>
   `;
+  return html;
 }
+
+// //add a function on mouseover to highlight the image
+
+// function mouseOverPath(event) {
+//   const pathOption = event.target.closest(".path-option");
+//   const highlightedImage = pathOption.querySelector(".highlighted-image");
+//   const baseImage = pathOption.querySelector(".base-image");
+//   baseImage.style.display = "none";
+//   highlightedImage.style.display = "block";
+// }
+
+// function mouseOutPath(event) {
+//   const pathOption = event.target.closest(".path-option");
+//   const highlightedImage = pathOption.querySelector(".highlighted-image");
+//   const baseImage = pathOption.querySelector(".base-image");
+//   baseImage.style.display = "block";
+//   highlightedImage.style.display = "none";
+// }

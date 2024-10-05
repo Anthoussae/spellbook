@@ -24,7 +24,8 @@ export function renderMythicSelection(state) {
       relic.effect,
       relic.supertype,
       relic.bunnyAdd,
-      relic.rarity
+      relic.rarity,
+      "mythic"
     );
   });
 
@@ -55,15 +56,6 @@ export function renderMythicSelection(state) {
               // Now apply the fade-out class
               elem.classList.add("relic-fade");
             });
-          }
-        });
-
-        imgElems.forEach((elem) => {
-          if (elem.dataset.index !== clickedIndex) {
-            const computedStyle = window.getComputedStyle(elem);
-            console.log(
-              `Relic index ${elem.dataset.index}: transform: ${computedStyle.transform}, opacity: ${computedStyle.opacity}`
-            );
           }
         });
       }, 10); // Small delay to ensure proper sequencing

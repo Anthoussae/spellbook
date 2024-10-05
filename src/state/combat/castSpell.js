@@ -1,6 +1,6 @@
 "use strict";
 import { drawXCards } from "./drawXCards";
-import { renderBattlefield } from "../../render/renderBattlefield";
+// import { renderBattlefield } from "../../render/renderBattlefield";
 
 export function castSpell(oldState, card) {
   let state = { ...oldState };
@@ -63,6 +63,6 @@ export function castSpell(oldState, card) {
       }
     }
   }
-  renderBattlefield(state);
+  // renderBattlefield(state);
   return state;
 }

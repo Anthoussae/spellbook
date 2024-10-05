@@ -38,7 +38,7 @@ body {
   padding: 4px; /* Adds some padding around the images */
   background-color: var(--containerBackgroundColor);
   width: 9vw; /* Slightly smaller width */
-  height: 9.5vh; /* Slightly smaller height */
+  height: 9.3vh; /* Slightly smaller height */
   top: 4vh; /* Move closer to the center vertically */
   left: 4vw; /* Move closer to the center horizontally */
 }
@@ -49,7 +49,7 @@ body {
   padding: 4px; /* Adds some padding around the images */
   background-color: var(--containerBackgroundColor);
   width: 8vw; /* Slightly smaller width */
-  height: 4vh; /* Slightly smaller height */
+  height: 3.5vh; /* Slightly smaller height */
   top: 4vh; /* Move closer to the center vertically */
   right: 4vw; /* Move closer to the center horizontally */
 }
@@ -57,10 +57,10 @@ body {
 .banner {
   background-color: var(--containerBackgroundColor);
   width: 40vw; /* Slightly smaller width */
-  height: 7.3vh; /* Slightly smaller height */
+  height: 6vh; /* Slightly smaller height */
   top: 4vh; /* Move closer to the center vertically */
   left: calc(47vw - 16.5vw); /* Centered horizontally, adjusted for new width */
-  font-size: 3vw;
+  font-size: 2.8vw;
   border-radius: 25px;
 }
 
@@ -76,18 +76,25 @@ body {
   background-color: rgba(0, 0, 128, 0.4); /* Slightly transparent blue */
 }
 
+#combatBannerElement {
+  /* text should be dark red, banner should be slightly redder*/
+  color: #800000; /* Dark text color */
+  background-color: rgba(128, 0, 0, 0.4); /* Slightly transparent red */
+}
+
 /* deck icon */
 .deckContainer {
   position: fixed;
-  left: 0.25in;
-  bottom: 0.25in;
+  left: 0.1in;
+  bottom: 0.1in;
   display: inline-block;
   cursor: pointer;
+  width: 25vh; /* Adjust width as needed */
   /*rounded edges*/
-  border-radius: 25px;
+  border-radius: 200px;
 }
 .deckImage {
-  width: 100%; /* Adjust width as needed */
+  width: 80%; /* Adjust width as needed */
   max-width: 400px;
   height: auto;
   transition: opacity 0.3s ease, filter 0.3s ease;
@@ -127,15 +134,15 @@ body {
 /* bag icon */
 .bagContainer {
   position: fixed;
-  right: 0.6in;
+  right: 0.2in;
   bottom: 0.2in;
   display: inline-block;
   cursor: pointer;
   /*rounded edges*/
-  border-radius: 25px;
+  border-radius: 250px;
 }
 .bagImage {
-  width: 80%; /* Adjust width as needed */
+  width: 70%; /* Adjust width as needed */
   max-width: 400px;
   height: auto;
   transition: opacity 0.3s ease, filter 0.3s ease;
@@ -155,44 +162,6 @@ body {
 }
 .bagContainer:hover .bagText {
   display: block; /* Shows the text on hover */
-}
-
-/*belt element*/
-#beltElement {
-  display: flex;
-  background-color: var(--containerBackgroundColor);
-  /*rounded edges*/
-  border-radius: 25px;
-  flex-wrap: wrap; /* Allows the images to wrap to the next line if necessary */
-  justify-content: center; /* Centers the images in the belt */
-  align-items: center; /* Centers the images vertically within the belt */
-  padding: 2px; /* Adds some padding around the images */
-  margin-left: 40vh; /* Adds space to the left of the belt */
-  margin-right: 10vh;
-  width: 100vh; /* Makes sure the beltDiv takes up the full width of its parent */
-  height: auto; /* Allows the height to adjust based on the content */
-  bottom: 4vh; /* Move closer to the center vertically */
-  right: 1vw; /* Move closer to the center horizontally */
-  left: 1vw; /* Move closer to the center horizontally */
-  overflow-x: auto; /* Allows scrolling if there are many relics */
-  overflow: visible; /* Ensure overflow is not clipping the tooltip */
-}
-
-#beltElement img {
-  max-width: 100%; /* Ensures the image scales down to fit the container width */
-  max-height: 12vh; /* Limits the height of the images */
-  height: auto; /* Maintains the aspect ratio of the image */
-  margin: 5px; /* Adds some space around each image */
-  object-fit: contain; /* Ensures the image is contained within its box */
-  flex: 1 1 auto; /* Allows images to grow and shrink as needed */
-  filter: var(--relicStyling);
-  opacity: 0.9; /* Optional: Add slight transparency */
-}
-.tooltip {
-  position: relative;
-  display: inline-block;
-  margin: 0; /* Ensure no extra margin is applied */
-  padding: 0; /* Ensure no extra padding is applied */
 }
 
 /* Image styling */
@@ -223,7 +192,7 @@ body {
   border-radius: 5px; /* Rounded corners */
   padding: 4px 10px; /* Padding around text */
   position: absolute;
-  z-index: 9999; /* High z-index to ensure it appears above other elements */
+  z-index: 99999; /* High z-index to ensure it appears above other elements */
   bottom: 85%; /* Position tooltip above the image */
   left: 50%; /* Center the tooltip horizontally */
   transform: translateX(-50%); /* Center the tooltip horizontally */
@@ -237,6 +206,8 @@ body {
 /* Show the tooltip text when hovering over the tooltip container */
 .tooltip:hover .tooltiptext {
   visibility: visible;
+  position: absolute;
+  z-index: 99999;
   opacity: 1;
 }
 
@@ -261,7 +232,7 @@ body {
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 80vw;
+  width: 75vw;
   height: 80vh;
   background-image: url("data/imgs/displayElements/mythicCarpet.png");
   background-size: contain;
@@ -545,64 +516,208 @@ button {
 /* Poof Effect */
 /* Initial state for relics */
 .relic-image {
-  transform: scale(1);
+  transform: scale(0.9);
   opacity: 1;
   transition: transform 3s ease, opacity 3s ease; /* Increase transition duration for debugging */
 }
 
 /* Poof Effect when relic fades out */
 .relic-fade {
-  transform: scale(1.75); /* Increase size by 75% */
+  transform: scale(1.2); /* Increase size by 75% */
   opacity: 0; /* Fade out */
   transition: transform 1.5s ease, opacity 1.5s ease; /* Increase transition duration for debugging */
 }
 
 /* cards */
-/*currently causing the deck icon to jump. */
 #deckExamineOutput {
-  display: flex; /*not culprit of deck jump */
-  flex-wrap: wrap; /*not culprit of deck jump */
-  align-items: flex-start; /*not culprit of deck jump */
-  justify-content: space-between; /*not culprit of deck jump */
-  gap: 3%; /* Space between cards */ /*not culprit of deck jump */
-  font-size: 1.5vw; /*not culprit of deck jump */
+  max-height: 700px; /* Set this to whatever height you need */
+  overflow-y: auto;
+  overflow: visible;
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 120px;
+  /* align-items: flex-start; 
+  justify-content: space-between;  */
+  gap: 1%; /* Space between cards */
+  font-size: 1.5vw;
+  transform: scale(0.9); /* 0.9 is 90%, so 10% smaller */
+  transform-origin: center; /* Ensure scaling is done from the top left */
+}
+
+#deckExamineOutput::-webkit-scrollbar {
+  width: 8px;
+}
+
+#deckExamineOutput::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 200, 150, 0.8); /* Teal color */
+  border-radius: 10px;
+}
+
+#deckExamineOutput::-webkit-scrollbar-track {
+  background-color: rgba(255, 255, 255, 0.1); /* Light track */
+  border-radius: 10px;
+}
+
+.card {
+  width: 1300%; /*not culprit of deck jump */
+}
+
+.card:hover {
+  transform: scale(1.5); /* Increase size by 50% */
+  z-index: 8888;
+  /*ease the transform*/
+  transition: transform 0.3s ease;
 }
 
 .card:hover .tooltip {
   visibility: visible;
 }
 
-/* relic examine */
+/* relic examine - items aren't properly centered.*/
 
 #bagExamineOutput {
-  /*if less than 7 items, center them*/
+  /* background-color: var(--containerBackgroundColor); */
+  max-height: 590px; /* Set this to whatever height you need */
+  max-width: 1400px;
+  min-height: 700px;
+  min-width: 1400px;
+  overflow-y: auto;
+  /* overflow: visible; */
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 0px;
+  /* margin-bottom: 150px; */
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0%; /* Space between cards */
+  font-size: 1.5vw;
+  transform: scale(0.9); /* 0.9 is 90%, so 10% smaller */
+  transform-origin: center;
   justify-content: center;
 }
 
-/*path displays */
+.tooltip.relic-container.bag {
+  margin-right: 30px;
+  margin-top: 100px;
+  justify-content: center;
+  transform-origin: center;
 
+  /* justify-content: center; */
+  /* justify-items: center; */
+  max-width: 180px;
+  max-height: 180px;
+  /* background-color: black; */
+  /* padding: 5px; */
+}
+
+.tooltiptext.bag {
+  bottom: 80%;
+  left: 20%;
+  transform: translate(10%, 20%);
+}
+
+#bagExamineOutput::-webkit-scrollbar {
+  width: 8px;
+}
+
+#bagExamineOutput::-webkit-scrollbar-thumb {
+  background-color: rgba(117, 123, 253, 0.8); /* Teal color */
+  border-radius: 10px;
+}
+
+#bagExamineOutput::-webkit-scrollbar-track {
+  background-color: rgba(255, 255, 255, 0.1); /* Light track */
+  border-radius: 10px;
+}
+
+/*path displays */
 #pathSelectionOutput {
   display: flex;
-  justify-content: space-around; /* or 'space-between', 'flex-start', etc. */
-  overflow: hidden; /* Ensure that if the image grows, it doesn't affect the layout */
+  justify-content: space-around; /* Ensures images are evenly spaced */
+  overflow: visible; /* Allow images to grow beyond container */
+  align-items: flex-start; /* Align items to the top of the container */
 }
 .path-option {
-  margin: 0 10px;
+  /* add a sepia  */
+  filter: sepia(0.4);
+  margin: 0 2px;
   text-align: center;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  overflow: hidden; /* Ensure that if the image grows, it doesn't affect the layout */
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+  position: relative; /* Ensure text stays in position */
 }
 
-.path-option:hover {
+.image-wrapper {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+.image-wrapper:hover {
+  color: #720363;
+}
+
+.path-option:not(#locked):hover {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
   transform: scale(1.1); /* Increase size by 10% */
+  z-index: 1; /* Ensure the hovered image is above others */
+}
+
+.path-optionlocked:hover {
+  filter: brightness(1.3); /* Darken the image when locked */
+}
+
+#locked {
+  filter: grayscale(100%);
 }
 
 .path-image {
-  width: 100%; /* Ensure image scales to fill its container */
-  height: auto; /* Maintain aspect ratio */
+  width: 80%;
+  height: auto;
   transition: opacity 0.3s ease;
 }
 
+.path-image.rest:hover {
+  transition: opacity 0.3s ease;
+  filter: hue-rotate(160deg) contrast(1) saturate(50);
+}
+.path-image.combat:hover {
+  transition: opacity 0.3s ease;
+  filter: hue-rotate(0deg) contrast(1) saturate(50);
+}
+.path-image.shop:hover {
+  transition: opacity 0.3s ease;
+  filter: hue-rotate(40deg) contrast(1) saturate(50);
+}
+
+.path-name {
+  margin-top: 5px; /* Add space between the image and text */
+}
+
 .path-image.fade {
-  opacity: 0;
+  opacity: 1;
+}
+
+.locked-overlay {
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(1, 0, 0, -0.5); /* Semi-transparent black overlay */
+  display: flex; /* Enable flexbox */
+  align-items: center; /* Center items horizontally */
+  justify-content: center; /* Center items vertically */
+  border-radius: 25px; /* Rounded corners */
+}
+
+/*combat*/
+
+.hand {
+  background-color: var(--containerBackgroundColor);
+  display: block;
+  width: 120vh;
+  height: 18vh;
+  margin-bottom: -70vh;
+  border-radius: 25px;
 }

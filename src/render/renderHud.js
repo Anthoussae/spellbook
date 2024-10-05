@@ -9,6 +9,21 @@ const hudEventRemovers = [];
 //seems to be assigning click handlers to the bag and deck buttons multiple times.
 export function renderHud(oldState) {
   let state = { ...oldState };
+  console.log(
+    "Before renderHud:",
+    "previousHp",
+    state.previousHp,
+    "hp",
+    state.hp,
+    "previousHp",
+    state.previousHp,
+    "maxHp",
+    state.maxHp,
+    "previousGold",
+    state.previousGold,
+    "gold",
+    state.gold
+  );
   // console.log(new Error().stack);
   removeAllHudEventHandlers();
   renderGold(state);
@@ -17,6 +32,21 @@ export function renderHud(oldState) {
   renderLevel(state);
   renderDeckButton(state);
   renderBagButton(state);
+  console.log(
+    "After renderHud:",
+    "previousHp",
+    state.previousHp,
+    "hp",
+    state.hp,
+    "previousHp",
+    state.previousHp,
+    "maxHp",
+    state.maxHp,
+    "previousGold",
+    state.previousGold,
+    "gold",
+    state.gold
+  );
 }
 
 function renderLevel(state) {
@@ -47,12 +77,15 @@ function renderGold(state) {
       goldDiv.textContent = `Gold: ${gold}`;
     }
   });
+  state.previousGold = gold;
 }
 
+//currently bugged: Hp doesn't properly tick up animation, reticks up at random occasions when renderHud is called.
+//should be relatively easy to debug.
 function renderHp(state) {
   const hpDivs = document.querySelectorAll(".hp"); // Select all elements with the class 'hp'
-  const previousHp = state.previousHp || 0;
-  const previousMaxHp = state.previousMaxHp || 0;
+  const previousHp = state.previousHp || state.hp;
+  const previousMaxHp = state.previousMaxHp || state.maxHp;
   const hp = state.hp;
   const maxHp = state.maxHp;
 
@@ -67,14 +100,10 @@ function renderHp(state) {
       updateHpDisplay(hp, value, hpDiv); // Use the current hp here
     });
 
-    // If no change, directly update the display
-    if (previousHp == hp) {
-      updateHpDisplay(hp, maxHp, hpDiv);
-    }
-    if (previousMaxHp == maxHp) {
-      updateHpDisplay(hp, maxHp, hpDiv);
-    }
+    updateHpDisplay(hp, maxHp, hpDiv);
   });
+  state.previousMaxHp = maxHp;
+  state.previousHp = hp;
 }
 
 function tickUpAnimation(startValue, endValue, updateCallback) {
@@ -141,7 +170,7 @@ function renderBagButton(state) {
   const isBagExamine = state.currentScreen === "bagExamine";
 
   // Set background color based on screen
-  bagButton.style.backgroundColor = isBagExamine ? "darkblue" : "";
+  bagButton.style.backgroundColor = isBagExamine ? "#271d63" : "";
   bagText.innerHTML = isBagExamine
     ? "Exit"
     : `Relics: (${state.relicBelt.length})`;
@@ -166,7 +195,7 @@ function renderDeckButton(state) {
 
   const deckText = deckButton.querySelector(".deckText");
   const isDeckExamine = state.currentScreen === "deckExamine";
-  deckButton.style.backgroundColor = isDeckExamine ? "darkgreen" : "";
+  deckButton.style.backgroundColor = isDeckExamine ? "#06450b" : "";
   deckText.innerHTML = isDeckExamine
     ? "Exit"
     : state.currentScreen === "combat"

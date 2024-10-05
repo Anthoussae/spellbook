@@ -84,8 +84,8 @@ export function renderCard(card, index) {
   }
 
   return `
-    <div class="card" style="display: flex; flex-direction: column; width: 15%; margin: 0.5%; text-align: center; position: relative;">
-      <img src="${cardBack}" alt="${card.name}" style="width: 100%; border-radius: 8px;">
+    <div class="card" style="display: flex; flex-direction: column; width: 181px; height: 265px; margin: 0.5%; text-align: center; position: relative;">
+      <img src="${cardBack}" alt="${card.name}" style="height: 100%; width: 100%; border-radius: 8px;">
       
       <!-- Card name overlay with dynamic font size and wider box -->
       <div class="card-name-overlay" style="position: absolute; top: 8%; left: 50%; transform: translateX(-50%); background-color: rgba(0, 0, 0, 0); color: ${nameColor}; padding: 4px 16px; border-radius: 4px; font-size: ${fontSize}px; font-weight: bold; min-width: 200px; text-align: center;">
@@ -101,7 +101,7 @@ export function renderCard(card, index) {
 
       <!-- Spell icon below card effect -->
       <div class="card-icon-overlay" style="position: absolute; top: 22%; left: 50%; transform: translateX(-50%);">
-        <img src="${cardIcon}" alt="${card.name} icon" style="width: 220px; height: 220px;">
+        <img src="${cardIcon}" alt="${card.name} icon" style="width: 220px; height: 200px;">
       </div>
 
       <!-- Ink cost below the spell icon with dynamic color -->
