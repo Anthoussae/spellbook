@@ -165,15 +165,27 @@
       <!-------------------------------Combat container---------------------------->
 
       <div id="combat" class="screen" style="display: none">
-        <div class="level"></div>
+        <!-- <div class="level"></div> -->
         <div class="hud">
           <div class="gold"></div>
           <div class="keys"></div>
           <div class="hp"></div>
         </div>
         <div class="banner" id="combatBannerElement">Combat</div>
-        <div class="output" id="combatOutput"></div>
+        <div class="enemyHud" id="enemyHud">
+          <div class="enemyHp">HP: 100</div>
+          <div class="enemyAttack">ATK: 50</div>
+        </div>
+        <!-- <div class="buffs"></div> -->
+        <div class="char-display player"></div>
+        <div class="buff-display player"></div>
+        <div class="char-display enemy"></div>
+        <div class="buff-display enemy"></div>
+        <div class="output combat" id="combatOutput"></div>
         <div class="hand" id="combatHand"></div>
+        <div class="ink-drop">
+          <span class="ink-number">Ink: 5</span>
+        </div>
         <div id="deckElement">
           <div class="deckContainer">
             <img

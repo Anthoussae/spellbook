@@ -45,9 +45,7 @@ export function upgradeCard(oldState, card) {
   upgradedCard.name = newCardName;
 
   // Find the index of the original card in the deck
-  let cardIndex = state.deck.findIndex(
-    (c) => c.name === card.name && c.upgrade === (card.upgrade || 0)
-  );
+  let cardIndex = state.deck.findIndex((c) => c.name === card.name);
 
   checkUpgradeTriggers(state, upgradedCard);
   // If the card is found, replace it with the upgraded card

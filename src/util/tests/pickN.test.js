@@ -2,6 +2,8 @@
 
 import { pickN } from "../pickN";
 
+let state = {};
+
 test("pickN should return an array of the correct length", () => {
   const pool = [
     { name: "Magic Wand", value: 10 },

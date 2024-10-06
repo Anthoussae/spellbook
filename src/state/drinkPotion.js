@@ -1,5 +1,6 @@
 import { findObjectInArray } from "../util/findObjectInArray";
 import { transformRelic } from "./transformRelic";
+import { randomlyUpgradeXCards } from "./upgradeXCards";
 
 ("use strict");
 export function drinkPotion(oldState) {
@@ -11,6 +12,10 @@ export function drinkPotion(oldState) {
     state.bonusBunnies = state.bonusBunnies + potion.bonusBunnies;
   } else if (potion.wandUpgrade) {
     state = upgradeWand(state, potion.wandUpgrade);
+  } else if (potion.addKeys) {
+    state.keys = state.keys + potion.addKeys;
+  } else if (potion.randomUpgrade) {
+    state = randomlyUpgradeXCards(state, 1);
   }
   return state;
 }

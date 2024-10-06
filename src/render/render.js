@@ -18,6 +18,9 @@ export const relicImages = {
   goldenEgg: require("../data/imgs/mythicRelics/goldenEgg.png"),
   phoenixFeatherQuill: require("../data/imgs/mythicRelics/phoenixFeatherQuill.png"),
   eternalInkstone: require("../data/imgs/mythicRelics/eternalInkstone.png"),
+  gaolersKeychain: require("../data/imgs/mythicRelics/gaolersKeychain.png"),
+  tarotDeck: require("../data/imgs/mythicRelics/tarotDeck.png"),
+  pixieDust: require("../data/imgs/mythicRelics/pixieDust.png"),
   //relics
   magicWand: require("../data/imgs/relics/magicWand.png"),
   brokenWand: require("../data/imgs/relics/brokenWand.png"),
@@ -46,6 +49,7 @@ export const displayElementImages = {
   deckImage: require("../data/imgs/displayElements/deck.png"),
   page: require("../data/imgs/displayElements/page.png"),
   senjafudaFrame: require("../data/imgs/displayElements/senjafudaFrame.png"),
+  inkdrop: require("../data/imgs/displayElements/inkdrop.png"),
 };
 export const gemImages = {
   amber: require("../data/imgs/gems/amber.png"),
@@ -103,6 +107,13 @@ export const paths = {
   highlightedcombat: require("../data/imgs/pathOfuda/highlightedCombat.png"),
   highlightedshop: require("../data/imgs/pathOfuda/highlightedShop.png"),
   locked: require("../data/imgs/pathOfuda/lockedOverlay.png"),
+};
+export const characters = {
+  witch: require("../data/imgs/characters/witch.png"),
+  dragon: require("../data/imgs/characters/dragon.png"),
+  goblin: require("../data/imgs/characters/goblin.png"),
+  onion: require("../data/imgs/characters/onion.png"),
+  carrot: require("../data/imgs/characters/carrot.png"),
 };
 
 import { renderBagExamine } from "./renderBagExamine";

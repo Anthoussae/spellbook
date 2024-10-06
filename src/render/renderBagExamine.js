@@ -13,6 +13,7 @@ export function renderBagExamine(state) {
   let html = "";
   bag.forEach((relic, index) => {
     let imagePath = relicImages[relic.imgName];
+    console.log("relic trigger", relic.trigger);
     html += renderRelic(
       imagePath,
       relic.name,
@@ -21,7 +22,8 @@ export function renderBagExamine(state) {
       relic.supertype,
       relic.bunnyAdd,
       relic.rarity,
-      "bag"
+      "bag",
+      relic.trigger
     );
   });
 

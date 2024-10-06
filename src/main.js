@@ -287,7 +287,9 @@ class Game {
     console.log("new game");
     this.resetState(); // Reset the game state
     this.state = generateStarterDeck(this.state);
+    console.log(this.state, "new game state");
     this.state = insertRelic(this.state, "Magic Wand");
+
     this.state = populateMythicRewards(this.state);
 
     // Debugging

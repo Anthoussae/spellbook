@@ -18,6 +18,9 @@ export function checkEndCombatTriggers(oldState, combatOutcome) {
       if ((relic.effect = "interest")) {
         state.gold = state.gold * (1 + relic.interest);
       }
+      if (relic.hpHeal) {
+        state.hp = Math.min(state.hp + relic.hpHeal, state.maxHp);
+      }
     }
   }
 

@@ -73,6 +73,23 @@ export const potionPool = [
     rarity: "rare",
     effect: "Permanently upgrade your wand by 3",
   },
+  //keys behave as potions. Janky but reasonable.
+  {
+    name: "Key",
+    level: 1,
+    type: "potion",
+    rarity: "common",
+    effect: "Gain 1 key",
+    addKeys: 1,
+  },
+  {
+    name: "Scholar's Draught",
+    level: 1,
+    type: "potion",
+    rarity: "common",
+    effect: "Upgrade a random card in your deck",
+    randomUpgrade: 1,
+  },
   //potions that upgrade 1, 2, or 3 cards in your deck
   //potions that give you 1, 2, or 3 bonus ink next fight
   //perfumes that give +5 / +10/ +15 max hpx

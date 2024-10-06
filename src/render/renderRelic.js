@@ -8,8 +8,10 @@ export function renderRelic(
   supertype = "",
   bunnyAdd = null,
   rarity = "basic", // Default rarity is "basic"
-  location = "bag" // Default location is "bag"
+  location = "bag", // Default location is "bag"
+  trigger
 ) {
+  console.log("render relic: trigger", trigger);
   let html = "";
   let tooltipText = `<em>${relicEffect}</em>`; // Default tooltip text
 
@@ -30,7 +32,7 @@ export function renderRelic(
     }[rarity.toLowerCase()] || "white"; // Default to white if rarity is invalid
 
   html += `<div class="tooltip relic-container ${location}" style="position: relative;">
-        <img src="${imagePath}" alt="${relicName}" class="relic-image" data-index="${index}" style="display: block;">
+        <img src="${imagePath}" alt="${relicName}" class="relic-image ${trigger}" data-index="${index}" style="display: block;">
         <span class="tooltiptext ${location}" style="position:absolute;" >
           <strong style="font-size: 20px; color: ${rarityColor};">${relicName}</strong><br>
           <em>-------------------</em><br>

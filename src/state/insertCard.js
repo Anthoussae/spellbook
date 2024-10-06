@@ -2,9 +2,9 @@
 
 import { checkCardPickupTriggers } from "./nonCombatTriggers/checkCardPickupTriggers";
 
-export function insertCard(oldState, card) {
+export function insertCard(oldState, oldCard) {
   let state = { ...oldState };
-  state.deck.push(card);
+  let card = { ...oldCard };
   state = checkCardPickupTriggers(state, card);
   return state;
 }

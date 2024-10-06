@@ -38,7 +38,7 @@ body {
   padding: 4px; /* Adds some padding around the images */
   background-color: var(--containerBackgroundColor);
   width: 9vw; /* Slightly smaller width */
-  height: 9.3vh; /* Slightly smaller height */
+  height: 10vh; /* Slightly smaller height */
   top: 4vh; /* Move closer to the center vertically */
   left: 4vw; /* Move closer to the center horizontally */
 }
@@ -78,8 +78,13 @@ body {
 
 #combatBannerElement {
   /* text should be dark red, banner should be slightly redder*/
+  /* text should be dark red, banner should be slightly redder*/
   color: #800000; /* Dark text color */
-  background-color: rgba(128, 0, 0, 0.4); /* Slightly transparent red */
+  background-color: rgba(255, 0, 0, 0.4); /* Slightly transparent red */
+  height: 10vh;
+  font-size: 3.6vw;
+  justify-content: center;
+  padding-top: 0.4vw;
 }
 
 /* deck icon */
@@ -521,6 +526,11 @@ button {
   transition: transform 3s ease, opacity 3s ease; /* Increase transition duration for debugging */
 }
 
+.relic-image.pickup {
+  /* make it grayscale*/
+  filter: grayscale(100%);
+}
+
 /* Poof Effect when relic fades out */
 .relic-fade {
   transform: scale(1.2); /* Increase size by 75% */
@@ -716,8 +726,113 @@ button {
 .hand {
   background-color: var(--containerBackgroundColor);
   display: block;
-  width: 120vh;
+  width: 62vw;
   height: 18vh;
+  position: absolute;
+  margin-right: -10vw;
   margin-bottom: -70vh;
   border-radius: 25px;
+}
+
+.enemyHud {
+  color: #800000; /* Dark text color */
+  background-color: rgba(255, 0, 0, 0.4); /* Slightly transparent red */
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  font-size: 1.8vw;
+  align-items: center;
+  position: absolute;
+  width: 10vw;
+  height: 10vh;
+  top: 4vh; /* Move closer to the center vertically */
+  padding: 4px;
+  margin-left: 82vw;
+  border-radius: 25px;
+}
+
+.enemyHp {
+  display: block;
+}
+
+.enemyAttack {
+  display: block;
+}
+
+.buffs {
+  display: flex;
+  background-color: /*pale red*/ rgba(255, 0, 0, 0.4);
+  flex-direction: column;
+  justify-content: left;
+  font-size: 1.8vw;
+  align-items: center;
+  position: absolute;
+  width: 14vw;
+  height: 10vh;
+  top: 4vh; /* Move closer to the center vertically */
+  padding: 4px;
+  margin-left: 56.5vw;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ink-drop {
+  background-color: #120336;
+  border-radius: 225px;
+  height: 10vh;
+  width: 7vw;
+  font-size: 1.8vw;
+  color: rgb(189, 200, 255);
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  display: flex;
+  top: 80vh; /* Move closer to the center vertically */
+  left: 15vw;
+}
+
+.char-display {
+  background-color: var(--containerBackgroundColor);
+  display: flex;
+  flex-direction: column;
+  height: 30vw;
+  width: 20vw;
+  margin-top: -5vw;
+  border-radius: 25px;
+  position: absolute;
+}
+
+.char-display.player {
+  left: 4vw;
+}
+.char-display.enemy {
+  right: 4vw;
+}
+
+.buff-display {
+  background-color: var(--containerBackgroundColor);
+  display: flex;
+  flex-direction: column;
+  height: 10vh;
+  width: 20vw;
+  border-radius: 25px;
+  position: absolute;
+  margin-top: 20vw;
+}
+
+.buff-display.player {
+  left: 4vw;
+}
+.buff-display.enemy {
+  right: 4vw;
+}
+.output.combat {
+  width: 50vw;
+  margin-top: -5vw;
+  height: 30vw;
+  border-radius: 25px;
+
+  background-color: var(--containerBackgroundColor);
 }

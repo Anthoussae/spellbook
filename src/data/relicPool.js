@@ -17,7 +17,7 @@ export const relicPool = [
     name: "Broken Wand",
     imgName: "brokenWand",
     bunnyAdd: 0,
-    effect: "When you cast, gain ${bunnyAdd} bonus bunnies",
+    effect: "When you cast, gain ${bunnyAdd} bonus bunnies.",
     rarity: "basic",
     type: "relic",
     supertype: "wand",
@@ -27,7 +27,7 @@ export const relicPool = [
   {
     //integrated
     name: "Inkpot",
-    effect: "Gain 1 bonus ink each combat",
+    effect: "Gain 1 bonus ink each combat.",
     rarity: "common",
     imgName: "inkpot",
     inkAdd: 1,
@@ -39,7 +39,7 @@ export const relicPool = [
     name: "Brush",
     bonusHandsize: 1,
     imgName: "brush",
-    effect: "Increase your opening hand size by 1",
+    effect: "Increase your opening hand size by 1.",
     rarity: "common",
     type: "relic",
     trigger: "combatStart",
@@ -49,7 +49,7 @@ export const relicPool = [
     name: "Scroll",
     imgName: "scroll",
     bonusPages: 1,
-    effect: "Increase your spellbook size by 1 page",
+    effect: "Increase your spellbook size by 1 page.",
     rarity: "uncommon",
     type: "relic",
     trigger: "combatStart",
@@ -58,7 +58,7 @@ export const relicPool = [
     //integrated
     name: "Hydrangea",
     imgName: "hydrangea",
-    effect: "Gain 25 max HP upon pickup",
+    effect: "Gain 25 max HP upon pickup.",
     bonusMaxHp: 25,
     rarity: "uncommon",
     type: "relic",
@@ -68,7 +68,7 @@ export const relicPool = [
     //integrated
     name: "Magic Staff",
     imgName: "magicStaff",
-    effect: "Gain 5 bunnies when you cast your spellbook",
+    effect: "Gain 5 bunnies when you cast your spellbook.",
     bunnyAdd: 5,
     rarity: "mythic",
     type: "relic",
@@ -88,11 +88,11 @@ export const relicPool = [
     //integrated
     name: "Gold ingot",
     imgName: "goldIngot",
-    effect: "Gain 5% interest on your gold each time you win combat",
-    interest: 0.05,
+    effect: "Gain 50 gold on pickup.",
+    gold: 50,
     rarity: "uncommon",
     type: "relic",
-    trigger: "combatWin",
+    trigger: "pickup",
   },
   {
     //integrated
@@ -104,16 +104,16 @@ export const relicPool = [
     bunniesOnDraw: 1,
     trigger: "draw",
   },
-  {
-    //integrated
-    name: "Golf Ball",
-    imgName: "golfBall",
-    effect: "Gain 1 bonus mulligan each combat",
-    rarity: "common",
-    type: "relic",
-    bonusMulligans: 1,
-    trigger: "combatStart",
-  },
+  // {
+  //   //integrated
+  //   name: "Golf Ball",
+  //   imgName: "golfBall",
+  //   effect: "Gain 1 bonus mulligan each combat",
+  //   rarity: "common",
+  //   type: "relic",
+  //   bonusMulligans: 1,
+  //   trigger: "combatStart",
+  // },
   //@@@ ~~ UNINTEGRATED ~~ @@@
   // {
   //   //UNINTEGRATED: requires play card mechanic in combat.
