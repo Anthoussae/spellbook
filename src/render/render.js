@@ -115,6 +115,15 @@ export const characters = {
   onion: require("../data/imgs/characters/onion.png"),
   carrot: require("../data/imgs/characters/carrot.png"),
 };
+export const buffs = {
+  cross: require("../data/imgs/buffs/cross.png"),
+  down: require("../data/imgs/buffs/down.png"),
+  drop: require("../data/imgs/buffs/drop.png"),
+  eyes: require("../data/imgs/buffs/eyes.png"),
+  heart: require("../data/imgs/buffs/heart.png"),
+  shield: require("../data/imgs/buffs/shield.png"),
+  spiral: require("../data/imgs/buffs/spiral.png"),
+};
 
 import { renderBagExamine } from "./renderBagExamine";
 import { renderDeckExamine } from "./renderDeckExamine";
