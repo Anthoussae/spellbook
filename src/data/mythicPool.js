@@ -7,8 +7,9 @@ export const mythicPool = [
     effect: "Increase your spellbook size by 2 pages.",
     rarity: "mythic",
     type: "relic",
-    trigger: "combatStart",
+    trigger: "turnStart",
     bonusPages: 2,
+    buffDisplay: false,
   },
   {
     name: "Phoenix-feather Quill",
@@ -17,16 +18,18 @@ export const mythicPool = [
     effect: "Increase your hand size by 2.",
     rarity: "mythic",
     type: "relic",
-    trigger: "combatStart",
+    trigger: "turnStart",
+    buffDisplay: false,
   },
   {
     name: "Eternal Inkstone",
     imgName: "eternalInkstone",
-    effect: "Gain 2 bonus ink each combat.",
+    effect: "Gain 2 bonus ink.",
     rarity: "mythic",
     inkAdd: 2,
     type: "relic",
-    trigger: "combatStart",
+    trigger: "turnStart",
+    buffDisplay: false,
   },
   {
     name: "Blessed Orchid",
@@ -36,6 +39,7 @@ export const mythicPool = [
     rarity: "mythic",
     type: "relic",
     trigger: "combatWin",
+    buffDisplay: false,
   },
   {
     name: "Golden Egg",
@@ -45,6 +49,7 @@ export const mythicPool = [
     rarity: "mythic",
     type: "relic",
     trigger: "combatWin",
+    buffDisplay: false,
   },
   {
     name: "Gaoler's Keychain",
@@ -54,6 +59,7 @@ export const mythicPool = [
     rarity: "mythic",
     type: "relic",
     trigger: "pickup",
+    buffDisplay: false,
   },
   {
     name: "Tarot Deck",
@@ -63,6 +69,7 @@ export const mythicPool = [
     rarity: "mythic",
     type: "relic",
     trigger: "cardAdd",
+    buffDisplay: false,
   },
   {
     name: "Pixie Dust",
@@ -72,6 +79,7 @@ export const mythicPool = [
     rarity: "mythic",
     type: "relic",
     trigger: "pickup",
+    buffDisplay: false,
   },
   //a relic that upgrades any card you add to your deck.
   //a relic that grants +25% bunnies on cast.

@@ -6,7 +6,7 @@ export function checkStartCombatTriggers(oldState) {
   //make sure that all of these only apply to combat, and that combat mods are reset at the end of combat.
   for (let i = 0; i < relics.length; i++) {
     let relic = relics[i];
-    if (relic.trigger === "combatStart") {
+    if (relic.trigger === "turnStart") {
       //wands
       if (relic.bunnyAdd) {
         state.bunnies = state.bunnies + relic.bunnyAdd;

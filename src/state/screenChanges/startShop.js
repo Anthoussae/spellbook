@@ -34,7 +34,7 @@ export function startShop(oldState) {
 //       rarity: "common",
 //       inkAdd: 1,
 //       type: "relic",
-//       trigger: "combatStart",
+//       trigger: "turnStart",
 //     },
 //     {
 //       //integrated
@@ -43,7 +43,7 @@ export function startShop(oldState) {
 //       effect: "Increase your opening hand size by 1",
 //       rarity: "common",
 //       type: "relic",
-//       trigger: "combatStart",
+//       trigger: "turnStart",
 //     },
 //     {
 //       //integrated
@@ -52,7 +52,7 @@ export function startShop(oldState) {
 //       effect: "Increase your spellbook size by 1 page",
 //       rarity: "uncommon",
 //       type: "relic",
-//       trigger: "combatStart",
+//       trigger: "turnStart",
 //     },
 //   ];
 //   let offeredRelic1 =

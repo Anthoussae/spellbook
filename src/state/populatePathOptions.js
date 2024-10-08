@@ -203,5 +203,12 @@ export function applyLocks(options, oldState) {
     sortedOptions[2].locked = true;
   }
 
+  //remove all locks if it's level 1.
+  if (state.level === 1) {
+    sortedOptions.forEach((option) => {
+      option.locked = false;
+    });
+  }
+
   return availableOptions;
 }

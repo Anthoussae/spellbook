@@ -3,141 +3,23 @@
 import { resumeGame } from "./render";
 import { renderBagExamine } from "./renderBagExamine";
 import { renderDeckExamine } from "./renderDeckExamine";
+import { getNumberFromElement } from "../util/getNumberFromElement";
+import { tickNumber } from "../util/tickNumber";
+import { tickPlayerHp } from "../util/tickPlayerHp";
 
 const hudEventRemovers = [];
 
 //seems to be assigning click handlers to the bag and deck buttons multiple times.
 export function renderHud(oldState) {
   let state = { ...oldState };
-  console.log(
-    "Before renderHud:",
-    "previousHp",
-    state.previousHp,
-    "hp",
-    state.hp,
-    "previousHp",
-    state.previousHp,
-    "maxHp",
-    state.maxHp,
-    "previousGold",
-    state.previousGold,
-    "gold",
-    state.gold
-  );
   // console.log(new Error().stack);
   removeAllHudEventHandlers();
-  renderGold(state);
-  renderKeys(state);
-  renderHp(state);
-  renderLevel(state);
+  renderNumbers(state);
   renderDeckButton(state);
   renderBagButton(state);
-  console.log(
-    "After renderHud:",
-    "previousHp",
-    state.previousHp,
-    "hp",
-    state.hp,
-    "previousHp",
-    state.previousHp,
-    "maxHp",
-    state.maxHp,
-    "previousGold",
-    state.previousGold,
-    "gold",
-    state.gold
-  );
 }
 
-function renderLevel(state) {
-  let levelDivs = document.querySelectorAll(".level");
-  levelDivs.forEach((levelDiv) => {
-    levelDiv.innerHTML = "Level: " + state.level;
-  });
-}
-
-function renderKeys(state) {
-  let keysDivs = document.querySelectorAll(".keys");
-  keysDivs.forEach((keysDiv) => {
-    keysDiv.innerHTML = "Keys: " + state.keys;
-  });
-}
-
-function renderGold(state) {
-  const goldDivs = document.querySelectorAll(".gold"); // NodeList of all elements with the class 'gold'
-  const previousGold = state.previousGold;
-  const gold = state.gold;
-
-  goldDivs.forEach((goldDiv) => {
-    tickUpAnimation(previousGold, gold, function (value) {
-      goldDiv.textContent = `Gold: ${value}`;
-    });
-
-    if (previousGold == gold) {
-      goldDiv.textContent = `Gold: ${gold}`;
-    }
-  });
-  state.previousGold = gold;
-}
-
-//currently bugged: Hp doesn't properly tick up animation, reticks up at random occasions when renderHud is called.
-//should be relatively easy to debug.
-function renderHp(state) {
-  const hpDivs = document.querySelectorAll(".hp"); // Select all elements with the class 'hp'
-  const previousHp = state.previousHp || state.hp;
-  const previousMaxHp = state.previousMaxHp || state.maxHp;
-  const hp = state.hp;
-  const maxHp = state.maxHp;
-
-  hpDivs.forEach((hpDiv) => {
-    // Run animation for hp
-    tickUpAnimation(previousHp, hp, function (value) {
-      updateHpDisplay(value, maxHp, hpDiv); // Use the current maxHp here
-    });
-
-    // Run animation for maxHp
-    tickUpAnimation(previousMaxHp, maxHp, function (value) {
-      updateHpDisplay(hp, value, hpDiv); // Use the current hp here
-    });
-
-    updateHpDisplay(hp, maxHp, hpDiv);
-  });
-  state.previousMaxHp = maxHp;
-  state.previousHp = hp;
-}
-
-function tickUpAnimation(startValue, endValue, updateCallback) {
-  if (startValue === endValue) {
-    return;
-  }
-
-  let duration = 1000; // Total duration of the animation in milliseconds
-  let frameRate = 60; // Frames per second
-  let totalFrames = (duration / 1000) * frameRate;
-  let increment = (endValue - startValue) / totalFrames;
-  let currentValue = startValue;
-
-  function updateValue() {
-    currentValue += increment;
-    updateCallback(Math.round(currentValue));
-
-    if (
-      (increment > 0 && currentValue < endValue) ||
-      (increment < 0 && currentValue > endValue)
-    ) {
-      requestAnimationFrame(updateValue);
-    } else {
-      updateCallback(endValue); // Ensure the final value is set
-    }
-  }
-
-  requestAnimationFrame(updateValue);
-}
-
-function updateHpDisplay(hp, maxHp, element) {
-  element.textContent = `HP: ${hp}/${maxHp}`;
-}
-
+//bag and deck buttons
 // Store click handler reference outside the function
 function handleBagButtonClick(state, isBagExamine) {
   return (event) => {
@@ -170,7 +52,7 @@ function renderBagButton(state) {
   const isBagExamine = state.currentScreen === "bagExamine";
 
   // Set background color based on screen
-  bagButton.style.backgroundColor = isBagExamine ? "#271d63" : "";
+  bagButton.style.backgroundColor = isBagExamine ? "#00008066" : "";
   bagText.innerHTML = isBagExamine
     ? "Exit"
     : `Relics: (${state.relicBelt.length})`;
@@ -178,14 +60,6 @@ function renderBagButton(state) {
   // Ensure event handler is managed properly
   const bagClickHandler = handleBagButtonClick(state, isBagExamine);
   addHudEventListener(bagButton, "click", bagClickHandler);
-  // bagButton.addEventListener(
-  //   "click",
-  //   (event) => {
-  //     bagClickHandler(event);
-  //     bagButton.removeEventListener("click", bagClickHandler);
-  //   },
-  //   { once: true }
-  // );
 }
 
 function renderDeckButton(state) {
@@ -195,7 +69,7 @@ function renderDeckButton(state) {
 
   const deckText = deckButton.querySelector(".deckText");
   const isDeckExamine = state.currentScreen === "deckExamine";
-  deckButton.style.backgroundColor = isDeckExamine ? "#06450b" : "";
+  deckButton.style.backgroundColor = isDeckExamine ? "#00800066" : "";
   deckText.innerHTML = isDeckExamine
     ? "Exit"
     : state.currentScreen === "combat"
@@ -203,14 +77,6 @@ function renderDeckButton(state) {
     : `Deck: (${state.deck.length})`;
   const deckClickHandler = handleDeckButtonClick(state, isDeckExamine);
   addHudEventListener(deckButton, "click", deckClickHandler);
-  // deckButton.addEventListener(
-  //   "click",
-  //   (event) => {
-  //     deckClickHandler(event);
-  //     deckButton.removeEventListener("click", deckClickHandler);
-  //   },
-  //   { once: true }
-  // );
 }
 
 function addHudEventListener(elem, type, handler) {
@@ -225,4 +91,37 @@ function removeAllHudEventHandlers() {
     hudEventRemover();
   }
   hudEventRemovers.length = 0;
+}
+
+//render various hud elements with numbers.
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+function renderNumbers(state) {
+  const levelDivs = document.querySelectorAll(".level");
+  const keysDivs = document.querySelectorAll(".keys");
+  const goldDivs = document.querySelectorAll(".gold");
+  const hpDivs = document.querySelectorAll(".hp");
+
+  let currentLevel = getNumberFromElement(levelDivs[0]);
+  levelDivs.innerHTML = "Level: " + currentLevel;
+  let currentKeys = getNumberFromElement(keysDivs[0]);
+  keysDivs.innerHTML = "Keys: " + currentKeys;
+  let currentGold = getNumberFromElement(goldDivs[0]);
+  goldDivs.innerHTML = "Gold: " + currentGold;
+  let currentHp = getNumberFromElement(hpDivs[0]);
+  hpDivs.innerHTML = "HP: " + currentHp;
+
+  for (let i = 0; i < keysDivs.length; i++) {
+    console.log("currentKeys", currentKeys, "state.keys", state.keys);
+    tickNumber(keysDivs[i], currentKeys || 0, state.keys, "Keys: ");
+  }
+  for (let i = 0; i < levelDivs.length; i++) {
+    tickNumber(levelDivs[i], currentLevel || -1, state.level, "Level: ");
+  }
+  for (let i = 0; i < goldDivs.length; i++) {
+    tickNumber(goldDivs[i], currentGold || 0, state.gold, "Gold: ");
+  }
+  for (let i = 0; i < hpDivs.length; i++) {
+    tickPlayerHp(hpDivs[i], currentHp || 0, state.hp, state.maxHp);
+  }
 }

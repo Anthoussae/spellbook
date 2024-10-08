@@ -2,13 +2,14 @@
 
 export function populateEnemyPool() {
   const enemyPool = [];
-  for (let i = 0; i < 300; i++) {
+  for (let i = 21; i < 300; i++) {
     const enemy = {
       hp: Math.max(i - 5, 5),
       name: "",
       level: Math.floor(i / 10),
       goldReward: Math.floor(Math.random() * (30 - 15 + 1)) + 15,
       type: "concrete",
+      attack: i * 5,
       screen: "combat",
       rarity: "common",
       supertype: "enemy", //is this needed? Purge if posible, it's unclear.
@@ -17,10 +18,53 @@ export function populateEnemyPool() {
       monsterClass: ["elite", "enchanted", "basic"][
         Math.floor(Math.random() * 3)
       ],
+      imgName: "default",
     };
     enemy.name = generateRandomName();
     enemyPool.push(enemy);
   }
+  enemyPool.push({
+    hp: 1,
+    name: "Lettuce Goblin",
+    level: 1,
+    goldReward: 1,
+    type: "concrete",
+    attack: 1,
+    screen: "combat",
+    rarity: "common",
+    supertype: "enemy",
+    pathType: "combat",
+    monsterClass: "basic",
+    imgName: "lettuceGoblin",
+  });
+  enemyPool.push({
+    hp: 1,
+    name: "Lettuce Goblin ",
+    level: 1,
+    goldReward: 1,
+    type: "concrete",
+    attack: 1,
+    screen: "combat",
+    rarity: "common",
+    supertype: "enemy",
+    pathType: "combat",
+    monsterClass: "basic",
+    imgName: "lettuceGoblin",
+  });
+  enemyPool.push({
+    hp: 1,
+    name: "Lettuce Goblin  ",
+    level: 1,
+    goldReward: 1,
+    type: "concrete",
+    attack: 1,
+    screen: "combat",
+    rarity: "common",
+    supertype: "enemy",
+    pathType: "combat",
+    monsterClass: "basic",
+    imgName: "lettuceGoblin",
+  });
   return enemyPool;
 }
 

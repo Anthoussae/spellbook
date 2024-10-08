@@ -5,85 +5,21 @@
 //make a concede button that transitions to an end-game 'you lose' screen with stats. When you close that screen, bunny screen transition plays and takes you back to the main menu.
 //the above you lose screen is also displayed when you lose.
 
-//make interesting relics that modify gameplay substantially.
-//relic: whenever you add a card to your deck, gain +5 max HP.
-//relic: whenever you play a socketed card, dispel an enemy buff.
-//relic: all lesser potions are upgraded to medium potions and discounted by 1 tier.
-//relic: All cards with 5 or more upgrades cost 1 less ink.
-//relic: you gain +2 ink, but can no longer rest.
-//relic: you gain +2 pages, but gain 50% less gold.
-//relic: you gain +3 hand size, but all healing is reduced by 50%.
-//relic: whenever you heal, upgrade a random card.
-//relic: All gems are onyx.
-
-//decide on reward mechanics, path tree, and shop design
-
-//lets set some predefined variables etc. in CSS.
-
-//seems to be triggering set difficulty for each button, rather than assigning it to onclick.
-
-//screen judder on relic selection.
-
 //add credits
 
 //add tutorial
 
-//add disclaimer @ breakpoint - "this game is in development, and is not optimized for small screens. Please re-open in a desktop browser."
-
 //add darkmnode
 
-//fix the picture for bottomless inkpot
-
-//current
-// make it pretty
-
-//for relic belt
-//if the contents is over ~8, make it scrollable.
-// a good way to do that is to make the belt a flexbox, and then make the contents a flexbox as well.?
-//alternatively, draw arrow key icons, design a belt render that renders "displayed relics", and the arrow keys are buttons that shift the "dusplayed relics"  windw.
-
 //when you select an option, the others vanish in a puff of smoke with bunnies
-//make a "bag" button where relics that trigger on pickup only are kept (in the bottom right hand corner)
-//make the deck button cute
-//design card frames. Should include a socket space for gems, and a space for illustration.
-//two card versions: Small and Large. Small has no text, large does.
-//(urgent) fix the belt box sizing (urgent)
-//tidy the wand upgrade logic. Should now track an attribute "upgraded"
-//every 7 levels you get a mythic. (eg., lvl 1, lvl 8, lvl 15.) No repeat relics offered. Let's design at least 12 mythic relics.
-//minor
 
-//add italic effect text to cards in deck examine
-//add tooltips to hand cards
-//add tooltips to spellbook cards
-//rounded edges for cards
-//ink cost appears in socketing
-//wand upgrade can appear twice, fix that
-//shop pity timer (shop guaranteed every 5 fights)
-//console error when you cast (doesn't seem to affect logic).
-//show ink cost when socketing
-//add colors and reward type to reward selection, and make it look better.
-//make sure that battlehud doesn't display fractions - math.floor everything..
-//clear the renderBattlehud after combat (when entering pathselection)
+//when upgrading cards, a puff of magic surrounds deck.
 
-//create the luck mechanic.
-
-// fix color display in "render deck examine" so that card colors are displayed correctly.
 // make a favicon
-// make the shop render.
-// the shop should always include either a quill, an inkbottle, or a page. The first costs 10 gold, then incrementally 20, 30, etc.
-// you start the game with 50 gold in the shop.
-// the shop has a row of gems, a row of relics (one of which is one of the above 3), a row of cards, and a row of potions.
-//currently socketing a gem automatically takes you to path selection. It should be fixed so that if you're in a shop, it takes you back to shop selection.
 
-//major bug: Occasionally randomly skips through a screen. Reason unclear, no error message.
+//add shadows to cards.
 
-//very minor bug: when clicking socket, receives this error message:
-//    render.js:72 Uncaught TypeError: Cannot read properties of undefined (reading 'hp')
-//     at renderHud (render.js:72:26)
-//     at HTMLButtonElement.<anonymous> (render.js:62:7)
-// seems to be that the socketing buttons triggger a renderHUD call without a state.
-
-//distant:
+//various relic tooltips need to be adjusted.
 
 //data
 import { cardPool } from "./data/cardPool";
@@ -196,6 +132,7 @@ class Game {
       selectedPath: null,
       shopWares: [],
       mythicRewards: [],
+      shield: 0,
     };
   }
 
@@ -280,6 +217,7 @@ class Game {
       selectedPath: null,
       shopWares: [],
       mythicRewards: [],
+      shield: 0,
     };
   }
 
@@ -289,7 +227,6 @@ class Game {
     this.state = generateStarterDeck(this.state);
     console.log(this.state, "new game state");
     this.state = insertRelic(this.state, "Magic Wand");
-
     this.state = populateMythicRewards(this.state);
 
     // Debugging

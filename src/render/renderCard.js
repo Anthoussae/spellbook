@@ -1,7 +1,7 @@
 "use strict";
 import { cardBacks, spellIcons } from "./render";
 
-export function renderCard(card, index) {
+export function renderCard(card, location) {
   const cardBack = cardBacks[card.color] || cardBacks["misc"];
   const cardIcon = spellIcons[card.imgName] || spellIcons["misc"];
 
@@ -27,7 +27,7 @@ export function renderCard(card, index) {
 
   let inkColor = "black";
 
-  //handle card text to include colors corresponding to upgrades.
+  // Handle card text to include colors corresponding to upgrades.
   let numberColor = "black";
   let cardText = "";
   if (card.upgrade) {
@@ -38,7 +38,7 @@ export function renderCard(card, index) {
     }
   }
 
-  // dynamic card text and number color logic with singular/plural handling
+  // Dynamic card text and number color logic with singular/plural handling
   if (card.bunnyAdd) {
     const bunnyWord = card.bunnyAdd === 1 ? "bunny" : "bunnies";
     cardText += `Adds <span style="color: ${numberColor};">${card.bunnyAdd}</span> ${bunnyWord}.`;
@@ -84,22 +84,21 @@ export function renderCard(card, index) {
   }
 
   return `
-    <div class="card" style="display: flex; flex-direction: column; width: 181px; height: 265px; margin: 0.5%; text-align: center; position: relative;">
-      <img src="${cardBack}" alt="${card.name}" style="height: 100%; width: 100%; border-radius: 8px;">
+    <div class="card ${location}" style="display: flex; flex-direction: column; width: 181px; height: 265px; margin: 0.5%; text-align: center; position: relative; border-radius: 8px;">
+      <!-- Card back with shadow -->
+      <img src="${cardBack}" alt="${card.name}" style="height: 100%; width: 100%; border-radius: 8px; filter: drop-shadow(-4px 4px 8px rgba(0, 0, 0, 0.2));">
       
       <!-- Card name overlay with dynamic font size and wider box -->
       <div class="card-name-overlay" style="position: absolute; top: 8%; left: 50%; transform: translateX(-50%); background-color: rgba(0, 0, 0, 0); color: ${nameColor}; padding: 4px 16px; border-radius: 4px; font-size: ${fontSize}px; font-weight: bold; min-width: 200px; text-align: center;">
         ${card.name}
       </div>
     
-      
-
       <!-- Card effect text below card name -->
       <div class="card-effect-overlay" style="position: absolute; top: 18%; left: 50%; transform: translateX(-50%); background-color: rgba(0, 0, 0, 0); color: black; padding: 4px 16px; font-size: ${effectFontSize}px; min-width: 200px; text-align: center;">
         ${cardText}
       </div>
 
-      <!-- Spell icon below card effect -->
+      <!-- Spell icon below card effect (without shadow) -->
       <div class="card-icon-overlay" style="position: absolute; top: 22%; left: 50%; transform: translateX(-50%);">
         <img src="${cardIcon}" alt="${card.name} icon" style="width: 220px; height: 200px;">
       </div>

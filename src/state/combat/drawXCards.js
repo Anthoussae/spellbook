@@ -2,6 +2,7 @@
 
 import { findObjectInArray } from "../../util/findObjectInArray";
 import { checkDrawTriggers } from "./checkDrawTriggers";
+import { renderCardDraw } from "../../render/renderCardDraw";
 
 export function drawXCards(oldState, x) {
   let state = { ...oldState };
@@ -21,8 +22,10 @@ export function drawCard(oldState) {
     state.hand.push(drawnCard);
     state.combatDeck.splice(state.combatDeck.indexOf(drawnCard), 1);
     state = checkDrawTriggers(state, drawnCard);
+    renderCardDraw(drawnCard);
   } else if (state.combatDeck.length < 1) {
     state.hand.push(findObjectInArray(state.cardPool, "name", "Bunnyfluff"));
   }
+
   return state;
 }

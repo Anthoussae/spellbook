@@ -32,11 +32,11 @@
       <!-------------------------------Mythic Selection container---------------------------->
 
       <div id="mythicSelection" class="screen" style="display: none">
-        <div class="level"></div>
+        <div class="level">Level: -1</div>
         <div class="hud">
-          <div class="gold"></div>
-          <div class="keys"></div>
-          <div class="hp"></div>
+          <div class="gold">Gold: -1</div>
+          <div class="keys">Keys: -1</div>
+          <div class="hp">Hp: -1</div>
         </div>
         <div class="banner" id="mythicBannerElement">
           Choose a mythic artefact:
@@ -166,25 +166,26 @@
 
       <div id="combat" class="screen" style="display: none">
         <!-- <div class="level"></div> -->
-        <div class="hud">
-          <div class="gold"></div>
-          <div class="keys"></div>
-          <div class="hp"></div>
+        <div class="hud combat">
+          <!-- <div class="gold"></div>
+          <div class="keys"></div> -->
+          <div class="hp" id="combatHp"></div>
+          <div class="Shield" id="combatShield">Shield: 0</div>
         </div>
         <div class="banner" id="combatBannerElement">Combat</div>
         <div class="enemyHud" id="enemyHud">
-          <div class="enemyHp">HP: 100</div>
-          <div class="enemyAttack">ATK: 50</div>
+          <div class="enemyHp" id="enemyHp">HP: 0</div>
+          <div class="enemyAttack" id="enemyAttack">ATK: 0</div>
         </div>
         <!-- <div class="buffs"></div> -->
-        <div class="char-display player"></div>
+        <div class="char-display player" id="playerCombatDisplay"></div>
         <div class="buff-display player"></div>
-        <div class="char-display enemy"></div>
+        <div class="char-display enemy" id="enemyCombatDisplay"></div>
         <div class="buff-display enemy"></div>
         <div class="output combat" id="combatOutput"></div>
         <div class="hand" id="combatHand"></div>
         <div class="ink-drop">
-          <span class="ink-number">Ink: 5</span>
+          <span class="ink-number" id="ink-number">Ink: 5</span>
         </div>
         <div id="deckElement">
           <div class="deckContainer">

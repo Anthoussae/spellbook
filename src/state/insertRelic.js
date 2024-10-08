@@ -9,6 +9,5 @@ export function insertRelic(oldState, relicName) {
   state.relicBelt.push(relic);
   state.relicPool.splice(state.relicPool.indexOf(relic), 1);
   state = checkRelicPickupTriggers(state, relic);
-  console.log(state, "state after relic [ickup triggers");
   return state;
 }

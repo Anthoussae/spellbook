@@ -53,23 +53,23 @@ function applyDifficultyLevel(difficulty, oldState) {
   //apply difficulty settings here.
   //PLACEHOLDER- MERGE WIWTH STARTUP/APPLYDIFFICULTYLEVEL
   if (difficulty === "easy") {
-    state.maxHp = state.maxHp + 50;
-    state.hp = state.hp + 50;
-    state.gold = state.gold + 50;
+    state.maxHp = 150;
+    state.hp = 150;
+    state.gold = 100;
     state.previousGold = state.gold;
     state.previousMaxHp = state.maxHp;
     state.previousHp = state.hp;
-    state.keys = state.keys + 1;
+    state.keys = 2;
     state.lockChance = 0.1;
   }
   if (difficulty === "hard") {
-    state.maxHp = state.maxHp - 50;
-    state.hp = state.hp - 50;
-    state.gold = state.gold - 50;
+    state.maxHp = 50;
+    state.hp = 50;
+    state.gold = 50;
     state.previousGold = state.gold;
     state.previousMaxHp = state.maxHp;
     state.previousHp = state.hp;
-    state.keys = state.keys - 1;
+    state.keys = 0;
     state.lockChance = 0.7;
   }
   console.log(state);

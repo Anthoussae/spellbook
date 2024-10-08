@@ -10,7 +10,8 @@ export const relicPool = [
     rarity: "basic",
     type: "relic",
     supertype: "wand",
-    trigger: "combatStart",
+    trigger: "turnStart",
+    buffDisplay: true,
   },
   {
     //integrated
@@ -21,28 +22,31 @@ export const relicPool = [
     rarity: "basic",
     type: "relic",
     supertype: "wand",
-    trigger: "combatStart",
+    trigger: "turnStart",
+    buffDisplay: true,
   },
   //need pics
   {
     //integrated
     name: "Inkpot",
-    effect: "Gain 1 bonus ink each combat.",
+    effect: "Gain 1 bonus ink.",
     rarity: "common",
     imgName: "inkpot",
     inkAdd: 1,
     type: "relic",
-    trigger: "combatStart",
+    trigger: "turnStart",
+    buffDisplay: false,
   },
   {
     //integrated
     name: "Brush",
     bonusHandsize: 1,
     imgName: "brush",
-    effect: "Increase your opening hand size by 1.",
+    effect: "Increase your hand size by 1.",
     rarity: "common",
     type: "relic",
-    trigger: "combatStart",
+    trigger: "turnStart",
+    buffDisplay: false,
   },
   {
     //integrated
@@ -52,7 +56,8 @@ export const relicPool = [
     effect: "Increase your spellbook size by 1 page.",
     rarity: "uncommon",
     type: "relic",
-    trigger: "combatStart",
+    trigger: "turnStart",
+    buffDisplay: false,
   },
   {
     //integrated
@@ -63,9 +68,11 @@ export const relicPool = [
     rarity: "uncommon",
     type: "relic",
     trigger: "pickup",
+    buffDisplay: false,
   },
   {
     //integrated
+    //let's adjust it : bunnymult = 1.5
     name: "Magic Staff",
     imgName: "magicStaff",
     effect: "Gain 5 bunnies when you cast your spellbook.",
@@ -73,6 +80,7 @@ export const relicPool = [
     rarity: "mythic",
     type: "relic",
     trigger: "cast",
+    buffDisplay: true,
   },
   //bugged
   // {
@@ -93,16 +101,18 @@ export const relicPool = [
     rarity: "uncommon",
     type: "relic",
     trigger: "pickup",
+    buffDisplay: false,
   },
   {
     //integrated
     name: "Encyclopaedia",
     imgName: "encyclopaedia",
-    effect: "Gain 1 bunny each time you draw a card.",
+    effect: "Add 1 bunny each time you draw a card.",
     rarity: "common",
     type: "relic",
     bunniesOnDraw: 1,
     trigger: "draw",
+    buffDisplay: true,
   },
   // {
   //   //integrated
@@ -112,7 +122,7 @@ export const relicPool = [
   //   rarity: "common",
   //   type: "relic",
   //   bonusMulligans: 1,
-  //   trigger: "combatStart",
+  //   trigger: "turnStart",
   // },
   //@@@ ~~ UNINTEGRATED ~~ @@@
   // {
@@ -163,3 +173,15 @@ export const relicPool = [
   //a relic that makes you lose 50% max HP on pickup, but grants +50% bunnies on cast
   //a relic that decreases your ink by 1, but sockets 3 random cards with gems on pickup
 ];
+
+//relic: whenever you add a card to your deck, gain +5 max HP.
+//relic: whenever you play a socketed card, dispel an enemy buff.
+//relic: all lesser potions are upgraded to medium potions and discounted by 1 tier.
+//relic: All cards with 5 or more upgrades cost 1 less ink.
+//relic: you gain +2 ink, but can no longer rest.
+//relic: you gain +2 pages, but gain 50% less gold.
+//relic: you gain +3 hand size, but all healing is reduced by 50%.
+//relic: whenever you heal, upgrade a random card.
+//relic: All gems are onyx.
+
+//relic designs: Mochi, mochi hammer, mochi bucket, hakuto's blessing, kokuto's blessing

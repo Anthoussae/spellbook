@@ -28,7 +28,6 @@ export function startCombat(oldState) {
   state.bunnies = state.bunnies + state.bonusBunnies;
   state.combatHandSize = state.handSize + state.combatHandSize;
 
-  console.log(state.pages, state.combatPages);
   //prepare pages
   state.spellbook = [];
   for (let i = 0; i < state.combatPages; i++) {

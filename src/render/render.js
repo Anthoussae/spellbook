@@ -114,6 +114,7 @@ export const characters = {
   goblin: require("../data/imgs/characters/goblin.png"),
   onion: require("../data/imgs/characters/onion.png"),
   carrot: require("../data/imgs/characters/carrot.png"),
+  lettuceGoblin: require("../data/imgs/characters/lettuceGoblin.png"),
 };
 export const buffs = {
   cross: require("../data/imgs/buffs/cross.png"),
@@ -184,3 +185,5 @@ export function resumeGame(state) {
     render(state);
   }
 }
+
+//render each card in cardDraw. (make a renderCardDraw)
