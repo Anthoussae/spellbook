@@ -1,6 +1,6 @@
 import { sleep } from "../../util/sleep";
 
-export function checkStartCombatTriggers(oldState) {
+export function checkStartTurnTriggers(oldState) {
   let state = { ...oldState };
   let relics = state.relicBelt;
   //make sure that all of these only apply to combat, and that combat mods are reset at the end of combat.
@@ -26,6 +26,11 @@ export function checkStartCombatTriggers(oldState) {
       //golf club
       if (relic.bonusMulligans) {
         state.combatMulligans = state.combatMulligans + relic.bonusMulligans;
+      }
+      //nazar
+      if (relic.shieldAdd) {
+        console.log("rendering shield");
+        state.shield = state.shield + relic.shieldAdd;
       }
 
       // Wait for 200ms before processing the next relic

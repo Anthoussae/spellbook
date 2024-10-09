@@ -185,6 +185,7 @@ body {
 /* Image styling */
 .tooltip img {
   filter: var(--relicStyling);
+
   max-width: 100%; /* Ensures the image scales down to fit the container width */
   height: auto; /* Maintains the aspect ratio of the image */
   margin: 4.2vw; /* Adds some space around each image */
@@ -218,7 +219,7 @@ body {
   transition: opacity 0.3s; /* Smooth fade-in effect */
   box-sizing: border-box; /* Include padding and border in the element's total width and height */
   line-height: 1.5; /* Adjust line height for better readability */
-  font-size: 18px;
+  font-size: 16px;
 }
 
 /* Show the tooltip text when hovering over the tooltip container */

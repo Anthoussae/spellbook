@@ -7,7 +7,6 @@ export const gemPool = [
     rarity: "common",
     effect: "Destroy the socketed card.",
     color: "black",
-    shape: "circle",
   },
   {
     name: "Lapis Lazuli",
@@ -16,7 +15,6 @@ export const gemPool = [
     bunnyAdd: 5,
     effect: "Add 5 bunnies.",
     color: "blue",
-    shape: "triangle",
   },
   {
     name: "Garnet",
@@ -25,7 +23,6 @@ export const gemPool = [
     ink: -1,
     effect: "-1 ink cost.",
     color: "red",
-    shape: "hexagon",
   },
   {
     name: "Malachite",
@@ -34,7 +31,6 @@ export const gemPool = [
     color: "green",
     drawOnDraw: 1,
     effect: "draw an extra card when you draw the socketed card.",
-    shape: "square",
   },
   {
     name: "Amber",
@@ -43,7 +39,6 @@ export const gemPool = [
     type: "gem",
     bunnyMult: 1.5,
     effect: "Multiply bunnies by 1.5.",
-    shape: "star",
   },
   {
     name: "Aquamarine",
@@ -52,7 +47,6 @@ export const gemPool = [
     rarity: "common",
     bunniesOnDraw: 3,
     effect: "Add 3 bunnies when you draw the socketed card.",
-    shape: "crystal",
   },
   {
     name: "Tourmaline",
@@ -63,7 +57,6 @@ export const gemPool = [
     ink: 2,
     bunnyMult: 1.5,
     effect: "+2 ink cost, adds +3 bunnies, and multiplies bunnies by 1.5.",
-    shape: "broken",
   },
   {
     name: "Zircon",
@@ -72,7 +65,14 @@ export const gemPool = [
     rarity: "common",
     reduceEnemyMaxHpPercent: 0.05,
     effect: "Reduces enemy max hp by 5%.",
-    shape: "octagon",
+  },
+  {
+    name: "Granite",
+    type: "gem",
+    color: "basic",
+    rarity: "common",
+    shieldAdd: 5,
+    effect: "Add 5 shield.",
   },
 ];
 
