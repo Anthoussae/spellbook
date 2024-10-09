@@ -29,6 +29,9 @@ export function castSpell(oldState, card) {
       state.spellbook.push("page");
     }
   }
+  if (card.shieldAdd) {
+    state.shield += card.shieldAdd;
+  }
   if (card.bunnyMult) {
     state.bunnies = state.bunnies * card.bunnyMult;
   }

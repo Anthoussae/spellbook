@@ -19,6 +19,9 @@ export function upgradeCard(oldState, card) {
   if (upgradedCard.bunnyMult) {
     upgradedCard.bunnyMult = upgradedCard.bunnyMult + 0.5;
   }
+  if (upgradedCard.shieldAdd) {
+    upgradedCard.shieldAdd = upgradedCard.shieldAdd + 5;
+  }
   if (upgradedCard.cardsDrawn) {
     upgradedCard.cardsDrawn = upgradedCard.cardsDrawn + 1;
   }
