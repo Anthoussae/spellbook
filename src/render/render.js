@@ -32,6 +32,7 @@ export const relicImages = {
   goldIngot: require("../data/imgs/relics/goldIngot.png"),
   encyclopaedia: require("../data/imgs/relics/encyclopaedia.png"),
   golfBall: require("../data/imgs/relics/golfBall.png"),
+  nazar: require("../data/imgs/relics/nazar.png"),
 };
 export const animationImages = {
   poof: require("../data/imgs/displayElements/poof.png"),
@@ -59,6 +60,7 @@ export const gemImages = {
   onyx: require("../data/imgs/gems/onyx.png"),
   tourmaline: require("../data/imgs/gems/tourmaline.png"),
   zircon: require("../data/imgs/gems/zircon.png"),
+  pumice: require("../data/imgs/gems/pumice.png"),
 };
 export const cardBacks = {
   reverse: require("../data/imgs/cardBacks/reverse.png"),
@@ -71,6 +73,7 @@ export const cardBacks = {
   red: require("../data/imgs/cardBacks/red.png"),
   white: require("../data/imgs/cardBacks/white.png"),
   yellow: require("../data/imgs/cardBacks/yellow.png"),
+  grey: require("../data/imgs/cardBacks/grey.png"),
 };
 export const potions = {
   bunnyJar: require("../data/imgs/potions/bunnyJar.png"),
@@ -98,6 +101,10 @@ export const spellIcons = {
   timeFlip: require("../data/imgs/spellIcons/timeFlip.png"),
   timeWarp: require("../data/imgs/spellIcons/timeWarp.png"),
   tripleBunnies: require("../data/imgs/spellIcons/tripleBunnies.png"),
+  shield: require("../data/imgs/spellIcons/shield.png"),
+  fortress: require("../data/imgs/spellIcons/fortress.png"),
+  dispel: require("../data/imgs/spellIcons/dispel.png"),
+  massDispel: require("../data/imgs/spellIcons/massDispel.png"),
 };
 export const paths = {
   rest: require("../data/imgs/pathOfuda/rest.png"),
@@ -124,6 +131,7 @@ export const buffs = {
   heart: require("../data/imgs/buffs/heart.png"),
   shield: require("../data/imgs/buffs/shield.png"),
   spiral: require("../data/imgs/buffs/spiral.png"),
+  broken: require("../data/imgs/buffs/brokenBuff.png"),
 };
 
 import { renderBagExamine } from "./renderBagExamine";

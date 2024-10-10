@@ -40,6 +40,9 @@ export function insertGem(card, gem) {
   if (gem.pageAdd) {
     newCard.pageAdd = (newCard.pageAdd || 0) + gem.pageAdd;
   }
+  if (gem.shieldAdd) {
+    newCard.shieldAdd = (newCard.shieldAdd || 0) + gem.shieldAdd;
+  }
   console.log(newCard);
   return newCard;
 }

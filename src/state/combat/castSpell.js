@@ -1,5 +1,6 @@
 "use strict";
 import { drawXCards } from "./drawXCards";
+import { purgeBuff } from "./purgeBuff";
 // import { renderBattlefield } from "../../render/renderBattlefield";
 
 export function castSpell(oldState, card) {
@@ -9,6 +10,11 @@ export function castSpell(oldState, card) {
   } else if (typeof card != "object") {
     console.log("not a valid spell!");
     return state;
+  }
+  if (card.purge) {
+    for (let i = 0; i < card.purge; i++) {
+      state = purgeBuff(state);
+    }
   }
   if (card.cardsDrawn) {
     state = drawXCards(state, card.cardsDrawn);

@@ -13,6 +13,7 @@ export function renderPathSelection(state) {
     const highlightedImagePath = paths["highlighted" + path.pathType];
     const lockedOverlay = paths["locked"];
     const hp = path.hp ? ` (${path.hp} HP)` : "";
+    const monsterClass = path.monsterClass ? path.monsterClass : "";
     html += renderPath(
       imagePath,
       highlightedImagePath,
@@ -21,7 +22,8 @@ export function renderPathSelection(state) {
       path.pathType,
       path.locked,
       lockedOverlay,
-      hp
+      hp,
+      monsterClass
     );
   });
   outputDiv.innerHTML = html;
@@ -95,7 +97,8 @@ function renderPath(
   pathType,
   locked,
   lockedOverlay,
-  hp
+  hp,
+  monsterClass
 ) {
   let html = "";
   if (!locked) {
@@ -112,8 +115,12 @@ function renderPath(
     html += `<img class="locked-overlay ${index}" src="${lockedOverlay}"></div>`;
   }
   html += `<img class="path-image highlighted-image" src="${highlightedImagePath}" alt="${name}" style="display: none"/>`;
-  if (!pathType === "combat") html += `<div class="path-name">${name}</div>`;
-  else html += `<div class="path-name">${name}${hp}</div>`;
+  if (!pathType === "combat") {
+    html += `<div class="path-name">${name}</div>`;
+  } else {
+    html += `<div class="path-name">${name}${hp}</div>`;
+    html += `<div class="path-name">${monsterClass}</div>`;
+  }
   html += `</div>
     </div>
   `;

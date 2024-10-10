@@ -15,7 +15,7 @@ export function populateEnemyPool() {
       supertype: "enemy", //is this needed? Purge if posible, it's unclear.
       pathType: "combat",
       //monsterClass should randomly be one of "elite", "enchanted", or "basic"
-      monsterClass: ["elite", "enchanted", "basic"][
+      monsterClass: ["Elite", "Enchanted", "Basic"][
         Math.floor(Math.random() * 3)
       ],
       imgName: "default",
@@ -34,7 +34,7 @@ export function populateEnemyPool() {
     rarity: "common",
     supertype: "enemy",
     pathType: "combat",
-    monsterClass: "basic",
+    monsterClass: "Enchanted",
     imgName: "lettuceGoblin",
   });
   enemyPool.push({
@@ -48,7 +48,7 @@ export function populateEnemyPool() {
     rarity: "common",
     supertype: "enemy",
     pathType: "combat",
-    monsterClass: "basic",
+    monsterClass: "Enchanted",
     imgName: "lettuceGoblin",
   });
   enemyPool.push({
@@ -62,7 +62,7 @@ export function populateEnemyPool() {
     rarity: "common",
     supertype: "enemy",
     pathType: "combat",
-    monsterClass: "basic",
+    monsterClass: "Enchanted",
     imgName: "lettuceGoblin",
   });
   return enemyPool;

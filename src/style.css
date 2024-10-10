@@ -182,10 +182,10 @@ body {
   display: block; /* Shows the text on hover */
 }
 
-/* Image styling */
+/* Image styling. */
+
 .tooltip img {
   filter: var(--relicStyling);
-
   max-width: 100%; /* Ensures the image scales down to fit the container width */
   height: auto; /* Maintains the aspect ratio of the image */
   margin: 4.2vw; /* Adds some space around each image */
@@ -776,25 +776,81 @@ button {
   display: block;
 }
 
-.buffs {
+/*buffs - display still a bit bugged, quivering and resizing weirdly*/
+
+.buff-display {
   display: flex;
-  background-color: /*pale red*/ rgba(255, 0, 0, 0.4);
-  flex-direction: column;
-  justify-content: left;
-  font-size: 1.8vw;
-  align-items: center;
-  position: absolute;
-  width: 14vw;
+  flex-direction: row; /* Arrange in row */
+  justify-content: space-evenly; /* Evenly distribute buffs */
+  align-items: center; /* Vertically align buffs */
   height: 10vh;
-  top: 4vh; /* Move closer to the center vertically */
-  padding: 4px;
-  margin-left: 56.5vw;
+  width: 20vw;
   border-radius: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: absolute;
+  margin-top: 20vw;
 }
 
+.tooltiptext.buff-text {
+  pointer-events: none;
+}
+
+.buff-display.player {
+  left: 4vw;
+}
+
+.buff-display.enemy {
+  right: 4vw;
+}
+
+.buff {
+  width: 50px; /* Set a fixed width for the buffs */
+  height: 50px; /* Set a fixed height for the buffs */
+  object-fit: cover; /* Ensure the image fits well */
+  margin: 0 5px; /* Add some spacing between buffs */
+  transform: scale(3); /* Shrink buff if needed */
+}
+
+.buff-image img {
+  filter: none;
+}
+
+.buff-image img:hover {
+  transform: scale(3.6);
+}
+
+.tooltiptext.buff-image {
+  pointer-events: none; /* Disable all user interactions */
+}
+
+.tooltip.buff-image {
+  margin: -15px;
+}
+
+.tooltip.buff-image:hover {
+  margin: -15px;
+  pointer-events: none;
+}
+
+.tooltip .buff .tooltiptext .buff-display .buff-image .buff-text :hover {
+  pointer-events: none;
+}
+
+.buff-display * {
+  pointer-events: none;
+}
+
+.buff-display *:hover {
+  pointer-events: none;
+}
+
+#enemyBuffDisplay * {
+  pointer-events: visiblePainted;
+}
+#enemyBuffDisplay *:hover {
+  pointer-events: visiblePainted;
+}
+
+/*ink*/
 .ink-drop {
   /* background-image: url("data/imgs/displayElements/inkdrop.png");
   background-color: #120336;
@@ -853,23 +909,6 @@ button {
   right: 4vw;
 }
 
-.buff-display {
-  /* background-color: var(--containerBackgroundColor); */
-  display: flex;
-  flex-direction: column;
-  height: 10vh;
-  width: 20vw;
-  border-radius: 25px;
-  position: absolute;
-  margin-top: 20vw;
-}
-
-.buff-display.player {
-  left: 4vw;
-}
-.buff-display.enemy {
-  right: 4vw;
-}
 .output.combat {
   width: 50vw;
   margin-top: -5vw;
@@ -897,4 +936,32 @@ button {
 
 #combatShield {
   color: rgba(0, 0, 128, 0.4);
+}
+
+/*purge animation*/
+/* CSS for the white puff effect */
+@keyframes puffEffect {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+
+.puff {
+  position: absolute;
+  width: 50px; /* Adjust the size as needed */
+  height: 50px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none; /* This prevents the puff from interfering with clicks */
+  animation: puffEffect 0.5s ease-out forwards;
 }

@@ -67,9 +67,9 @@ export const gemPool = [
     effect: "Reduces enemy max hp by 5%.",
   },
   {
-    name: "Granite",
+    name: "Pumice",
     type: "gem",
-    color: "basic",
+    color: "grey",
     rarity: "common",
     shieldAdd: 5,
     effect: "Add 5 shield.",

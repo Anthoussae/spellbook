@@ -6,8 +6,8 @@ export function checkCastTriggers(oldState) {
     let relic = relics[i];
     if (relic.trigger === "cast") {
       //Magic Staff
-      if (relic.effect === "bunnyAdd") {
-        state.bunnies = state.bunnies + relic.bunnyAdd;
+      if (relic.effect === "bunnyMult") {
+        state.bunnies = Math.floor(state.bunnies * relic.bunnyMult);
       }
     }
   }

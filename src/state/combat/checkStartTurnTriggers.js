@@ -1,4 +1,5 @@
 import { sleep } from "../../util/sleep";
+import { purgeBuff } from "./purgeBuff";
 
 export function checkStartTurnTriggers(oldState) {
   let state = { ...oldState };
@@ -32,8 +33,13 @@ export function checkStartTurnTriggers(oldState) {
         console.log("rendering shield");
         state.shield = state.shield + relic.shieldAdd;
       }
-
-      // Wait for 200ms before processing the next relic
+      //shakujo
+    }
+    if (relic.trigger === "combatStart") {
+      if (relic.purge) {
+        console.log("Purging a buff");
+        state = purgeBuff(state);
+      }
     }
   }
 

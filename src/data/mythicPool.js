@@ -85,24 +85,73 @@ export const mythicPool = [
     buffDisplay: false,
   },
   {
-    name: "Nazar",
-    imgName: "nazar",
-    effect: "Gain 10 shield at the start of each turn.",
-    shieldAdd: 10,
+    name: "Shakujō",
+    imgName: "shakujo",
+    effect: "Purge one enemy buff at the start of each combat.",
+    purge: 1,
     rarity: "mythic",
     type: "relic",
-    trigger: "turnStart",
+    trigger: "combatStart",
     buffDisplay: false,
   },
-  //a relic that upgrades any card you add to your deck.
-  //a relic that grants +25% bunnies on cast.
-  //a relic that purges one buff from an enemy at the start of each combat.
-
-  //4 more relics
-  //a relic that heals 10 HP each combat.
-  //a relic that shuffles 7 random cards into your deck.
-  //a relic that sockets 3 random cards in your deck with gems.
-  //a relic that randomly upgrades one of your cards 4 times.
-
-  //relics with drawbacks, like StS
+  {
+    name: "Shakujō",
+    imgName: "shakujo",
+    effect: "Purge one enemy buff at the start of each combat.",
+    purge: 1,
+    rarity: "mythic",
+    type: "relic",
+    trigger: "combatStart",
+    buffDisplay: false,
+  },
+  {
+    name: "Shakujō",
+    imgName: "shakujo",
+    effect: "Purge one enemy buff at the start of each combat.",
+    purge: 1,
+    rarity: "mythic",
+    type: "relic",
+    trigger: "combatStart",
+    buffDisplay: false,
+  },
+  {
+    name: "Shakujō",
+    imgName: "shakujo",
+    effect: "Purge one enemy buff at the start of each combat.",
+    purge: 1,
+    rarity: "mythic",
+    type: "relic",
+    trigger: "combatStart",
+    buffDisplay: false,
+  },
+  {
+    name: "Shakujō",
+    imgName: "shakujo",
+    effect: "Purge one enemy buff at the start of each combat.",
+    purge: 1,
+    rarity: "mythic",
+    type: "relic",
+    trigger: "combatStart",
+    buffDisplay: false,
+  },
+  {
+    name: "Shakujō",
+    imgName: "shakujo",
+    effect: "Purge one enemy buff at the start of each combat.",
+    purge: 1,
+    rarity: "mythic",
+    type: "relic",
+    trigger: "combatStart",
+    buffDisplay: false,
+  },
+  {
+    name: "Shakujō",
+    imgName: "shakujo",
+    effect: "Purge one enemy buff at the start of each combat.",
+    purge: 1,
+    rarity: "mythic",
+    type: "relic",
+    trigger: "combatStart",
+    buffDisplay: false,
+  },
 ];

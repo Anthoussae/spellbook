@@ -1,5 +1,4 @@
 "use strict";
-// an array with all the relics.
 export const relicPool = [
   {
     //integrated
@@ -71,12 +70,11 @@ export const relicPool = [
     buffDisplay: false,
   },
   {
-    //integrated
     //let's adjust it : bunnymult = 1.5
     name: "Magic Staff",
     imgName: "magicStaff",
-    effect: "Gain 5 bunnies when you cast your spellbook.",
-    bunnyAdd: 5,
+    effect: "Gain 50% more bunnies when you cast your spellbook.",
+    bunnyMult: 1.5,
     rarity: "mythic",
     type: "relic",
     trigger: "cast",
@@ -113,6 +111,16 @@ export const relicPool = [
     bunniesOnDraw: 1,
     trigger: "draw",
     buffDisplay: true,
+  },
+  {
+    name: "Nazar",
+    imgName: "nazar",
+    effect: "Gain 10 shield at the start of each turn.",
+    shieldAdd: 10,
+    rarity: "common",
+    type: "relic",
+    trigger: "turnStart",
+    buffDisplay: false,
   },
   // {
   //   //integrated
