@@ -26,9 +26,9 @@ export function insertGem(card, gem) {
   if (gem.inkAdd) {
     newCard.inkAdd = (newCard.inkAdd || 0) + gem.inkAdd;
   }
-  if (gem.reduceEnemyMaxHpPercent) {
-    newCard.reduceEnemyMaxHpPercent =
-      (newCard.reduceEnemyMaxHpPercent || 0) + gem.reduceEnemyMaxHpPercent;
+  if (gem.reduceEnemyMaxHpFraction) {
+    newCard.reduceEnemyMaxHpFraction =
+      (newCard.reduceEnemyMaxHpFraction || 0) + gem.reduceEnemyMaxHpFraction;
   }
   if (gem.retriggers && newCard.retriggers) {
     newCard.retriggers = (newCard.retriggers || 0) + gem.retriggers;

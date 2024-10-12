@@ -25,9 +25,9 @@ export function castSpell(oldState, card) {
   if (card.inkAdd) {
     state.combatInk += card.inkAdd;
   }
-  if (card.reduceEnemyMaxHpPercent) {
+  if (card.reduceEnemyMaxHpFraction) {
     state.currentEnemy.hp = Math.floor(
-      state.currentEnemy.hp * (1 - card.reduceEnemyMaxHpPercent)
+      state.currentEnemy.hp * (1 - card.reduceEnemyMaxHpFraction)
     );
   }
   if (card.pageAdd) {

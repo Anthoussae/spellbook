@@ -63,7 +63,7 @@ export const gemPool = [
     type: "gem",
     color: "white",
     rarity: "common",
-    reduceEnemyMaxHpPercent: 0.05,
+    reduceEnemyMaxHpFraction: 0.05,
     effect: "Reduces enemy max hp by 5%.",
   },
   {

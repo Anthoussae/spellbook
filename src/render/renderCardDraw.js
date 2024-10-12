@@ -1,59 +1,54 @@
 "use strict";
 import { renderCard } from "./renderCard";
+import { playCard } from "../state/combat/playCard";
 
-export function renderCardDraw(drawnCard) {
-  const cardHtml = renderCard(drawnCard, "hand"); // Render the card HTML
+export function renderCardDraw(drawnCard, state) {
+  let cardHtml = renderCard(drawnCard, "hand"); // Render the card HTML
+
   const handDiv = document.getElementById("combatHand");
   const deckDiv = document.getElementById("deckElement");
 
   // Create a card element and add it to the deckDiv temporarily
   const cardElement = document.createElement("div");
+  cardElement.classList.add("cardContainer");
+
   cardElement.innerHTML = cardHtml;
-  console.log("cardElement:", cardElement);
-  deckDiv.appendChild(cardElement);
+  handDiv.appendChild(cardElement);
 
-  // Calculate card positions based on the number of cards in hand
-  const currentCards = handDiv.getElementsByClassName("card").length;
-  const cardWidth = 181; // Width of each card in px
-  const cardSpacing = 30; // Spacing between cards in px
-  const maxSpacedCardsInHand = 4;
-  const offsetX = cardWidth + cardSpacing; // Total width a card takes with spacing
+  // updateCardRotations(state);
 
-  let finalLeft = 0;
+  //this may be bugged: Does it register the state at the time of drawing the card, or the state upon clicking it?
+  cardElement.addEventListener("click", () => {
+    state = playCard(state, drawnCard, cardElement);
+    //remove the card from the hand
+    // cardElement.remove();
+  });
+}
 
-  if (currentCards < maxSpacedCardsInHand) {
-    // Calculate position based on current cards in hand
-    finalLeft =
-      handDiv.offsetWidth / 2 -
-      (currentCards * offsetX) / 2 +
-      currentCards * offsetX;
-  } else {
-    // Stack cards, offsetting the visible portion slightly
-    finalLeft =
-      handDiv.offsetWidth / 2 -
-      (maxSpacedCardsInHand * offsetX) / 2 +
-      (maxSpacedCardsInHand - 1) * offsetX;
-    // Apply stacking behavior by reducing the offset for previous cards
-    cardElement.style.zIndex = currentCards + 1; // Ensure the newest card is on top
+//bugged for even numbers
+//bugged when playing cards
+function updateCardRotations(state) {
+  const handDiv = document.getElementById("combatHand");
+  const cardsInHand = handDiv.getElementsByClassName("cardContainer");
+
+  let totalCards = state.hand.length;
+  let middleIndex = Math.floor((totalCards - 1) / 2); // Adjusted for zero-based index
+  console.log("middleIndex", middleIndex);
+
+  // Constants for visual adjustments
+  const maxVerticalShift = 20; // Maximum pixels to lower/raise cards
+  const rotationFactor = 5; // Degrees of rotation
+
+  // Loop through each card and apply both rotation and vertical adjustment
+  for (let i = 0; i < cardsInHand.length; i++) {
+    let rotation = (i - middleIndex) * rotationFactor;
+
+    // Calculate vertical shift: closer to middle = higher (positive values raise, negative lower)
+    let verticalShift = Math.abs(i - middleIndex) * maxVerticalShift; // Cards farther from the middle go lower
+
+    // Apply rotation and vertical shift
+    cardsInHand[
+      i
+    ].style.transform = `rotate(${rotation}deg) translateY(${verticalShift}px)`;
   }
-
-  // Move card from deck to hand with animation
-  const rect = deckDiv.getBoundingClientRect(); // Starting position
-  const handRect = handDiv.getBoundingClientRect(); // Target position
-
-  cardElement.style.position = "absolute";
-  cardElement.style.left = `${rect.left}px`;
-  cardElement.style.top = `${rect.top}px`;
-  cardElement.style.transition = "all 0.25s ease";
-
-  // Append the card to the handDiv after positioning it absolutely
-  setTimeout(() => {
-    handDiv.appendChild(cardElement);
-
-    // Move card to its final position
-    cardElement.style.left = `${handRect.left + finalLeft}px`;
-    cardElement.style.top = `${handRect.top}px`;
-  }, 10); // Delay to allow for transition
-
-  console.log("Rendering card draw:", drawnCard);
 }

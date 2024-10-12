@@ -21,6 +21,7 @@ export const relicImages = {
   gaolersKeychain: require("../data/imgs/mythicRelics/gaolersKeychain.png"),
   tarotDeck: require("../data/imgs/mythicRelics/tarotDeck.png"),
   pixieDust: require("../data/imgs/mythicRelics/pixieDust.png"),
+  shakujo: require("../data/imgs/mythicRelics/shakujo.png"),
   //relics
   magicWand: require("../data/imgs/relics/magicWand.png"),
   brokenWand: require("../data/imgs/relics/brokenWand.png"),
@@ -51,6 +52,7 @@ export const displayElementImages = {
   page: require("../data/imgs/displayElements/page.png"),
   senjafudaFrame: require("../data/imgs/displayElements/senjafudaFrame.png"),
   inkdrop: require("../data/imgs/displayElements/inkdrop.png"),
+  emptyPage: require("../data/imgs/displayElements/emptyPage.png"),
 };
 export const gemImages = {
   amber: require("../data/imgs/gems/amber.png"),

@@ -66,9 +66,9 @@ export function renderCard(card, location) {
   if (card.inkAdd) {
     cardText += `Adds <span style="color: ${numberColor};">${card.inkAdd}</span> ink.`;
   }
-  if (card.reduceEnemyMaxHpPercent) {
+  if (card.reduceEnemyMaxHpFraction) {
     cardText += `Reduces enemy max hp by <span style="color: ${numberColor};">${
-      card.reduceEnemyMaxHpPercent * 100
+      card.reduceEnemyMaxHpFraction * 100
     }%</span>.`;
   }
   if (card.name === "Golden Bunny") {
@@ -84,7 +84,7 @@ export function renderCard(card, location) {
   }
 
   return `
-    <div class="card ${location}" style="display: flex; flex-direction: column; width: 181px; height: 265px; margin: 0.5%; text-align: center; position: relative; border-radius: 8px;">
+    <div class="card" style="display: flex; flex-direction: column; width: 181px; height: 265px; margin: 0.5%; text-align: center; border-radius: 8px;">
       <!-- Card back with shadow -->
       <img src="${cardBack}" alt="${card.name}" style="height: 100%; width: 100%; border-radius: 8px; filter: drop-shadow(-4px 4px 8px rgba(0, 0, 0, 0.2));">
       

@@ -5,6 +5,8 @@ import { tickNumber } from "../util/tickNumber";
 import { tickPlayerHp } from "../util/tickPlayerHp";
 import { characters } from "./render";
 import { buffs } from "./render";
+import { displayElementImages } from "./render";
+import { spellIcons } from "./render";
 
 export function renderCombat(state) {
   document.getElementById("combatBannerElement").innerHTML =
@@ -12,6 +14,7 @@ export function renderCombat(state) {
   renderCombatHud(state);
   renderCharacters(state);
   renderBuffs(state);
+  renderSpellbook(state);
 }
 
 function renderCombatHud(state) {
@@ -97,4 +100,36 @@ function generateBuffText(buff, state) {
     buffText += buff.effect;
   }
   return buffText;
+}
+
+function renderSpellbook(state) {
+  let outputDiv = document.getElementById("combatOutput");
+  let spellbook = state.spellbook;
+  let pageWidth = 900 / state.spellbook.length;
+
+  let html = "";
+  console.log(state.spellbook);
+  spellbook.forEach((spell, index) => {
+    if (spell === "page") {
+      //should have the image of page, displayElementImages[page];
+
+      html += `
+  <div class="spellbook-page" id="page${index}" data-index="${index}" style="width: ${pageWidth}px">
+    <img src="${displayElementImages["emptyPage"]}" alt="page" class="spellbook-page-image">
+    <div class="spellbook-page-text">Empty Page</div>
+  </div>
+  `;
+    } else {
+      console.log("spell", spell);
+      html += `
+  <div class="spellbook-page" id="page${index}" data-index="${index}" style="width: ${pageWidth}px">
+  <img src="${
+    spellIcons[spell.imgName]
+  }" alt="card" class="spellbook-page-image style="display:flex"">
+    <div class="spellbook-page-text">${spell.name}</div>
+  </div>
+  `;
+    }
+  });
+  outputDiv.innerHTML = html;
 }

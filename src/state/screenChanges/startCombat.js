@@ -35,6 +35,12 @@ export function startCombat(oldState) {
   state.bonusBunnies = 0;
   state = updateCastBunnies(state);
 
+  //assign logic to the cast button
+  let castButton = document.getElementById("castBtn");
+  castButton.onclick = function () {
+    console.log("Casting");
+  };
+
   render(state);
 }
 
@@ -67,6 +73,7 @@ export function startTurn(oldState) {
   for (let i = 0; i < state.combatPages; i++) {
     state.spellbook.push("page");
   }
+  console.log("state.spellbook", state.spellbook);
   //draw hand
   state = drawXCards(state, state.combatHandSize);
 

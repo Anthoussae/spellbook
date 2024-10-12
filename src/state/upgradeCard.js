@@ -31,9 +31,9 @@ export function upgradeCard(oldState, card) {
   if (upgradedCard.inkAdd) {
     upgradedCard.inkAdd = upgradedCard.inkAdd + 1;
   }
-  if (upgradedCard.reduceEnemyMaxHpPercent) {
-    upgradedCard.reduceEnemyMaxHpPercent =
-      upgradedCard.reduceEnemyMaxHpPercent + 0.1;
+  if (upgradedCard.reduceEnemyMaxHpFraction) {
+    upgradedCard.reduceEnemyMaxHpFraction =
+      upgradedCard.reduceEnemyMaxHpFraction + 0.1;
   }
   if (upgradedCard.purge) {
     upgradedCard.purge = upgradedCard.purge + 1;

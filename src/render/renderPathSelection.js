@@ -3,6 +3,14 @@ import { paths } from "./render";
 import { advanceScreen } from "../state/screenChanges/advanceScreen";
 import { renderHud } from "./renderHud";
 
+//currently stopgap behavior: desired behavior uses highlighted images as follows
+//in order to use two different images for path (highlighted and unselected),
+//use two images in the same div
+//both positioned absolutely in the exact same palce
+//on hover (in css) transition the opacity from 1 to 0 and from 0 to 1 respectively
+//events are on the div that surrounds them, not on the images
+//if you scale the images, make sure you do both
+
 export function renderPathSelection(state) {
   let outputDiv = document.getElementById("pathSelectionOutput");
   let options = state.presentedOptions;

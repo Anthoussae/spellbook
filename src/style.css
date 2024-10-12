@@ -5,6 +5,16 @@
   --relicStyling: brightness(1.4) contrast(0.7) saturate(0.7);
 }
 
+/* Prevent dragging images and links */
+img,
+a {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+}
+
 /* Disable text selection */
 * {
   user-select: none;
@@ -87,17 +97,6 @@ body {
   /* text should be dark blue, banner should be slightly bluer*/
   color: #160042; /* Dark text color */
   background-color: rgba(0, 0, 128, 0.4); /* Slightly transparent blue */
-}
-
-#combatBannerElement {
-  /* text should be dark red, banner should be slightly redder*/
-  /* text should be dark red, banner should be slightly redder*/
-  color: #800000; /* Dark text color */
-  background-color: rgba(255, 0, 0, 0.4); /* Slightly transparent red */
-  height: 10vh;
-  font-size: 3.6vw;
-  justify-content: center;
-  padding-top: 0.4vw;
 }
 
 /* deck icon */
@@ -584,6 +583,7 @@ button {
 
 .card {
   width: 1300%; /*not culprit of deck jump */
+  position: relative;
 }
 
 .card:hover {
@@ -738,17 +738,38 @@ button {
 /*combat*/
 
 .hand {
-  background-color: var(--containerBackgroundColor);
-  display: block;
-  width: 62vw;
+  display: flex;
+  flex-direction: row;
+  width: 50vw;
+  justify-content: center; /* Center items vertically */
+  align-items: center; /* Center items horizontally */
   height: 18vh;
   position: absolute;
-  margin-right: -10vw;
-  margin-bottom: -70vh;
+  margin-right: -3vw;
+  margin-bottom: -40vh;
   border-radius: 25px;
   /*allow contents to spill out*/
   overflow: visible;
   overflow-y: visible;
+  z-index: 2;
+}
+
+.cardContainer {
+  position: relative;
+  flex: 1;
+  display: flex;
+  padding: 0px;
+}
+
+.cardContainer:hover .card {
+  transform: translateY(-70px);
+  filter: drop-shadow(0 0 0.75rem rgb(97, 4, 99));
+}
+
+.hand .card {
+  transition: transform 0.25s ease-in-out;
+  transform: translateY(0px);
+  position: absolute;
 }
 
 .enemyHud {
@@ -766,6 +787,7 @@ button {
   padding: 4px;
   margin-left: 72vw;
   border-radius: 25px;
+  right: 7vw;
 }
 
 .enemyHp {
@@ -795,11 +817,11 @@ button {
 }
 
 .buff-display.player {
-  left: 4vw;
+  left: 2vw;
 }
 
 .buff-display.enemy {
-  right: 4vw;
+  right: 2vw;
 }
 
 .buff {
@@ -877,6 +899,7 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 }
 
 .ink-number {
@@ -903,23 +926,14 @@ button {
 }
 
 .char-display.player {
-  left: 4vw;
+  left: 2vw;
 }
 .char-display.enemy {
-  right: 4vw;
-}
-
-.output.combat {
-  width: 50vw;
-  margin-top: -5vw;
-  height: 30vw;
-  border-radius: 25px;
-
-  background-color: var(--containerBackgroundColor);
+  right: 2vw;
 }
 
 .hud.combat {
-  left: 10vw;
+  left: 7vw;
   color: #014b1c; /* Dark text color */
   background-color: var(--containerBackgroundColor);
   display: flex;
@@ -964,4 +978,53 @@ button {
   opacity: 0;
   pointer-events: none; /* This prevents the puff from interfering with clicks */
   animation: puffEffect 0.5s ease-out forwards;
+}
+
+/* pages and spellbook */
+
+.output.combat {
+  width: 50vw;
+  margin-top: -5vw;
+  height: 30vw;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: row;
+
+  /* force contents to fit in width by resizing it*/
+}
+
+.spellbook-page {
+  pointer-events: none;
+  height: 300px; /* Set a fixed height for the elements */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.5rem;
+  box-sizing: border-box;
+  transform: scale(0.6);
+  flex-direction: column; /* This ensures that the image and text are stacked vertically */
+}
+
+.spellbook-page-image {
+  /* add a shadow to the left of the non-transparent parts*/
+  /* filter: drop-shadow(12px 12px 0px rgba(0, 0, 0, 0.2)); */
+  /*add an outline to the non-transparent parts of the image*/
+  filter: drop-shadow(0 0 0.75rem rgb(93, 91, 93));
+}
+
+.spellbook-page-text {
+  margin-top: 10px; /* Add some space between the image and the text */
+  text-align: center; /* Center the text */
+  color: grey;
+}
+
+/*cast button*/
+
+#castBtn {
+  margin-top: 12vw;
+  z-index: 2;
+  width: 90%;
+  height: 10%;
+  font-size: 30px;
 }
