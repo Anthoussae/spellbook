@@ -26,7 +26,7 @@ export function applyBuffEffects(oldState, timing) {
         }
         if (buff.name === "Weaken") {
           buff.storedValue = buff.bunnyAddPerLevel * level;
-          state.bunnies = state.bunnies - buff.storedValue;
+          state.bunnies = state.bunnies + buff.storedValue;
         }
         if (buff.name === "Empowered") {
           buff.storedValue = buff.bonusDamagePerLevel * level;

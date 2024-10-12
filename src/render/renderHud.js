@@ -6,6 +6,7 @@ import { renderDeckExamine } from "./renderDeckExamine";
 import { getNumberFromElement } from "../util/getNumberFromElement";
 import { tickNumber } from "../util/tickNumber";
 import { tickPlayerHp } from "../util/tickPlayerHp";
+import { renderCombat } from "./renderCombat";
 
 const hudEventRemovers = [];
 
@@ -15,11 +16,16 @@ export function renderHud(oldState) {
   // console.log(new Error().stack);
   removeAllHudEventHandlers();
   renderNumbers(state);
+
   renderDeckButton(state);
   renderBagButton(state);
+  if (state.currentScreen === "combat") {
+    renderCombat(state);
+  }
 }
 
 //bag and deck buttons
+//these are currently bugged during combat - they do not seem to acquire the correct state.
 // Store click handler reference outside the function
 function handleBagButtonClick(state, isBagExamine) {
   return (event) => {

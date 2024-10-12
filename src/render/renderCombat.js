@@ -7,6 +7,8 @@ import { characters } from "./render";
 import { buffs } from "./render";
 import { displayElementImages } from "./render";
 import { spellIcons } from "./render";
+import { updateCastBunnies } from "../state/combat/updateCastBunnies";
+import { castSpellbook } from "../state/combat/castSpellbook";
 
 export function renderCombat(state) {
   document.getElementById("combatBannerElement").innerHTML =
@@ -15,6 +17,7 @@ export function renderCombat(state) {
   renderCharacters(state);
   renderBuffs(state);
   renderSpellbook(state);
+  renderCastButton(state);
 }
 
 function renderCombatHud(state) {
@@ -43,6 +46,21 @@ function renderCombatHud(state) {
     "Attack: "
   );
   tickNumber(ink, currentInk, state.combatInk, "Ink: ");
+}
+
+export function renderCastButton(state) {
+  let castButtonDiv = document.getElementById("castButtonContainer");
+  let html = `<button id="castBtn" class="menuBtn">Cast Spellbook</button>`;
+  castButtonDiv.innerHTML = "";
+  castButtonDiv.innerHTML = html;
+  state = updateCastBunnies(state);
+  console.log("castBunnies", state.castBunnies);
+  let castButton = document.getElementById("castBtn");
+  castButton.innerHTML = `Cast (${state.castBunnies})`;
+  castButton.onclick = function () {
+    console.log("Casting", state.spellbook);
+    castSpellbook(state);
+  };
 }
 
 function renderCharacters(state) {
@@ -102,6 +120,8 @@ function generateBuffText(buff, state) {
   return buffText;
 }
 
+//spell effect
+
 function renderSpellbook(state) {
   let outputDiv = document.getElementById("combatOutput");
   let spellbook = state.spellbook;
@@ -121,15 +141,92 @@ function renderSpellbook(state) {
   `;
     } else {
       console.log("spell", spell);
+      let spellEffect = generateSpellText(spell);
       html += `
   <div class="spellbook-page" id="page${index}" data-index="${index}" style="width: ${pageWidth}px">
   <img src="${
     spellIcons[spell.imgName]
   }" alt="card" class="spellbook-page-image style="display:flex"">
     <div class="spellbook-page-text">${spell.name}</div>
+        <div class="spellbook-page-effect">${spellEffect}</div>
+
   </div>
   `;
     }
   });
   outputDiv.innerHTML = html;
+}
+
+//roughly copied from render card. COuld be refactored.
+function generateSpellText(spell) {
+  let cardText = "";
+  let card = { ...spell };
+
+  let inkCost = "";
+  if (card.ink) {
+    inkCost = card.ink;
+  }
+
+  let typeColor = "black";
+
+  if (card.trigger === "instant") {
+    typeColor = "white";
+  }
+
+  // Handle card text to include colors corresponding to upgrades.
+  let numberColor = "black";
+  if (card.upgrade) {
+    if (card.upgrade > 0) {
+      numberColor = "green";
+    } else if (card.upgrade < 0) {
+      numberColor = "red";
+    }
+  }
+
+  // Dynamic card text and number color logic with singular/plural handling
+  if (card.bunnyAdd) {
+    const bunnyWord = card.bunnyAdd === 1 ? "bunny" : "bunnies";
+    cardText += `Adds <span style="color: ${numberColor};">${card.bunnyAdd}</span> ${bunnyWord}.`;
+  }
+  if (card.bunnyMult) {
+    cardText += `Multiplies bunnies by <span style="color: ${numberColor};">${card.bunnyMult}</span>.`;
+  }
+  if (card.cardsDrawn) {
+    const cardWord = card.cardsDrawn === 1 ? "card" : "cards";
+    cardText += `Draw <span style="color: ${numberColor};">${card.cardsDrawn}</span> ${cardWord}.`;
+  }
+  if (card.retriggers) {
+    const timeWord = card.retriggers === 1 ? "time" : "times";
+    cardText += `Retriggers <span style="color: ${numberColor};">${card.retriggers}</span> ${timeWord}.`;
+    if (card.name === "Echoing Splash") {
+      cardText += " Affects spells to the left and right.";
+    }
+    if (card.name === "Time Warp") {
+      cardText += " Affects all spells.";
+    }
+    if (card.name === "Time Flip") {
+      cardText += " Affects all spells cast so far, in reverse order.";
+    }
+  }
+  if (card.inkAdd) {
+    cardText += `Adds <span style="color: ${numberColor};">${card.inkAdd}</span> ink.`;
+  }
+  if (card.reduceEnemyMaxHpFraction) {
+    cardText += `Reduces enemy max hp by <span style="color: ${numberColor};">${
+      card.reduceEnemyMaxHpFraction * 100
+    }%</span>.`;
+  }
+  if (card.name === "Golden Bunny") {
+    cardText += `Adds bunnies equal to <span style="color: ${numberColor};">${card.bunnyAdd}</span> plus 10% of your current gold.`;
+  }
+  if (card.purge) {
+    const cardWord = card.purge === 1 ? "card" : "cards";
+    cardText += `Purges <span style="color: ${numberColor};">${card.purge}</span> ${cardWord}.`;
+  }
+  if (card.pageAdd) {
+    const pageWord = card.pageAdd === 1 ? "page" : "pages";
+    cardText += `Adds <span style="color: ${numberColor};">${card.pageAdd}</span> ${pageWord}.`;
+  }
+
+  return cardText;
 }

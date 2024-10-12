@@ -32,8 +32,15 @@ function updateCardRotations(state) {
   const cardsInHand = handDiv.getElementsByClassName("cardContainer");
 
   let totalCards = state.hand.length;
-  let middleIndex = Math.floor((totalCards - 1) / 2); // Adjusted for zero-based index
-  console.log("middleIndex", middleIndex);
+  let middleIndex = 0;
+
+  if (totalCards % 2 != 0) {
+    middleIndex = Math.floor((totalCards - 1) / 2); // Adjusted for zero-based index
+    console.log("middleIndex", middleIndex);
+  } else {
+    middleIndex = (totalCards - 1) / 2; // Adjusted for zero-based index
+    console.log("middleIndex", middleIndex);
+  }
 
   // Constants for visual adjustments
   const maxVerticalShift = 20; // Maximum pixels to lower/raise cards
@@ -46,7 +53,18 @@ function updateCardRotations(state) {
     // Calculate vertical shift: closer to middle = higher (positive values raise, negative lower)
     let verticalShift = Math.abs(i - middleIndex) * maxVerticalShift; // Cards farther from the middle go lower
 
+    console.log(
+      "rotating",
+      i,
+      "by",
+      rotation,
+      "degrees and shifting by",
+      verticalShift,
+      "pixels"
+    );
     // Apply rotation and vertical shift
+    cardsInHand[i].style.transform = "";
+
     cardsInHand[
       i
     ].style.transform = `rotate(${rotation}deg) translateY(${verticalShift}px)`;

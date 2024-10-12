@@ -740,6 +740,9 @@ button {
 .hand {
   display: flex;
   flex-direction: row;
+  /*flex from the center*/
+  align-items: center;
+  /*start from the center*/
   width: 50vw;
   justify-content: center; /* Center items vertically */
   align-items: center; /* Center items horizontally */
@@ -763,13 +766,14 @@ button {
 
 .cardContainer:hover .card {
   transform: translateY(-70px);
-  filter: drop-shadow(0 0 0.75rem rgb(97, 4, 99));
+  filter: drop-shadow(0 0 0.75rem rgb(71, 255, 255));
 }
 
 .hand .card {
   transition: transform 0.25s ease-in-out;
   transform: translateY(0px);
   position: absolute;
+  justify-content: center;
 }
 
 .enemyHud {

@@ -2,7 +2,7 @@
 
 import { render } from "../../render/render";
 import { generateBuffs } from "../combat/generateBuffs.js";
-
+import { castSpellbook } from "../combat/castSpellbook.js";
 import { drawXCards } from "../combat/drawXCards.js";
 // import { checkStartCombatTriggers } from "../combat/checkStartTurnTriggers.js";
 import { checkStartTurnTriggers } from "../combat/checkStartTurnTriggers.js";
@@ -36,10 +36,14 @@ export function startCombat(oldState) {
   state = updateCastBunnies(state);
 
   //assign logic to the cast button
-  let castButton = document.getElementById("castBtn");
-  castButton.onclick = function () {
-    console.log("Casting");
-  };
+
+  //this should really just draw the button. Currently it's storing the original values of state, rather thna the modified later values.
+  //let's just redraw it dynamically in rendercombat.
+  // let castButton = document.getElementById("castBtn");
+  // castButton.onclick = function () {
+  //   console.log("Casting", state.spellbook);
+  //   castSpellbook(state);
+  // };
 
   render(state);
 }

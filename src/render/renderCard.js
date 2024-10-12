@@ -26,6 +26,11 @@ export function renderCard(card, location) {
   }
 
   let inkColor = "black";
+  let typeColor = "black";
+
+  if (card.trigger === "instant") {
+    typeColor = "white";
+  }
 
   // Handle card text to include colors corresponding to upgrades.
   let numberColor = "black";
@@ -36,6 +41,10 @@ export function renderCard(card, location) {
     } else if (card.upgrade < 0) {
       numberColor = "red";
     }
+  }
+
+  if (card.trigger === "instant") {
+    cardText += "Instant. ";
   }
 
   // Dynamic card text and number color logic with singular/plural handling
@@ -93,6 +102,9 @@ export function renderCard(card, location) {
         ${card.name}
       </div>
     
+      <!-- Instant card icon overlay -->
+      
+
       <!-- Card effect text below card name -->
       <div class="card-effect-overlay" style="position: absolute; top: 18%; left: 50%; transform: translateX(-50%); background-color: rgba(0, 0, 0, 0); color: black; padding: 4px 16px; font-size: ${effectFontSize}px; min-width: 200px; text-align: center;">
         ${cardText}

@@ -21,6 +21,6 @@ export function tickNumber(element, currentValue, targetValue, label) {
       element.style.color = ""; // Reset color when done
     }
   }
-
   requestAnimationFrame(updateNumber);
+  console.log("currentValue", currentValue, "targetValue", targetValue);
 }
