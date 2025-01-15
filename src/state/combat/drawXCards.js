@@ -22,6 +22,7 @@ export function drawCard(oldState) {
     state.hand.push(drawnCard);
     state.combatDeck.splice(state.combatDeck.indexOf(drawnCard), 1);
     state = checkDrawTriggers(state, drawnCard);
+    
     renderCardDraw(drawnCard, state);
   } else if (state.combatDeck.length < 1) {
     state.hand.push(findObjectInArray(state.cardPool, "name", "Bunnyfluff"));

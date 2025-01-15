@@ -1,5 +1,5 @@
 "use strict";
-
+  
 export function endCombat(oldState) {
   let state = { ...oldState };
   console.log(state);
